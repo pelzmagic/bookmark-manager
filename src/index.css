@@ -1,4 +1,36 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
 
 @import "tailwindcss";
+
+.font-roboto {
+  font-family: "Roboto", sans-serif;
+}
+
+.font-manrope {
+  font-family: "Manrope", sans-serif;
+}
+
+@layer utilities {
+  .neutral-900 {
+    background-color: #051513;
+  }
+  .neutral-800 {
+    background-color: #4c5c59;
+  }
+  .neutral-500 {
+    background-color: #899492;
+  }
+  .neutral-400 {
+    background-color: #c0cfcc;
+  }
+  .neutral-300 {
+    background-color: #dde9e7;
+  }
+  .neutral-100 {
+    background-color: #e8f0ef;
+  }
+  .neutral-0 {
+    background-color: #ffffff;
+  }
+}
