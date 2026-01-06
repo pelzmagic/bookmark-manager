@@ -1,7 +1,13 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import SignUp from "./pages/SignUp";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <SignUp />,
+  },
+]);
+
 export default function App() {
-  return (
-    <div>
-      <h1>How are you?</h1>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
