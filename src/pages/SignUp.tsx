@@ -1,7 +1,7 @@
 export default function SignUp() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100">
-      <div className="flex max-w-85.75 flex-col gap-8 rounded-xl bg-white px-5 py-8">
+      <div className="flex min-w-85.75 flex-col gap-8 rounded-xl bg-white px-5 py-8">
         <div className="flex items-center gap-2">
           <img src="/Bookmark.png" alt="bookmark icon" className="h-8 w-8" />
           <p className="font-roboto text-xl leading-[100%] font-bold text-neutral-900">
@@ -52,11 +52,23 @@ export default function SignUp() {
           </button>
         </form>
 
-        <div>
-          <p>Forgot Password?</p> <span>Reset it</span>
-          <p>
-            Don't have an account? <span>Sign up</span>
-          </p>
+        <div className="flex flex-col gap-3">
+          <div className="flex justify-center gap-1">
+            <p className="font-manrope text-sm leading-[150%] font-medium text-neutral-800">
+              Forgot Password?
+            </p>
+            <span className="font-manrope text-sm leading-[140%] font-semibold text-neutral-900">
+              Reset it
+            </span>
+          </div>
+          <div className="flex justify-center gap-1">
+            <p className="font-manrope text-sm leading-[150%] font-medium text-neutral-800">
+              Don't have an account?
+            </p>{" "}
+            <span className="font-manrope text-sm leading-[140%] font-semibold text-neutral-900">
+              Sign up
+            </span>
+          </div>
         </div>
       </div>
     </div>
