@@ -67,8 +67,9 @@ export default function SignUp() {
           </button>
         </form>
 
-        <p className="text-center">
-          Already have an account? <span>Log in</span>
+        <p className="font-manrope text-center text-sm leading-[140%] font-semibold text-neutral-800">
+          Already have an account?{" "}
+          <span className="text-neutral-900">Log in</span>
         </p>
       </div>
     </div>
