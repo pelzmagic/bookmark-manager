@@ -18,6 +18,58 @@ export default function SignUp() {
             searchable, and always within reach.
           </p>
         </div>
+
+        <form className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1.5">
+            <label
+              htmlFor="fullname"
+              className="font-manrope text-sm leading-[140%] font-semibold text-neutral-900"
+            >
+              Full name <span className="text-teal-700">*</span>
+            </label>
+            <input
+              type="text"
+              id="fullname"
+              name="fullname"
+              className="rounded-lg border border-neutral-500 p-3 shadow-xs outline-0"
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label
+              htmlFor="email"
+              className="font-manrope text-sm leading-[140%] font-semibold text-neutral-900"
+            >
+              Email address <span className="text-teal-700">*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              className="rounded-lg border border-neutral-500 p-3 shadow-xs outline-0"
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label
+              htmlFor="password"
+              className="font-manrope text-sm leading-[140%] font-semibold text-neutral-900"
+            >
+              Password <span className="text-teal-700">*</span>
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              className="rounded-lg border border-neutral-500 p-3 shadow-xs outline-0"
+            />
+          </div>
+          <button className="font-manrope rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white">
+            Create account
+          </button>
+        </form>
+
+        <p className="text-center">
+          Already have an account? <span>Log in</span>
+        </p>
       </div>
     </div>
   );
