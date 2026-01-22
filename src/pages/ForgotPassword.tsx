@@ -1,7 +1,7 @@
 export default function ForgotPassword() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100">
-      <div className="flex max-w-85.75 flex-col gap-8 rounded-xl bg-white px-5 py-8">
+      <div className="flex max-w-85.75 flex-col gap-8 rounded-xl bg-white px-5 py-8 md:min-w-md lg:min-w-md">
         <div className="flex items-center gap-2">
           <img src="/Bookmark.png" alt="bookmark icon" className="h-8 w-8" />
           <p className="font-roboto text-xl leading-[100%] font-bold text-neutral-900">
@@ -23,7 +23,7 @@ export default function ForgotPassword() {
           <div className="flex flex-col gap-1.5">
             <label
               htmlFor="email"
-              className="font-manrope text-sm leading-[140%] font-semibold text-neutral-900"
+              className="font-manrope cursor-pointer text-sm leading-[140%] font-semibold text-neutral-900"
             >
               Email <span className="text-neutral-900">*</span>
             </label>
@@ -34,12 +34,12 @@ export default function ForgotPassword() {
               className="rounded-lg border border-neutral-500 p-3 shadow-xs outline-0"
             />
           </div>
-          <button className="font-manrope rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white">
+          <button className="font-manrope cursor-pointer rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white">
             Send reset Link
           </button>
         </form>
 
-        <p className="font-manrope text-center text-sm leading-[140%] font-semibold text-neutral-900">
+        <p className="font-manrope cursor-pointer text-center text-sm leading-[140%] font-semibold text-neutral-900">
           Back to login
         </p>
       </div>
