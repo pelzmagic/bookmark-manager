@@ -2,15 +2,26 @@ import { useState } from "react";
 import TypewriterComponent from "typewriter-effect";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "../services/auth";
+import { toast } from "sonner";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { mutate, isLoading } = useMutation({
-    mutationFn: ({ email, password }) => login({ email, password }),
-    onSuccess: () => {},
+  const { mutate, isPending } = useMutation({
+    mutationFn: login,
+    onSuccess: () => {
+      toast.success("Sign in successful");
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
   });
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    mutate({ email, password });
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100">
@@ -29,7 +40,7 @@ export default function SignIn() {
           <p className="font-manrope text-sm leading-[150%] font-medium text-neutral-800">
             <TypewriterComponent
               options={{
-                strings: ["Welcome! Please enter your details"],
+                strings: ["Welcome back! Please enter your details"],
                 autoStart: true,
                 loop: false,
                 delay: 50,
@@ -39,7 +50,7 @@ export default function SignIn() {
           </p>
         </div>
 
-        <form className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-1.5">
             <label
               htmlFor="email"
@@ -51,7 +62,7 @@ export default function SignIn() {
               type="email"
               id="email"
               name="email"
-              value="email"
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="cursor-pointer rounded-lg border border-neutral-500 p-3 shadow-xs outline-0 hover:bg-neutral-100 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
             />
@@ -67,12 +78,15 @@ export default function SignIn() {
               type="password"
               id="password"
               name="password"
-              value="password"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="rounded-lg border border-neutral-500 p-3 shadow-xs outline-0 hover:bg-neutral-100 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
             />
           </div>
-          <button className="font-manrope cursor-pointer rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2">
+          <button
+            className="font-manrope cursor-pointer rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
+            disabled={isPending}
+          >
             Log in
           </button>
         </form>
