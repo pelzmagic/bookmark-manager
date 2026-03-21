@@ -30,7 +30,7 @@ export default function SignIn() {
               type="email"
               id="email"
               name="email"
-              className="rounded-lg border border-neutral-500 p-3 shadow-xs outline-0"
+              className="cursor-pointer rounded-lg border border-neutral-500 p-3 shadow-xs outline-0 hover:bg-neutral-100 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
             />
           </div>
           <div className="flex flex-col gap-1.5">
@@ -44,10 +44,10 @@ export default function SignIn() {
               type="password"
               id="password"
               name="password"
-              className="rounded-lg border border-neutral-500 p-3 shadow-xs outline-0"
+              className="rounded-lg border border-neutral-500 p-3 shadow-xs outline-0 hover:bg-neutral-100 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
             />
           </div>
-          <button className="font-manrope cursor-pointer rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white">
+          <button className="font-manrope cursor-pointer rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2">
             Log in
           </button>
         </form>
