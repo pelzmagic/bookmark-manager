@@ -1,4 +1,17 @@
+import { useState } from "react";
+import TypewriterComponent from "typewriter-effect";
+import { useMutation } from "@tanstack/react-query";
+import { login } from "../services/auth";
+
 export default function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { mutate, isLoading } = useMutation({
+    mutationFn: ({ email, password }) => login({ email, password }),
+    onSuccess: () => {},
+  });
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100">
       <div className="flex w-[90%] flex-col gap-8 rounded-xl bg-white px-5 py-8 md:max-w-md lg:max-w-md">
@@ -14,7 +27,15 @@ export default function SignIn() {
             Log in to your account
           </h1>
           <p className="font-manrope text-sm leading-[150%] font-medium text-neutral-800">
-            Welcome back! Please enter your details
+            <TypewriterComponent
+              options={{
+                strings: ["Welcome! Please enter your details"],
+                autoStart: true,
+                loop: false,
+                delay: 50,
+                deleteSpeed: Infinity,
+              }}
+            />
           </p>
         </div>
 
@@ -30,6 +51,8 @@ export default function SignIn() {
               type="email"
               id="email"
               name="email"
+              value="email"
+              onChange={(e) => setEmail(e.target.value)}
               className="cursor-pointer rounded-lg border border-neutral-500 p-3 shadow-xs outline-0 hover:bg-neutral-100 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
             />
           </div>
@@ -44,6 +67,8 @@ export default function SignIn() {
               type="password"
               id="password"
               name="password"
+              value="password"
+              onChange={(e) => setPassword(e.target.value)}
               className="rounded-lg border border-neutral-500 p-3 shadow-xs outline-0 hover:bg-neutral-100 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
             />
           </div>
