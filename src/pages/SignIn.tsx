@@ -1,7 +1,7 @@
 export default function SignIn() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100">
-      <div className="flex max-w-85.75 flex-col gap-8 rounded-xl bg-white px-5 py-8 md:min-w-md lg:min-w-md">
+      <div className="flex w-[90%] flex-col gap-8 rounded-xl bg-white px-5 py-8 md:max-w-md lg:max-w-md">
         <div className="flex items-center gap-2">
           <img src="/Bookmark.png" alt="bookmark icon" className="h-8 w-8" />
           <p className="font-roboto text-xl leading-[100%] font-bold text-neutral-900">
@@ -64,7 +64,7 @@ export default function SignIn() {
           <div className="flex justify-center gap-1">
             <p className="font-manrope text-sm leading-[150%] font-medium text-neutral-800">
               Don't have an account?
-            </p>{" "}
+            </p>
             <span className="font-manrope cursor-pointer text-sm leading-[140%] font-semibold text-neutral-900">
               Sign up
             </span>
