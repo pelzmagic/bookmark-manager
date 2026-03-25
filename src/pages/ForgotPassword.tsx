@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
+  
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100">
       <div className="flex w-[90%] flex-col gap-8 rounded-xl bg-white px-5 py-8 md:max-w-md lg:max-w-md">
