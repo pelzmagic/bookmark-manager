@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 export default function ResetPassword() {
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100">
       <div className="flex w-[90%] flex-col gap-8 rounded-xl bg-white px-5 py-8 md:max-w-md lg:max-w-md">
@@ -30,6 +34,8 @@ export default function ResetPassword() {
               type="password"
               id="new password"
               name="new password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
               className="cursor-pointer rounded-lg border border-neutral-500 p-3 shadow-xs outline-0 hover:bg-neutral-100 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
             />
           </div>
@@ -45,6 +51,8 @@ export default function ResetPassword() {
               type="password"
               id="confirm password"
               name="confirm password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               className="cursor-pointer rounded-lg border border-neutral-500 p-3 shadow-xs outline-0 hover:bg-neutral-100 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
             />
           </div>

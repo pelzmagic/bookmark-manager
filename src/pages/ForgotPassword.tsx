@@ -1,4 +1,7 @@
+import { useState } from "react";
+
 export default function ForgotPassword() {
+  const [email, setEmail] = useState("");
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100">
       <div className="flex w-[90%] flex-col gap-8 rounded-xl bg-white px-5 py-8 md:max-w-md lg:max-w-md">
@@ -31,6 +34,8 @@ export default function ForgotPassword() {
               type="email"
               id="email"
               name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="cursor-pointer rounded-lg border border-neutral-500 p-3 shadow-xs outline-0 hover:bg-neutral-100 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
             />
           </div>
