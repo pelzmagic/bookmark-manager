@@ -3,6 +3,7 @@ import { signUp } from "@/services/auth";
 import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import Spinner from "@/ui/Spinner";
 
 export default function SignUp() {
   const [fullName, setFullName] = useState("");
@@ -101,7 +102,14 @@ export default function SignUp() {
             className="font-manrope cursor-pointer rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
             disabled={isPending}
           >
-            Create account
+            {isPending ? (
+              <>
+                <Spinner size="sm" />
+                <span>Creating account...</span>
+              </>
+            ) : (
+              "Create account"
+            )}
           </button>
         </form>
 
