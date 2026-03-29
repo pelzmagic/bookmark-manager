@@ -1,15 +1,18 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { signUp } from "@/services/auth";
 import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import Spinner from "@/ui/Spinner";
+import { HiEye, HiEyeSlash } from "react-icons/hi2";
 
 export default function SignUp() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [touched, setTouched] = useState({ email: false, password: false });
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -104,15 +107,31 @@ export default function SignUp() {
             >
               Password <span className="text-teal-700">*</span>
             </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onBlur={() => setTouched((t) => ({ ...t, password: true }))}
-              onChange={(e) => setPassword(e.target.value)}
-              className={`cursor-pointer rounded-lg border p-3 shadow-xs outline-0 hover:bg-neutral-100 focus:ring-2 focus:ring-offset-2 ${touched.password && !isPasswordValid ? "border-red-500 focus:ring-red-500" : "border-neutral-500 focus:ring-neutral-700"}`}
-            />
+            <div
+              className={`relative cursor-pointer rounded-lg border focus-within:ring-2 focus-within:ring-offset-2 hover:bg-neutral-100 ${touched.password && !isPasswordValid ? "border-red-500 focus-within:ring-red-500" : "border-neutral-500 focus-within:ring-neutral-700"}`}
+            >
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                value={password}
+                onBlur={() => setTouched((t) => ({ ...t, password: true }))}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full cursor-pointer rounded-lg p-3 shadow-xs outline-none"
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
+              >
+                {showPassword ? (
+                  <HiEyeSlash className="h-5 w-5" />
+                ) : (
+                  <HiEye className="h-5 w-5" />
+                )}
+              </button>
+            </div>
 
             <div
               id="password-requirements"
@@ -166,7 +185,6 @@ export default function SignUp() {
             {isPending ? (
               <>
                 <Spinner size="sm" />
-                <span>Creating account...</span>
               </>
             ) : (
               "Create account"
@@ -176,7 +194,9 @@ export default function SignUp() {
 
         <p className="font-manrope text-center text-sm leading-[140%] font-semibold text-neutral-800">
           Already have an account?{" "}
-          <span className="cursor-pointer text-neutral-900">Log in</span>
+          <Link to="/" className="cursor-pointer text-neutral-900">
+            Log in
+          </Link>
         </p>
       </div>
     </div>

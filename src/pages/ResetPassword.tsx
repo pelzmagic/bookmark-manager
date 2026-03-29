@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function ResetPassword() {
   const [newPassword, setNewPassword] = useState("");
@@ -62,9 +63,12 @@ export default function ResetPassword() {
           </button>
         </form>
 
-        <p className="font-manrope cursor-pointer text-center text-sm leading-[140%] font-semibold text-neutral-900">
+        <Link
+          to="/"
+          className="font-manrope cursor-pointer text-center text-sm leading-[140%] font-semibold text-neutral-900"
+        >
           Back to login
-        </p>
+        </Link>
       </div>
     </div>
   );

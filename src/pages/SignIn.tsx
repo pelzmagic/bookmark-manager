@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import TypewriterComponent from "typewriter-effect";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "../services/auth";
@@ -96,17 +97,23 @@ export default function SignIn() {
             <p className="font-manrope text-sm leading-[150%] font-medium text-neutral-800">
               Forgot Password?
             </p>
-            <span className="font-manrope cursor-pointer text-sm leading-[140%] font-semibold text-neutral-900">
+            <Link
+              to="/reset-password"
+              className="font-manrope cursor-pointer text-sm leading-[140%] font-semibold text-neutral-900"
+            >
               Reset it
-            </span>
+            </Link>
           </div>
           <div className="flex justify-center gap-1">
             <p className="font-manrope text-sm leading-[150%] font-medium text-neutral-800">
               Don't have an account?
             </p>
-            <span className="font-manrope cursor-pointer text-sm leading-[140%] font-semibold text-neutral-900">
+            <Link
+              to="/sign-up"
+              className="font-manrope cursor-pointer text-sm leading-[140%] font-semibold text-neutral-900"
+            >
               Sign up
-            </span>
+            </Link>
           </div>
         </div>
       </div>
