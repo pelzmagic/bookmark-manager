@@ -1,9 +1,23 @@
 import { useState } from "react";
+import { signUp } from "@/services/auth";
+import { toast } from "sonner";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: signUp,
+    onSuccess: () => {
+      toast.success("Account created successfully!");
+      navigate("/login");
+    },
+  });
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100">
