@@ -17,7 +17,16 @@ export default function SignUp() {
       toast.success("Account created successfully!");
       navigate("/login");
     },
+    onError: (err: Error) => {
+      toast.error(err.message);
+    },
   });
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email || !password || !fullName) return;
+    mutate({ fullName, email, password });
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100">
@@ -39,7 +48,7 @@ export default function SignUp() {
           </p>
         </div>
 
-        <form className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-1.5">
             <label
               htmlFor="fullname"
@@ -88,7 +97,10 @@ export default function SignUp() {
               className="cursor-pointer rounded-lg border border-neutral-500 p-3 shadow-xs outline-0 hover:bg-neutral-100 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
             />
           </div>
-          <button className="font-manrope cursor-pointer rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2">
+          <button
+            className="font-manrope cursor-pointer rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
+            disabled={isPending}
+          >
             Create account
           </button>
         </form>
