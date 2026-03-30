@@ -1,8 +1,31 @@
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { sendResetPasswordLink } from "@/services/auth";
+import { toast } from "sonner";
+import Spinner from "@/ui/Spinner";
+import { Link } from "react-router-dom";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
-  
+  const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: sendResetPasswordLink,
+    onSuccess: () => {
+      toast.success("Reset link sent! Please check your email.");
+      setEmail("");
+    },
+    onError: (err: Error) => {
+      toast.error(err.message);
+    },
+  });
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!isEmailValid) return toast.error("Please enter a valid email address");
+    mutate(email);
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100">
       <div className="flex w-[90%] flex-col gap-8 rounded-xl bg-white px-5 py-8 md:max-w-md lg:max-w-md">
@@ -23,7 +46,7 @@ export default function ForgotPassword() {
           </p>
         </div>
 
-        <form className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-1.5">
             <label
               htmlFor="email"
@@ -36,18 +59,25 @@ export default function ForgotPassword() {
               id="email"
               name="email"
               value={email}
+              placeholder="m@example.com"
               onChange={(e) => setEmail(e.target.value)}
-              className="cursor-pointer rounded-lg border border-neutral-500 p-3 shadow-xs outline-0 hover:bg-neutral-100 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
+              className="cursor-pointer rounded-lg border border-neutral-500 p-3 shadow-xs outline-0 transition-all hover:bg-neutral-100 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
             />
           </div>
-          <button className="font-manrope cursor-pointer rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2">
-            Send reset Link
+          <button
+            className="font-manrope cursor-pointer rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 disabled:bg-neutral-400"
+            disabled={isPending}
+          >
+            {isPending ? <Spinner /> : "Send reset Link"}
           </button>
         </form>
 
-        <p className="font-manrope cursor-pointer text-center text-sm leading-[140%] font-semibold text-neutral-900">
+        <Link
+          to="/"
+          className="font-manrope cursor-pointer text-center text-sm leading-[140%] font-semibold text-neutral-900"
+        >
           Back to login
-        </p>
+        </Link>
       </div>
     </div>
   );

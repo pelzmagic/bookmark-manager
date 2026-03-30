@@ -1,9 +1,38 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { updatePassword } from "@/services/auth";
+import { toast } from "sonner";
+import Spinner from "@/ui/Spinner";
 
 export default function ResetPassword() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: updatePassword,
+    onSuccess: () => {
+      toast.success("Password updated successfully!");
+      navigate("/");
+    },
+    onError: (err: Error) => {
+      toast.error(err.message);
+    },
+  });
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (newPassword.length < 8) {
+      return toast.error("Password must be atleast 8 characters long");
+    }
+    if (newPassword !== confirmPassword) {
+      return toast.error("Passwords do not match");
+    }
+
+    mutate(newPassword);
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100">
       <div className="flex w-[90%] flex-col gap-8 rounded-xl bg-white px-5 py-8 md:max-w-md lg:max-w-md">
@@ -23,7 +52,7 @@ export default function ResetPassword() {
           </p>
         </div>
 
-        <form className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-1.5">
             <label
               htmlFor="new password"
@@ -33,7 +62,7 @@ export default function ResetPassword() {
             </label>
             <input
               type="password"
-              id="new password"
+              id="new-password"
               name="new password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
@@ -59,7 +88,7 @@ export default function ResetPassword() {
           </div>
 
           <button className="font-manrope cursor-pointer rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2">
-            Reset password
+            {isPending ? <Spinner /> : "Reset password"}
           </button>
         </form>
 

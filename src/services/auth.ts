@@ -28,3 +28,21 @@ export async function signUp({ fullName, email, password }: SignUpCredentials) {
 
   return data;
 }
+
+export async function sendResetPasswordLink(email: string) {
+  const siteUrl = import.meta.env.VITE_SITE_URL;
+  const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${siteUrl}/reset-password`,
+  });
+
+  if (error) throw new Error(error.message);
+  return data;
+}
+
+export async function updatePassword(newPassword: string) {
+  const { data, error } = await supabase.auth.updateUser({
+    password: newPassword,
+  });
+  if (error) throw new Error(error.message);
+  return data;
+}

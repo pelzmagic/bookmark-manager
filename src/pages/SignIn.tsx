@@ -4,15 +4,20 @@ import TypewriterComponent from "typewriter-effect";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "../services/auth";
 import { toast } from "sonner";
+import Spinner from "@/ui/Spinner";
+import { useNavigate } from "react-router-dom";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const { mutate, isPending } = useMutation({
     mutationFn: login,
     onSuccess: () => {
       toast.success("Sign in successful");
+      navigate("/dashboard");
     },
     onError: (err) => {
       toast.error(err.message);
@@ -85,10 +90,10 @@ export default function SignIn() {
             />
           </div>
           <button
-            className="font-manrope cursor-pointer rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
+            className="font-manrope flex cursor-pointer items-center justify-center rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 disabled:bg-neutral-400"
             disabled={isPending}
           >
-            Log in
+            {isPending ? <Spinner /> : "Log in"}
           </button>
         </form>
 
@@ -98,7 +103,7 @@ export default function SignIn() {
               Forgot Password?
             </p>
             <Link
-              to="/reset-password"
+              to="/forgot-password"
               className="font-manrope cursor-pointer text-sm leading-[140%] font-semibold text-neutral-900"
             >
               Reset it
