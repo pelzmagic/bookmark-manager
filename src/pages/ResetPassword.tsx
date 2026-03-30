@@ -4,11 +4,22 @@ import { useMutation } from "@tanstack/react-query";
 import { updatePassword } from "@/services/auth";
 import { toast } from "sonner";
 import Spinner from "@/ui/Spinner";
+import { HiEye, HiEyeSlash } from "react-icons/hi2";
 
 export default function ResetPassword() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [touched, setTouched] = useState(false);
+
   const navigate = useNavigate();
+
+  const hasMinLength = newPassword.length >= 8;
+  const hasUpperCase = /[A-Z]/.test(newPassword);
+  const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(newPassword);
+  const isPasswordValid = hasMinLength && hasSpecialChar && hasUpperCase;
+  const passwordsMatch =
+    newPassword === confirmPassword && confirmPassword !== "";
 
   const { mutate, isPending } = useMutation({
     mutationFn: updatePassword,
@@ -23,10 +34,15 @@ export default function ResetPassword() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (newPassword.length < 8) {
-      return toast.error("Password must be atleast 8 characters long");
+    setTouched(true);
+
+    if (!isPasswordValid) {
+      return toast.error("Please meet all password requirements");
     }
-    if (newPassword !== confirmPassword) {
+    if (!confirmPassword && !newPassword) {
+      return toast.error("Please reset your password");
+    }
+    if (!passwordsMatch) {
       return toast.error("Passwords do not match");
     }
 
@@ -55,19 +71,73 @@ export default function ResetPassword() {
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-1.5">
             <label
-              htmlFor="new password"
+              htmlFor="new-password"
               className="font-manrope cursor-pointer text-sm leading-[140%] font-semibold text-neutral-900"
             >
               New Password <span className="text-neutral-900">*</span>
             </label>
-            <input
-              type="password"
-              id="new-password"
-              name="new password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              className="cursor-pointer rounded-lg border border-neutral-500 p-3 shadow-xs outline-0 hover:bg-neutral-100 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
-            />
+            <div
+              className={`relative flex items-center rounded-lg border transition-all focus-within:ring-2 focus-within:ring-offset-2 hover:bg-neutral-50 ${touched && !isPasswordValid ? "border-red-500 focus-within:ring-red-500" : "border-neutral-500 focus-within:ring-neutral-700"}`}
+            >
+              <input
+                type={showPassword ? "text" : "password"}
+                id="new-password"
+                name="new password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                onBlur={() => setTouched(true)}
+                className="w-full rounded-lg bg-transparent p-3 outline-none"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
+              >
+                {showPassword ? (
+                  <HiEyeSlash className="h-5 w-5" />
+                ) : (
+                  <HiEye className="h-5 w-5" />
+                )}
+              </button>
+            </div>
+
+            <div className="mt-1 flex flex-col gap-1">
+              <ul className="space-y-0.5 text-xs">
+                <li
+                  className={
+                    hasMinLength
+                      ? "text-teal-700"
+                      : touched
+                        ? "text-red-500"
+                        : "text-neutral-500"
+                  }
+                >
+                  {hasMinLength ? "✓" : "○"} Atleast 8 characters
+                </li>
+                <li
+                  className={
+                    hasUpperCase
+                      ? "text-teal-700"
+                      : touched
+                        ? "text-red-500"
+                        : "text-neutral-500"
+                  }
+                >
+                  {hasUpperCase ? "✓" : "○"} An Uppercase letter
+                </li>
+                <li
+                  className={
+                    hasSpecialChar
+                      ? "text-teal-700"
+                      : touched
+                        ? "text-red-500"
+                        : "text-neutral-500"
+                  }
+                >
+                  {hasSpecialChar ? "✓" : "○"} A special character
+                </li>
+              </ul>
+            </div>
           </div>
 
           <div className="flex flex-col gap-1.5">
@@ -83,11 +153,19 @@ export default function ResetPassword() {
               name="confirm password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="cursor-pointer rounded-lg border border-neutral-500 p-3 shadow-xs outline-0 hover:bg-neutral-100 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
+              className={`rounded-lg border p-3 transition-all outline-none focus:ring-2 focus:ring-offset-2 ${touched && !passwordsMatch ? "border-red-500 focus:ring-red-500" : "border-neutral-500 focus:ring-neutral-700"}`}
             />
+            {touched && !passwordsMatch && confirmPassword !== "" && (
+              <p className="text-xs font-medium text-red-500">
+                Passwords do not match
+              </p>
+            )}
           </div>
 
-          <button className="font-manrope cursor-pointer rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2">
+          <button
+            className="font-manrope flex cursor-pointer items-center justify-center rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 disabled:bg-neutral-400"
+            disabled={isPending}
+          >
             {isPending ? <Spinner /> : "Reset password"}
           </button>
         </form>
