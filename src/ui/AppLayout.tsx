@@ -7,7 +7,7 @@ export default function AppLayout() {
     <div>
       <Sidebar />
       <Header />
-      <main>
+      <main className="bg-light-100 px-8 pt-8 pb-16">
         <Outlet />
       </main>
     </div>

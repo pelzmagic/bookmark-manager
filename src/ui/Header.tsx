@@ -1,6 +1,6 @@
 export default function Header() {
   return (
-    <header className="flex items-center justify-between px-8 py-4">
+    <header className="border-light-300 flex items-center justify-between border-b px-8 py-4">
       <div className="border-light-300 flex max-w-[320px] items-center gap-1.5 rounded-md border p-3">
         <img src="/search.png" alt="search icon" className="h-5 w-5" />
         <input
