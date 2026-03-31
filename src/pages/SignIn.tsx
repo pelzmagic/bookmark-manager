@@ -43,7 +43,7 @@ export default function SignIn() {
           <h1 className="font-manrope lelading-[140%] text-2xl font-bold text-neutral-900">
             Log in to your account
           </h1>
-          <p className="font-manrope text-sm leading-[150%] font-medium text-neutral-800">
+          <div className="font-manrope text-sm leading-[150%] font-medium text-neutral-800">
             <TypewriterComponent
               options={{
                 strings: ["Welcome back! Please enter your details"],
@@ -53,7 +53,7 @@ export default function SignIn() {
                 deleteSpeed: Infinity,
               }}
             />
-          </p>
+          </div>
         </div>
 
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>

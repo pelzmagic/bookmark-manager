@@ -19,39 +19,26 @@
   font-family: "Manrope", sans-serif;
 }
 
-@layer utilities {
-  .neutral-900 {
-    background-color: #051513;
-  }
-  .neutral-800 {
-    background-color: #4c5c59;
-  }
-  .neutral-500 {
-    background-color: #899492;
-  }
-  .neutral-400 {
-    background-color: #c0cfcc;
-  }
-  .neutral-300 {
-    background-color: #dde9e7;
-  }
-  .neutral-100 {
-    background-color: #e8f0ef;
-  }
-  .neutral-0 {
-    background-color: #ffffff;
-  }
-  .teal-700 {
-    background-color: #014745;
-  }
-  .teal-800 {
-    background-color: #013c3b;
-  }
+@theme inline {
+  --color-light-100: #e8f0ef;
+  --color-light-300: #dde9e7;
+  --color-light-400: #c0cfcc;
+  --color-light-500: #899492;
+  --color-light-800: #4c5c59;
+  --color-light-900: #051513;
+  --color-teal-800: #013c3b;
+  --color-teal-700: #014745;
+  --color-neutral-100: #e8f0ef;
+  --color-neutral-300: #dde9e7;
+  --color-neutral-400: #c0cfcc;
+  --color-neutral-500: #899492;
+  --color-neutral-800: #4c5c59;
+  --color-neutral-900: #051513;
 }
 
 @theme inline {
   --font-heading: var(--font-sans);
-  --font-sans: 'Geist Variable', sans-serif;
+  --font-sans: "Geist Variable", sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
