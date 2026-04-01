@@ -31,7 +31,7 @@ export default function Sidebar() {
         </ul>
       </nav>
 
-      <div className="mt-4 border border-red-500 px-4">
+      <div className="mt-4 px-4">
         <p className="font-manrope px-3 pb-1 text-xs leading-[140%] font-bold text-[#4D4D4D]">
           TAGS
         </p>
