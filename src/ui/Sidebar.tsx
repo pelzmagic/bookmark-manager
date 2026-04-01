@@ -7,6 +7,34 @@ export default function Sidebar() {
           Bookmark Manager
         </p>
       </div>
+
+      <nav className="px-4 pb-5">
+        <ul>
+          <li>
+            <div className="flex cursor-pointer items-center gap-3 px-3 py-2">
+              <img src="/Icon.png" alt="home icon" className="h-5 w-5" />
+              <p className="font-manrope text-light-900 text-base leading-[140%] font-semibold">
+                Home
+              </p>
+            </div>
+          </li>
+          <li>
+            <div className="flex cursor-pointer items-center gap-3 px-3 py-2">
+              <img src="/archive.png" alt="archive icon" className="h-5 w-5" />
+              <p className="font-manrope text-light-900 text-base leading-[140%] font-semibold">
+                Archived
+              </p>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <div className="mt-4 border border-red-500 px-4">
+        <p className="font-manrope px-3 pb-1 text-xs leading-[140%] font-bold text-[#4D4D4D]">
+          TAGS
+        </p>
+        <div></div>
+      </div>
     </aside>
   );
 }
