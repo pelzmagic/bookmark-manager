@@ -1,6 +1,10 @@
 import { Checkbox } from "@/components/ui/checkbox";
+import { NavLink } from "react-router-dom";
 
 export default function Sidebar() {
+  const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
+    `flex cursor-pointer items-center gap-3 px-3 py-2 transition-all duration-200 ${isActive ? "bg-light-100 rounded-md" : "hover:bg-light-100 rounded-md"}`;
+
   return (
     <aside className="border-light-300 row-start-1 -row-end-1 flex h-full flex-col gap-4 overflow-y-auto border-r">
       <div className="flex items-center gap-5 px-5 pt-5 pb-2.5">
@@ -13,20 +17,40 @@ export default function Sidebar() {
       <nav className="px-4 pb-5">
         <ul>
           <li>
-            <div className="flex cursor-pointer items-center gap-3 px-3 py-2">
-              <img src="/Icon.png" alt="home icon" className="h-5 w-5" />
-              <p className="font-manrope text-light-900 text-base leading-[140%] font-semibold">
-                Home
-              </p>
-            </div>
+            <NavLink to="/dashboard" className={navLinkClasses}>
+              {({ isActive }) => (
+                <>
+                  <img
+                    src="/Icon.png"
+                    alt="home icon"
+                    className={`h-5 w-5 ${isActive ? "opacity-100" : "opacity-50"}`}
+                  />
+                  <p
+                    className={`font-manrope text-base leading-[140%] font-semibold ${isActive ? "text-light-900" : "text-light-800"}`}
+                  >
+                    Home
+                  </p>
+                </>
+              )}
+            </NavLink>
           </li>
           <li>
-            <div className="flex cursor-pointer items-center gap-3 px-3 py-2">
-              <img src="/archive.png" alt="archive icon" className="h-5 w-5" />
-              <p className="font-manrope text-light-900 text-base leading-[140%] font-semibold">
-                Archived
-              </p>
-            </div>
+            <NavLink to="/archived" className={navLinkClasses}>
+              {({ isActive }) => (
+                <>
+                  <img
+                    src="/archive.png"
+                    alt="archive icon"
+                    className={`h-5 w-5 ${isActive ? "opacity-100" : "opacity-50"}`}
+                  />
+                  <p
+                    className={`font-manrope text-light-900 text-base leading-[140%] font-semibold ${isActive ? "text-light-900" : "text-light-800"}`}
+                  >
+                    Archived
+                  </p>
+                </>
+              )}
+            </NavLink>
           </li>
         </ul>
       </nav>
