@@ -7,7 +7,7 @@ export default function AppLayout() {
     <div className="grid h-screen grid-cols-[296px_1fr] grid-rows-[auto_1fr]">
       <Sidebar />
       <Header />
-      <main className="bg-light-100 min-h-0 overflow-y-auto px-8 pt-8 pb-16">
+      <main className="bg-light-100 flex flex-col gap-5 px-8 pt-8 pb-16">
         <Outlet />
       </main>
     </div>

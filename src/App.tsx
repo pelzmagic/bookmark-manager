@@ -8,6 +8,7 @@ import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
+import Archived from "./pages/Archived";
 import { Toaster } from "./components/ui/sonner";
 
 const queryClient = new QueryClient({
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "/archived",
+        element: <Archived />,
       },
     ],
   },
