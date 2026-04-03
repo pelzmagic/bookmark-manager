@@ -19,6 +19,13 @@
   font-family: "Manrope", sans-serif;
 }
 
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
 @theme inline {
   --color-light-100: #e8f0ef;
   --color-light-300: #dde9e7;

@@ -1,3 +1,7 @@
 export default function Dashboard() {
-  return <h1>How are you?</h1>;
+  return (
+    <div>
+      <h1>All Bookmarks</h1>
+    </div>
+  );
 }

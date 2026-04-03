@@ -1,7 +1,7 @@
 export default function Header() {
   return (
     <header className="border-light-300 flex items-center justify-between border-b px-8 py-4">
-      <div className="border-light-300 flex max-w-[320px] items-center gap-1.5 rounded-md border p-3">
+      <div className="border-light-300 flex min-w-[320px] items-center gap-1.5 rounded-md border p-3">
         <img src="/search.png" alt="search icon" className="h-5 w-5" />
         <input
           type="text"
@@ -11,7 +11,7 @@ export default function Header() {
       </div>
 
       <div className="flex items-center gap-4 rounded-lg">
-        <div className="flex max-w-42.25 cursor-pointer items-center gap-1 rounded-lg bg-teal-700 px-4 py-3">
+        <div className="flex min-w-42.25 cursor-pointer items-center gap-1 rounded-lg bg-teal-700 px-4 py-3">
           <img src="/add-icon.png" alt="addition icon" className="h-5 w-5" />
           <p className="font-manrope text-base leading-[140%] font-semibold text-white">
             Add Bookmark
