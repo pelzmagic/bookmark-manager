@@ -1,4 +1,19 @@
+import useUser from "@/hooks/useUser";
+
 export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
+  const { user, isPending } = useUser();
+
+  const fullName = user?.user_metadata?.fullName;
+
+  const initials = fullName
+    .split(" ")
+    .filter(Boolean)
+    .map((name: string) => name[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+
+  console.log(initials);
   return (
     <header className="border-light-300 flex items-center justify-between border-b px-4 py-3 md:px-8 md:py-4 lg:px-8 lg:py-4">
       <div className="flex items-center gap-1 md:gap-4">
@@ -28,7 +43,15 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
             Add Bookmark
           </p>
         </div>
-        <div className="bg-light-500 h-10 w-10 rounded-full"></div>
+        <div className="bg-light-500 flex h-10 w-10 items-center justify-center rounded-full">
+          {isPending ? (
+            <div className="bg-light-300 h-full w-full animate-pulse"></div>
+          ) : (
+            <span className="font-manrope text-light-900 text-sm font-bold">
+              {initials}
+            </span>
+          )}
+        </div>
       </div>
     </header>
   );

@@ -15,7 +15,7 @@ export default function Sidebar({
     <aside
       className={`border-light-300 fixed inset-y-0 left-0 z-2 row-start-1 -row-end-1 flex h-full w-74 flex-col gap-4 overflow-y-auto border-r transition-all duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"} bg-white lg:static lg:flex lg:translate-x-0`}
     >
-      <div className="flex items-center gap-5 px-5 pt-5 pb-2.5">
+      <div className="flex items-center gap-2 px-5 pt-5 pb-2.5 lg:gap-5">
         <img src="/Bookmark.png" alt="logo icon" className="h-8 w-8" />
         <p className="font-roboto text-light-900 text-[20px] leading-[100%] font-bold tracking-[-1%]">
           Bookmark Manager
