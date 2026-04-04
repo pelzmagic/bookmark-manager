@@ -1,17 +1,28 @@
-export default function Header() {
+export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
   return (
-    <header className="border-light-300 flex items-center justify-between border-b px-8 py-4">
-      <div className="border-light-300 flex min-w-[320px] items-center gap-1.5 rounded-md border p-3">
-        <img src="/search.png" alt="search icon" className="h-5 w-5" />
-        <input
-          type="text"
-          placeholder="Search by title"
-          className="font-manrope text-light-800 text-sm leading-[140%] font-semibold outline-none"
-        />
+    <header className="border-light-300 flex items-center justify-between border-b px-4 py-3 md:px-8 md:py-4 lg:px-8 lg:py-4">
+      <div className="flex items-center gap-1 md:gap-4">
+        <button
+          className="border-light-400 rounded-lg border px-2.5 py-2.5 lg:hidden"
+          onClick={onMenuClick}
+        >
+          <img src="/menu.png" alt="hamburger menu" className="h-5 w-5" />
+        </button>
+        <div className="border-light-300 flex max-w-48.25 items-center gap-1.5 rounded-md border p-3 lg:min-w-[320px]">
+          <img src="/search.png" alt="search icon" className="h-5 w-5" />
+          <input
+            type="text"
+            placeholder="Search by title"
+            className="font-manrope text-light-800 text-sm leading-[140%] font-semibold outline-none"
+          />
+        </div>
       </div>
 
-      <div className="flex items-center gap-4 rounded-lg">
-        <div className="flex min-w-42.25 cursor-pointer items-center gap-1 rounded-lg bg-teal-700 px-4 py-3">
+      <div className="flex items-center gap-2.5 rounded-lg lg:gap-4">
+        <div className="rounded-lg bg-teal-700 px-2.5 py-2.5 lg:hidden">
+          <img src="/add-icon.png" alt="addition icon" className="h-5 w-5" />
+        </div>
+        <div className="hidden min-w-42.25 cursor-pointer items-center gap-1 rounded-lg bg-teal-700 px-4 py-3 lg:flex">
           <img src="/add-icon.png" alt="addition icon" className="h-5 w-5" />
           <p className="font-manrope text-base leading-[140%] font-semibold text-white">
             Add Bookmark

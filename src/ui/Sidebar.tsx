@@ -1,12 +1,20 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { NavLink } from "react-router-dom";
 
-export default function Sidebar() {
+export default function Sidebar({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) {
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
     `flex cursor-pointer items-center gap-3 px-3 py-2 transition-all duration-200 ${isActive ? "bg-light-100 rounded-md" : "hover:bg-light-100 rounded-md"}`;
 
   return (
-    <aside className="border-light-300 row-start-1 -row-end-1 flex h-full flex-col gap-4 overflow-y-auto border-r">
+    <aside
+      className={`border-light-300 fixed inset-y-0 left-0 z-2 row-start-1 -row-end-1 flex h-full w-74 flex-col gap-4 overflow-y-auto border-r transition-all duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"} bg-white lg:static lg:flex lg:translate-x-0`}
+    >
       <div className="flex items-center gap-5 px-5 pt-5 pb-2.5">
         <img src="/Bookmark.png" alt="logo icon" className="h-8 w-8" />
         <p className="font-roboto text-light-900 text-[20px] leading-[100%] font-bold tracking-[-1%]">
@@ -14,9 +22,16 @@ export default function Sidebar() {
         </p>
       </div>
 
+      <button
+        className="absolute top-1.5 right-0 px-2.5 py-2.5 lg:hidden"
+        onClick={onClose}
+      >
+        <img src="/x-close.png" alt="close icon" className="h-5 w-5" />
+      </button>
+
       <nav className="px-4 pb-5">
         <ul>
-          <li>
+          <li onClick={() => window.innerWidth < 1024 && onClose()}>
             <NavLink to="/dashboard" className={navLinkClasses}>
               {({ isActive }) => (
                 <>
@@ -34,7 +49,7 @@ export default function Sidebar() {
               )}
             </NavLink>
           </li>
-          <li>
+          <li onClick={() => window.innerWidth < 1024 && onClose()}>
             <NavLink to="/archived" className={navLinkClasses}>
               {({ isActive }) => (
                 <>
