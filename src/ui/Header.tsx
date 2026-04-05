@@ -13,7 +13,6 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
     .toUpperCase()
     .slice(0, 2);
 
-  console.log(initials);
   return (
     <header className="border-light-300 flex items-center justify-between border-b px-4 py-3 md:px-8 md:py-4 lg:px-8 lg:py-4">
       <div className="flex items-center gap-1 md:gap-4">
