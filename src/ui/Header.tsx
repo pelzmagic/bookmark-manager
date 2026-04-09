@@ -37,22 +37,24 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
       <div className="flex items-center gap-2.5 rounded-lg border border-red-500 lg:gap-4">
         <Modal>
           <Modal.Open opens="bookmark-form">
-            <div className="rounded-lg bg-teal-700 px-2.5 py-2.5 lg:hidden">
-              <img
-                src="/add-icon.png"
-                alt="addition icon"
-                className="h-5 w-5"
-              />
-            </div>
-            <div className="hidden min-w-42.25 cursor-pointer items-center gap-1 rounded-lg bg-teal-700 px-4 py-3 lg:flex">
-              <img
-                src="/add-icon.png"
-                alt="addition icon"
-                className="h-5 w-5"
-              />
-              <p className="font-manrope text-base leading-[140%] font-semibold text-white">
-                Add Bookmark
-              </p>
+            <div>
+              <div className="cursor-pointer rounded-lg bg-teal-700 px-2.5 py-2.5 lg:hidden">
+                <img
+                  src="/add-icon.png"
+                  alt="addition icon"
+                  className="h-5 w-5"
+                />
+              </div>
+              <div className="hidden min-w-42.25 cursor-pointer items-center gap-1 rounded-lg bg-teal-700 px-4 py-3 lg:flex">
+                <img
+                  src="/add-icon.png"
+                  alt="addition icon"
+                  className="h-5 w-5"
+                />
+                <p className="font-manrope text-base leading-[140%] font-semibold text-white">
+                  Add Bookmark
+                </p>
+              </div>
             </div>
           </Modal.Open>
 

@@ -11,6 +11,12 @@ function Modal({ children }: { children: React.ReactNode }) {
 
   const close = () => setOpenName("");
   const open = setOpenName;
+
+  return (
+    <ModalContext.Provider value={{ openName, close, open }}>
+      {children}
+    </ModalContext.Provider>
+  );
 }
 
 function Open({ children, opens: openWindowName }) {
@@ -20,6 +26,9 @@ function Open({ children, opens: openWindowName }) {
 }
 
 function Window({ children, name }) {
+  const { openName, close } = useContext(ModalContext);
+  if (name !== openName) return null;
+
   return createPortal(
     <div className="fixed inset-0 z-10 flex items-center justify-center bg-[#131313]/70 backdrop-blur-sm transition-all">
       <div className="relative max-w-142.5 rounded-2xl bg-white p-8">
@@ -34,4 +43,5 @@ function Window({ children, name }) {
 
 Modal.Open = Open;
 Modal.Window = Window;
+
 export default Modal;
