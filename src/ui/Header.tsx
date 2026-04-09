@@ -1,4 +1,5 @@
 import useUser from "@/hooks/useUser";
+import Modal from "./Modal";
 
 export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
   const { user, isPending } = useUser();
