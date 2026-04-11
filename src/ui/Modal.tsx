@@ -31,10 +31,14 @@ function Window({ children, name }) {
 
   return createPortal(
     <div className="fixed inset-0 z-10 flex items-center justify-center bg-[#131313]/70 backdrop-blur-sm transition-all">
-      <div className="relative max-w-142.5 rounded-2xl bg-white p-8">
-        <button className="bg-light-400 absolute top-5 right-5 rounded-lg p-1.5">
+      <div className="relative max-h-screen max-w-142.5 overflow-y-auto rounded-2xl bg-white p-8">
+        <button
+          onClick={close}
+          className="border-light-400 absolute top-5 right-5 cursor-pointer rounded-lg border bg-white p-1.5"
+        >
           <img src="/x-close.png" alt="close icon" className="h-5 w-5" />
         </button>
+        {children}
       </div>
     </div>,
     document.body,
