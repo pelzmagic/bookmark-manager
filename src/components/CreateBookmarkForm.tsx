@@ -1,4 +1,15 @@
+import { useState } from "react";
+
 export default function CreateBookmarkForm() {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [url, setUrl] = useState("");
+  const [tag, setTag] = useState("");
+\
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+  }
+
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-2">
@@ -11,7 +22,7 @@ export default function CreateBookmarkForm() {
         </p>
       </div>
 
-      <form className="flex flex-col gap-5">
+      <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-1.5">
           <label
             htmlFor="title"
@@ -22,6 +33,8 @@ export default function CreateBookmarkForm() {
           <input
             type="text"
             id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             className="border-light-500 font-manrope text-light-800 rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none"
           />
         </div>
@@ -35,6 +48,8 @@ export default function CreateBookmarkForm() {
           </label>
           <textarea
             id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             rows={4}
             className="border-light-500 font-manrope text-light-800 resize-none rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none"
           ></textarea>
@@ -45,28 +60,32 @@ export default function CreateBookmarkForm() {
 
         <div className="flex flex-col gap-1.5">
           <label
-            htmlFor="title"
+            htmlFor="url"
             className="text-light-900 font-manrope text-sm leading-[140%] font-semibold"
           >
             Website Url <span className="text-sm text-teal-700">*</span>
           </label>
           <input
             type="text"
-            id="title"
+            id="url"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
             className="border-light-500 font-manrope text-light-800 rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none"
           />
         </div>
 
         <div className="flex flex-col gap-1.5">
           <label
-            htmlFor="title"
+            htmlFor="tag"
             className="text-light-900 font-manrope text-sm leading-[140%] font-semibold"
           >
             Tags <span className="text-sm text-teal-700">*</span>
           </label>
           <input
-            type="text"
-            id="title"
+            type="tag"
+            id="tag"
+            value={tag}
+            onChange={(e) => setTag(e.target.value)}
             placeholder="e.g. Design, Learning, Tools"
             className="border-light-500 font-manrope text-light-800 rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none"
           />

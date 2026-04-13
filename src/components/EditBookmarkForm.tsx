@@ -6,8 +6,8 @@ export default function EditBookmarkForm() {
           Edit bookmark
         </h1>
         <p className="text-light-800 font-manrope text-sm leading-[150%] font-medium">
-          Save a link with details to keep your collections organized. We
-          extract the favicon automatically from the URL
+          Update your saved link details - change the title, description, URL,
+          or tags anytime.
         </p>
       </div>
 
@@ -77,7 +77,7 @@ export default function EditBookmarkForm() {
             Cancel
           </button>
           <button className="font-manrope cursor-pointer rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white">
-            Add Bookmark
+            Save Bookmark
           </button>
         </div>
       </form>
