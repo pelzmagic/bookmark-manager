@@ -6,6 +6,8 @@ export default function CreateBookmarkForm() {
   const [url, setUrl] = useState("");
   const [tag, setTag] = useState("");
 
+  const maxLength = 280;
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
   }
@@ -49,12 +51,15 @@ export default function CreateBookmarkForm() {
           <textarea
             id="description"
             value={description}
+            maxLength={maxLength}
             onChange={(e) => setDescription(e.target.value)}
             rows={4}
             className="border-light-500 font-manrope text-light-800 resize-none rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none"
           ></textarea>
-          <p className="font-manrope text-light-800 self-end text-xs leading-[140%] font-medium">
-            0/280
+          <p
+            className={`font-manrope self-end text-xs leading-[140%] font-medium ${description.length >= maxLength ? "text-red-500" : "text-light-500"}`}
+          >
+            {description.length}/{maxLength}
           </p>
         </div>
 
