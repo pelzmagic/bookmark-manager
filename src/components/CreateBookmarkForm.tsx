@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useCreateBookmark } from "@/hooks/useBookmarks";
+import { toast } from "sonner";
 
 export default function CreateBookmarkForm() {
   const [title, setTitle] = useState("");
@@ -6,10 +8,22 @@ export default function CreateBookmarkForm() {
   const [url, setUrl] = useState("");
   const [tag, setTag] = useState("");
 
+  const { isCreating, createBookmark } = useCreateBookmark();
+
   const maxLength = 280;
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    if (!title || !url || !description)
+      toast.error("Please fill all required fields");
+
+    createBookmark({ title, description, url, tag });
+
+    setTitle("");
+    setDescription("");
+    setUrl("");
+    setTag("");
   }
 
   return (
@@ -36,6 +50,7 @@ export default function CreateBookmarkForm() {
             type="text"
             id="title"
             value={title}
+            disabled={isCreating}
             onChange={(e) => setTitle(e.target.value)}
             className="border-light-500 font-manrope text-light-800 rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none"
           />
@@ -52,6 +67,7 @@ export default function CreateBookmarkForm() {
             id="description"
             value={description}
             maxLength={maxLength}
+            disabled={isCreating}
             onChange={(e) => setDescription(e.target.value)}
             rows={4}
             className="border-light-500 font-manrope text-light-800 resize-none rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none"
@@ -71,9 +87,10 @@ export default function CreateBookmarkForm() {
             Website Url <span className="text-sm text-teal-700">*</span>
           </label>
           <input
-            type="text"
+            type="url"
             id="url"
             value={url}
+            disabled={isCreating}
             onChange={(e) => setUrl(e.target.value)}
             className="border-light-500 font-manrope text-light-800 rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none"
           />
@@ -90,6 +107,7 @@ export default function CreateBookmarkForm() {
             type="tag"
             id="tag"
             value={tag}
+            disabled={isCreating}
             onChange={(e) => setTag(e.target.value)}
             placeholder="e.g. Design, Learning, Tools"
             className="border-light-500 font-manrope text-light-800 rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none"
@@ -97,11 +115,18 @@ export default function CreateBookmarkForm() {
         </div>
 
         <div className="flex items-center justify-end gap-4">
-          <button className="border-light-400 text-light-900 cursor-pointer rounded-lg border px-4 py-3">
+          <button
+            className="border-light-400 text-light-900 cursor-pointer rounded-lg border px-4 py-3"
+            type="button"
+          >
             Cancel
           </button>
-          <button className="font-manrope cursor-pointer rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white">
-            Add Bookmark
+          <button
+            className="font-manrope cursor-pointer rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white"
+            type="submit"
+            disabled={isCreating}
+          >
+            {isCreating ? "Creating..." : "Add Bookmark"}
           </button>
         </div>
       </form>
