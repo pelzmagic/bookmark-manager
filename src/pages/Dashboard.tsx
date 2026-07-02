@@ -1,6 +1,6 @@
 export default function Dashboard() {
   return (
-    <div className="flex items-center justify-between">
+    <section className="flex items-center justify-between">
       <h1 className="text-light-900 font-manrope text-[20px] leading-[120%] font-bold lg:text-2xl lg:leading-[140%]">
         All Bookmarks
       </h1>
@@ -10,6 +10,6 @@ export default function Dashboard() {
           Sort by
         </p>
       </div>
-    </div>
+    </section>
   );
 }

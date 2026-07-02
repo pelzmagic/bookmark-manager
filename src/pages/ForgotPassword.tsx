@@ -1,29 +1,23 @@
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { sendResetPasswordLink } from "@/services/auth";
 import { toast } from "sonner";
 import Spinner from "@/ui/Spinner";
 import { Link } from "react-router-dom";
+import { useForgotPassword } from "@/hooks/useForgotPassword";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: sendResetPasswordLink,
-    onSuccess: () => {
-      toast.success("Reset link sent! Please check your email.");
-      setEmail("");
-    },
-    onError: (err: Error) => {
-      toast.error(err.message);
-    },
-  });
+  const { isForgettingPassword, forgetPassword } = useForgotPassword();
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!isEmailValid) return toast.error("Please enter a valid email address");
-    mutate(email);
+    forgetPassword(email, {
+      onSuccess: () => {
+        setEmail("");
+      },
+    });
   }
 
   return (
@@ -66,9 +60,9 @@ export default function ForgotPassword() {
           </div>
           <button
             className="font-manrope flex cursor-pointer items-center justify-center rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 disabled:bg-neutral-400"
-            disabled={isPending}
+            disabled={isForgettingPassword}
           >
-            {isPending ? <Spinner /> : "Send reset Link"}
+            {isForgettingPassword ? <Spinner /> : "Send reset Link"}
           </button>
         </form>
 

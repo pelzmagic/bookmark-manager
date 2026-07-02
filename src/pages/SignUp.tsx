@@ -1,11 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { signUp } from "@/services/auth";
-import { toast } from "sonner";
-import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
 import Spinner from "@/ui/Spinner";
 import { HiEye, HiEyeSlash } from "react-icons/hi2";
+import { useSignUp } from "@/hooks/useSignUp";
 
 export default function SignUp() {
   const [fullName, setFullName] = useState("");
@@ -14,7 +11,7 @@ export default function SignUp() {
   const [touched, setTouched] = useState({ email: false, password: false });
   const [showPassword, setShowPassword] = useState(false);
 
-  const navigate = useNavigate();
+  const { signUp, isSigningUp } = useSignUp();
 
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const hasMinLength = password.length >= 8;
@@ -22,22 +19,11 @@ export default function SignUp() {
   const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
   const isPasswordValid = hasMinLength && hasUpperCase && hasSpecialChar;
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: signUp,
-    onSuccess: () => {
-      toast.success("Account created successfully!");
-      navigate("/");
-    },
-    onError: (err: Error) => {
-      toast.error(err.message);
-    },
-  });
-
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setTouched({ email: true, password: true });
     if (!fullName || !isEmailValid || !isPasswordValid) return;
-    mutate({ fullName, email, password });
+    signUp({ fullName, email, password });
   }
 
   return (
@@ -180,9 +166,9 @@ export default function SignUp() {
           </div>
           <button
             className="font-manrope cursor-pointer rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
-            disabled={isPending}
+            disabled={isSigningUp}
           >
-            {isPending ? (
+            {isSigningUp ? (
               <>
                 <Spinner size="sm" />
               </>

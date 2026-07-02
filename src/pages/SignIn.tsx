@@ -1,32 +1,22 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import TypewriterComponent from "typewriter-effect";
-import { useMutation } from "@tanstack/react-query";
-import { login } from "../services/auth";
-import { toast } from "sonner";
 import Spinner from "@/ui/Spinner";
-import { useNavigate } from "react-router-dom";
+import { HiEyeSlash } from "react-icons/hi2";
+import { HiEye } from "react-icons/hi2";
+import { useLogin } from "@/hooks/useLogin";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
-  const navigate = useNavigate();
-
-  const { mutate, isPending } = useMutation({
-    mutationFn: login,
-    onSuccess: () => {
-      toast.success("Sign in successful");
-      navigate("/dashboard");
-    },
-    onError: (err) => {
-      toast.error(err.message);
-    },
-  });
+  const { isLoggingIn, login } = useLogin();
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    mutate({ email, password });
+
+    login({ email, password });
   }
 
   return (
@@ -80,20 +70,34 @@ export default function SignIn() {
             >
               Password
             </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="rounded-lg border border-neutral-500 p-3 shadow-xs outline-0 hover:bg-neutral-100 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
-            />
+            <div className="relative cursor-pointer">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full rounded-lg border border-neutral-500 p-3 shadow-xs outline-0 hover:bg-neutral-100 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
+              >
+                {showPassword ? (
+                  <HiEyeSlash className="h-5 w-5" />
+                ) : (
+                  <HiEye className="h-5 w-5" />
+                )}
+              </button>
+            </div>
           </div>
           <button
             className="font-manrope flex cursor-pointer items-center justify-center rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 disabled:bg-neutral-400"
-            disabled={isPending}
+            disabled={isLoggingIn}
           >
-            {isPending ? <Spinner /> : "Log in"}
+            {isLoggingIn ? <Spinner /> : "Log in"}
           </button>
         </form>
 

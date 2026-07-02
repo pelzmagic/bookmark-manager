@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useCreateBookmark } from "@/hooks/useBookmarks";
-import { toast } from "sonner";
 
-export default function CreateBookmarkForm() {
+export default function CreateBookmarkForm({
+  onCloseModal,
+}: {
+  onCloseModal?: () => void;
+}) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
@@ -15,8 +18,7 @@ export default function CreateBookmarkForm() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    if (!title || !url || !description)
-      toast.error("Please fill all required fields");
+    if (!title || !url || !description) return;
 
     createBookmark({ title, description, url, tag });
 
@@ -118,6 +120,7 @@ export default function CreateBookmarkForm() {
           <button
             className="border-light-400 text-light-900 cursor-pointer rounded-lg border px-4 py-3"
             type="button"
+            onClick={onCloseModal}
           >
             Cancel
           </button>

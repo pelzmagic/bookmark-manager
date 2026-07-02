@@ -38,7 +38,7 @@ function Window({ children, name }) {
         >
           <img src="/x-close.png" alt="close icon" className="h-5 w-5" />
         </button>
-        {children}
+        {cloneElement(children, { onCloseModal: close })}
       </div>
     </div>,
     document.body,

@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
-import { updatePassword } from "@/services/auth";
+import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import Spinner from "@/ui/Spinner";
 import { HiEye, HiEyeSlash } from "react-icons/hi2";
+import { useUpdatePassword } from "@/hooks/useUpdatePassword";
 
 export default function ResetPassword() {
   const [newPassword, setNewPassword] = useState("");
@@ -12,7 +11,7 @@ export default function ResetPassword() {
   const [showPassword, setShowPassword] = useState(false);
   const [touched, setTouched] = useState(false);
 
-  const navigate = useNavigate();
+  const { updatePassword, isUpdatingPassword } = useUpdatePassword();
 
   const hasMinLength = newPassword.length >= 8;
   const hasUpperCase = /[A-Z]/.test(newPassword);
@@ -20,17 +19,6 @@ export default function ResetPassword() {
   const isPasswordValid = hasMinLength && hasSpecialChar && hasUpperCase;
   const passwordsMatch =
     newPassword === confirmPassword && confirmPassword !== "";
-
-  const { mutate, isPending } = useMutation({
-    mutationFn: updatePassword,
-    onSuccess: () => {
-      toast.success("Password updated successfully!");
-      navigate("/");
-    },
-    onError: (err: Error) => {
-      toast.error(err.message);
-    },
-  });
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -46,7 +34,7 @@ export default function ResetPassword() {
       return toast.error("Passwords do not match");
     }
 
-    mutate(newPassword);
+    updatePassword(newPassword);
   }
 
   return (
@@ -164,9 +152,9 @@ export default function ResetPassword() {
 
           <button
             className="font-manrope flex cursor-pointer items-center justify-center rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 disabled:bg-neutral-400"
-            disabled={isPending}
+            disabled={isUpdatingPassword}
           >
-            {isPending ? <Spinner /> : "Reset password"}
+            {isUpdatingPassword ? <Spinner /> : "Reset password"}
           </button>
         </form>
 
