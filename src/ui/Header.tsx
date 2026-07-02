@@ -34,7 +34,7 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
         </div>
       </div>
 
-      <div className="flex items-center gap-2.5 rounded-lg border border-red-500 lg:gap-4">
+      <div className="flex items-center gap-2.5 rounded-lg lg:gap-4">
         <Modal>
           <Modal.Open opens="bookmark-form">
             <div>
@@ -62,7 +62,10 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
             <CreateBookmarkForm />
           </Modal.Window>
         </Modal>
-        <div className="bg-light-500 flex h-10 w-10 items-center justify-center rounded-full">
+        <div
+          role="button"
+          className="bg-light-500 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full"
+        >
           {isPending ? (
             <div className="bg-light-300 h-full w-full animate-pulse"></div>
           ) : (
