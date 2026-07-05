@@ -13,7 +13,7 @@ export default function AppLayout() {
     <div className="grid h-screen grid-cols-1 grid-rows-[auto_1fr] lg:grid-cols-[296px_1fr]">
       <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
       <Header onMenuClick={toggleSidebar} />
-      <main className="bg-light-100 flex min-h-0 flex-col border border-blue-900 px-4 pt-6 lg:px-8 lg:pt-8">
+      <main className="bg-light-100 flex min-h-0 flex-col px-4 pt-6 lg:px-8 lg:pt-8">
         <Outlet />
 
         {isSidebarOpen && (
