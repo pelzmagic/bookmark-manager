@@ -1,6 +1,8 @@
+import Card from "@/components/Card";
+
 export default function Dashboard() {
   return (
-    <section className="flex flex-1 flex-col gap-5 border border-red-700">
+    <section className="flex min-h-0 flex-1 flex-col gap-5 border border-red-700">
       <div className="flex items-center justify-between">
         <h1 className="text-light-900 font-manrope text-[20px] leading-[120%] font-bold lg:text-2xl lg:leading-[140%]">
           All Bookmarks
@@ -13,8 +15,10 @@ export default function Dashboard() {
         </button>
       </div>
 
-      <div className="flex-1 border border-blue-800">
-        <h1>How are you?</h1>
+      <div className="grid-cols- grid flex-1 content-start gap-8 overflow-y-auto border border-blue-800 md:grid-cols-2 lg:grid-cols-3">
+        <Card />
+        <Card />
+        <Card />
       </div>
     </section>
   );
