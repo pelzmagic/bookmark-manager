@@ -9,7 +9,7 @@ export default function CreateBookmarkForm({
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
-  const [tag, setTag] = useState("");
+  const [tags, setTags] = useState("");
 
   const { isCreating, createBookmark } = useCreateBookmark();
 
@@ -20,12 +20,12 @@ export default function CreateBookmarkForm({
 
     if (!title || !url || !description) return;
 
-    createBookmark({ title, description, url, tag });
+    createBookmark({ title, description, url, tags });
 
     setTitle("");
     setDescription("");
     setUrl("");
-    setTag("");
+    setTags("");
   }
 
   return (
@@ -108,9 +108,9 @@ export default function CreateBookmarkForm({
           <input
             type="tag"
             id="tag"
-            value={tag}
+            value={tags}
             disabled={isCreating}
-            onChange={(e) => setTag(e.target.value)}
+            onChange={(e) => setTags(e.target.value)}
             placeholder="e.g. Design, Learning, Tools"
             className="border-light-500 font-manrope text-light-800 rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none"
           />

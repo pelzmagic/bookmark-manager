@@ -3,7 +3,7 @@ import type { BookmarkData } from "@/types/bookmarkData";
 
 export async function createBookmark(newBookmark: BookmarkData) {
   const { data, error } = await supabase
-    .from("bookmarks")
+    .from("Bookmarks")
     .insert([newBookmark])
     .select();
 
