@@ -14,3 +14,11 @@ export async function createBookmark(newBookmark: BookmarkData) {
 
   return data;
 }
+
+export async function getBookmarks() {
+  const { data, error } = await supabase.from("Bookmarks").select("*");
+
+  if (error) throw new Error("Bookmark could not be retrieved");
+
+  return data;
+}

@@ -1,9 +1,16 @@
-export default function Card() {
+import type { BookmarkData } from "@/types/bookmarkData";
+import Tags from "./Tags";
+
+type CardProps = {
+  bookmark: BookmarkData;
+};
+
+export default function Card({ bookmark }: CardProps) {
   return (
     <div className="flex flex-col rounded-xl bg-white">
       <div className="flex flex-col gap-4 p-4">
         <div className="flex items-start justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <div className="h-10 w-10 rounded-lg">
               <img
                 src="/url-logo.png"
@@ -13,10 +20,10 @@ export default function Card() {
             </div>
             <div className="flex flex-col gap-1">
               <h1 className="font-manrope text-light-900 text-[20px] leading-[120%] font-bold">
-                Frontend Mentor
+                {bookmark.title}
               </h1>
               <p className="font-manrope text-light-800 text-[12px] leading-[140%] font-medium">
-                frontendmentor.io
+                {bookmark.url.slice(0, 21)}...
               </p>
             </div>
           </div>
@@ -29,23 +36,16 @@ export default function Card() {
         <hr className="border-light-300 border" />
 
         <p className="text-light-800 font-manrope text-sm leading-[150%] font-medium">
-          Improve your front-end coding skills by building real projects. Solve
-          real-world HTML, CSS and Javascript challenges whilst working to
-          professional designs.
+          {bookmark.description}
         </p>
 
         <div className="flex items-center gap-2">
-          <div className="bg-light-100 rounded-sm px-2 py-0.5">
-            <p className="text-light-800 font-manrope text-xs leading-[140%] font-medium">
-              Practise
-            </p>
-          </div>
-
-          <div className="bg-light-100 rounded-sm px-2 py-0.5">
-            <p className="text-light-800 font-manrope text-xs leading-[140%] font-medium">
-              Practise
-            </p>
-          </div>
+          {bookmark.tags
+            .split(",")
+            .slice(0, 3)
+            .map((tag, index) => (
+              <Tags tag={tag.trim()} key={index} />
+            ))}
         </div>
       </div>
 
