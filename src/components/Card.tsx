@@ -6,6 +6,14 @@ type CardProps = {
 };
 
 export default function Card({ bookmark }: CardProps) {
+  let faviconUrl = "/url-logo.png";
+  try {
+    const domain = new URL(bookmark.url).hostname;
+    faviconUrl = `https://www.google.com/s2/favicons?sz=64&domain=${domain}`;
+  } catch {
+    faviconUrl = "/url-logo.png";
+  }
+
   return (
     <div className="flex flex-col rounded-xl bg-white">
       <div className="flex flex-col gap-4 p-4">
@@ -13,9 +21,12 @@ export default function Card({ bookmark }: CardProps) {
           <div className="flex flex-wrap items-center gap-4">
             <div className="h-10 w-10 rounded-lg">
               <img
-                src="/url-logo.png"
-                alt="url logo"
-                className="h-full w-full"
+                src={faviconUrl}
+                alt={`${bookmark.title} favicon`}
+                className="h-full w-full object-contain"
+                onError={(e) =>
+                  ((e.target as HTMLImageElement).src = "/url-logo.png")
+                }
               />
             </div>
             <div className="flex flex-col gap-1">

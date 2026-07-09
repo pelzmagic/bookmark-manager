@@ -38,7 +38,7 @@ export default function Dashboard() {
           <Spinner />
         </div>
       ) : (
-        <div className="grid-cols- grid flex-1 content-start gap-8 overflow-y-auto md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid flex-1 grid-cols-1 content-start gap-8 overflow-y-auto md:grid-cols-2 lg:grid-cols-3">
           {bookmarks?.map((bookmark) => (
             <Card key={bookmark.id} bookmark={bookmark} />
           ))}
