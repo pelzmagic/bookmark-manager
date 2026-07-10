@@ -31,7 +31,7 @@ function Window({ children, name }) {
 
   return createPortal(
     <div className="fixed inset-0 z-10 flex items-center justify-center bg-[#131313]/70 backdrop-blur-sm transition-all">
-      <div className="relative max-h-screen max-w-142.5 overflow-y-auto rounded-2xl bg-white p-8">
+      <div className="relative max-h-screen max-w-87.5 overflow-y-auto rounded-2xl bg-white p-8 md:max-w-120 lg:max-w-142.5">
         <button
           onClick={close}
           className="border-light-400 absolute top-5 right-5 cursor-pointer rounded-lg border bg-white p-1.5"

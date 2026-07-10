@@ -46,7 +46,7 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
         </div>
       </div>
 
-      <div className="flex items-center gap-2.5 rounded-lg lg:gap-4">
+      <div className="flex items-center gap-2.5 rounded-lg  lg:gap-4">
         <Modal>
           <Modal.Open opens="bookmark-form">
             <div>
