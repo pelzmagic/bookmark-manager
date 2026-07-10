@@ -7,6 +7,7 @@ type CardProps = {
 
 export default function Card({ bookmark }: CardProps) {
   let faviconUrl = "/url-logo.png";
+
   try {
     const domain = new URL(bookmark.url).hostname;
     faviconUrl = `https://www.google.com/s2/favicons?sz=64&domain=${domain}`;
