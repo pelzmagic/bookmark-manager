@@ -26,6 +26,8 @@ export default function CreateBookmarkForm({
     setDescription("");
     setUrl("");
     setTags("");
+
+    onCloseModal?.();
   }
 
   return (
