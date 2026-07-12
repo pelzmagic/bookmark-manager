@@ -1,5 +1,6 @@
 import type { BookmarkData } from "@/types/bookmarkData";
 import Tags from "./Tags";
+import Menus from "./Menus";
 
 type CardProps = {
   bookmark: BookmarkData;
@@ -40,9 +41,17 @@ export default function Card({ bookmark }: CardProps) {
             </div>
           </div>
 
-          <div className="border-light-400 rounded-lg border bg-white p-1.5">
-            <img src="/dots-vertical.png" alt="menu icon" className="h-5 w-5" />
-          </div>
+          <Menus.Menu>
+            <Menus.Toggle id={bookmark.id} />
+
+            <Menus.List id={bookmark.id}>
+              <Menus.Button>Visit</Menus.Button>
+              <Menus.Button>Copy Url</Menus.Button>
+              <Menus.Button>Unpin</Menus.Button>
+              <Menus.Button>Edit</Menus.Button>
+              <Menus.Button>Archive</Menus.Button>
+            </Menus.List>
+          </Menus.Menu>
         </div>
 
         <hr className="border-light-300 border" />

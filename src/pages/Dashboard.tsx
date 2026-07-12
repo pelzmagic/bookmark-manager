@@ -2,6 +2,7 @@ import Card from "@/components/Card";
 import Spinner from "@/ui/Spinner";
 import { useGetBookmarks } from "@/hooks/useGetBookmarks";
 import Empty from "@/components/Empty";
+import Menus from "@/components/Menus";
 
 export default function Dashboard() {
   const { bookmarks, isPending } = useGetBookmarks();
@@ -39,9 +40,11 @@ export default function Dashboard() {
         </div>
       ) : (
         <div className="grid flex-1 grid-cols-1 content-start gap-8 overflow-y-auto md:grid-cols-2 lg:grid-cols-3">
-          {bookmarks?.map((bookmark) => (
-            <Card key={bookmark.id} bookmark={bookmark} />
-          ))}
+          <Menus>
+            {bookmarks?.map((bookmark) => (
+              <Card key={bookmark.id} bookmark={bookmark} />
+            ))}
+          </Menus>
         </div>
       )}
     </section>
