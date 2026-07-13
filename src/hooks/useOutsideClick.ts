@@ -6,7 +6,13 @@ export function useOutsideClick(handler: () => void, listenCapturing = true) {
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
+      const target = e.target as HTMLElement;
+
+      const clickedOutsideMenu = ref.current && !ref.current.contains(target);
+
+      const clickedToggleButton = target.closest("button");
+
+      if (clickedOutsideMenu && !clickedToggleButton) {
         handler();
       }
     }

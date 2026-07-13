@@ -21,7 +21,15 @@ function Menus({ children }: { children: React.ReactNode }) {
 }
 
 function Menu({ children }: { children: React.ReactNode }) {
-  return <div className="relative">{children}</div>;
+  return (
+    <div
+      className="relative cursor-pointer focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
+      role="button"
+      tabIndex={0}
+    >
+      {children}
+    </div>
+  );
 }
 
 function Toggle({ id }: { id: number | string }) {
@@ -46,7 +54,7 @@ function Toggle({ id }: { id: number | string }) {
 
   return (
     <button
-      className="border-light-400 rounded-lg border bg-white p-1.5"
+      className="border-light-400 cursor-pointer rounded-lg border bg-white p-1.5 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
       onClick={handleClick}
     >
       <img src="/dots-vertical.png" alt="menu icon" className="h-5 w-5" />
