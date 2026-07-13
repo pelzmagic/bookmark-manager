@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { useState } from "react";
 import { useContext } from "react";
+import { useOutsideClick } from "@/hooks/useOutsideClick";
 
 const MenusContext = createContext<{
   openId: number | string;
@@ -27,7 +28,9 @@ function Toggle({ id }: { id: number | string }) {
   const context = useContext(MenusContext);
 
   if (!context)
-    throw new Error("Menus.Toggle must e used inside a Menus parent container");
+    throw new Error(
+      "Menus.Toggle must be used inside a Menus parent container",
+    );
 
   const { openId, close, open } = context;
 
@@ -58,12 +61,22 @@ function List({
   id: number | string;
   children: React.ReactNode;
 }) {
-  const { openId } = useContext(MenusContext);
+  const context = useContext(MenusContext);
+
+  if (!context)
+    throw new Error("Menus.List must be used inside a Menus parent container");
+
+  const { openId, close } = context;
+
+  const ref = useOutsideClick(close);
 
   if (openId !== id) return null;
 
   return (
-    <ul className="border-light-300 absolute top-10 right-0 z-50 flex min-w-35 flex-col gap-1 rounded-lg border bg-white p-1.5 shadow-md">
+    <ul
+      ref={ref}
+      className="border-light-300 absolute top-10 right-0 z-50 flex min-w-50 flex-col gap-1 rounded-lg border bg-white p-2"
+    >
       {children}
     </ul>
   );
@@ -72,7 +85,7 @@ function List({
 function Button({ children }: { children: React.ReactNode }) {
   return (
     <li>
-      <button className="flex gap-2.5 rounded-md p-2 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2">
+      <button className="text-light-800 font-manrope flex w-full items-center gap-2.5 rounded-md border-neutral-700 p-2 text-sm leading-[140%] font-semibold hover:border focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2">
         {children}
       </button>
     </li>

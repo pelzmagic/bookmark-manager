@@ -45,11 +45,30 @@ export default function Card({ bookmark }: CardProps) {
             <Menus.Toggle id={bookmark.id} />
 
             <Menus.List id={bookmark.id}>
-              <Menus.Button>Visit</Menus.Button>
-              <Menus.Button>Copy Url</Menus.Button>
-              <Menus.Button>Unpin</Menus.Button>
-              <Menus.Button>Edit</Menus.Button>
-              <Menus.Button>Archive</Menus.Button>
+              <Menus.Button>
+                <img
+                  src="/external-link.png"
+                  alt="external link"
+                  className="h-4 w-4"
+                />
+                <span>Visit</span>
+              </Menus.Button>
+              <Menus.Button>
+                <img src="/copy.png" alt="copy icon" className="h-4 w-4" />
+                <span>Copy Url</span>
+              </Menus.Button>
+              <Menus.Button>
+                <img src="/pin-icon.png" alt="pin icon" className="h-4 w-4" />
+                <span>Unpin</span>
+              </Menus.Button>
+              <Menus.Button>
+                <img src="edit.png" alt="pin icon" className="h-4 w-4" />
+                <span>Edit</span>
+              </Menus.Button>
+              <Menus.Button>
+                <img src="archive.png" alt="pin icon" className="h-4 w-4" />
+                <span>Archive</span>
+              </Menus.Button>
             </Menus.List>
           </Menus.Menu>
         </div>
