@@ -1,6 +1,8 @@
 import type { BookmarkData } from "@/types/bookmarkData";
 import Tags from "./Tags";
 import Menus from "./Menus";
+import Modal from "@/ui/Modal";
+import CreateBookmarkForm from "./CreateBookmarkForm";
 
 type CardProps = {
   bookmark: BookmarkData;
@@ -41,36 +43,44 @@ export default function Card({ bookmark }: CardProps) {
             </div>
           </div>
 
-          <Menus.Menu>
-            <Menus.Toggle id={bookmark.id} />
+          <Modal>
+            <Menus.Menu>
+              <Menus.Toggle id={bookmark.id} />
 
-            <Menus.List id={bookmark.id}>
-              <Menus.Button>
-                <img
-                  src="/external-link.png"
-                  alt="external link"
-                  className="h-4 w-4"
-                />
-                <span>Visit</span>
-              </Menus.Button>
-              <Menus.Button>
-                <img src="/copy.png" alt="copy icon" className="h-4 w-4" />
-                <span>Copy Url</span>
-              </Menus.Button>
-              <Menus.Button>
-                <img src="/pin-icon.png" alt="pin icon" className="h-4 w-4" />
-                <span>Unpin</span>
-              </Menus.Button>
-              <Menus.Button>
-                <img src="edit.png" alt="pin icon" className="h-4 w-4" />
-                <span>Edit</span>
-              </Menus.Button>
-              <Menus.Button>
-                <img src="archive.png" alt="pin icon" className="h-4 w-4" />
-                <span>Archive</span>
-              </Menus.Button>
-            </Menus.List>
-          </Menus.Menu>
+              <Menus.List id={bookmark.id}>
+                <Menus.Button>
+                  <img
+                    src="/external-link.png"
+                    alt="external link"
+                    className="h-4 w-4"
+                  />
+                  <span>Visit</span>
+                </Menus.Button>
+                <Menus.Button>
+                  <img src="/copy.png" alt="copy icon" className="h-4 w-4" />
+                  <span>Copy Url</span>
+                </Menus.Button>
+                <Menus.Button>
+                  <img src="/pin-icon.png" alt="pin icon" className="h-4 w-4" />
+                  <span>Unpin</span>
+                </Menus.Button>
+                <Modal.Open opens="bookmark-form">
+                  <Menus.Button>
+                    <img src="edit.png" alt="pin icon" className="h-4 w-4" />
+                    <span>Edit</span>
+                  </Menus.Button>
+                </Modal.Open>
+                <Menus.Button>
+                  <img src="archive.png" alt="pin icon" className="h-4 w-4" />
+                  <span>Archive</span>
+                </Menus.Button>
+              </Menus.List>
+            </Menus.Menu>
+
+            <Modal.Window name="bookmark-form">
+              <CreateBookmarkForm />
+            </Modal.Window>
+          </Modal>
         </div>
 
         <hr className="border-light-300 border" />

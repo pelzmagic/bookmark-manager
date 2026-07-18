@@ -10,9 +10,11 @@ export function useOutsideClick(handler: () => void, listenCapturing = true) {
 
       const clickedOutsideMenu = ref.current && !ref.current.contains(target);
 
-      const clickedToggleButton = target.closest("button");
+      const button = target
+        .closest("button")
+        ?.querySelector('img[alt="menu icon"]');
 
-      if (clickedOutsideMenu && !clickedToggleButton) {
+      if (clickedOutsideMenu && !button) {
         handler();
       }
     }

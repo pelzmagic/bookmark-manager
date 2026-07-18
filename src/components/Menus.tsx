@@ -21,15 +21,7 @@ function Menus({ children }: { children: React.ReactNode }) {
 }
 
 function Menu({ children }: { children: React.ReactNode }) {
-  return (
-    <div
-      className="relative cursor-pointer focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
-      role="button"
-      tabIndex={0}
-    >
-      {children}
-    </div>
-  );
+  return <div className="relative">{children}</div>;
 }
 
 function Toggle({ id }: { id: number | string }) {
@@ -83,17 +75,26 @@ function List({
   return (
     <ul
       ref={ref}
-      className="border-light-300 absolute top-10 right-0 z-50 flex min-w-50 flex-col gap-1 rounded-lg border bg-white p-2"
+      className="border-light-300 absolute top-10 right-0 z-5 flex min-w-50 flex-col gap-1 rounded-lg border bg-white p-2"
     >
       {children}
     </ul>
   );
 }
 
-function Button({ children }: { children: React.ReactNode }) {
+function Button({
+  children,
+  ...props
+}: {
+  children: React.ReactNode;
+  [key: string]: any;
+}) {
   return (
     <li>
-      <button className="text-light-800 font-manrope flex w-full items-center gap-2.5 rounded-md border-neutral-700 p-2 text-sm leading-[140%] font-semibold hover:border focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2">
+      <button
+        {...props}
+        className="text-light-800 font-manrope flex w-full cursor-pointer items-center gap-2.5 rounded-md border border-transparent p-2 text-sm leading-[140%] font-semibold hover:border-neutral-700 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
+      >
         {children}
       </button>
     </li>

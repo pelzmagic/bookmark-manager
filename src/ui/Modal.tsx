@@ -19,10 +19,20 @@ function Modal({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Open({ children, opens: openWindowName }) {
+function Open({
+  children,
+  opens: openWindowName,
+}: {
+  children: React.ReactNode;
+}) {
   const { open } = useContext(ModalContext);
 
-  return cloneElement(children, { onClick: () => open(openWindowName) });
+  return cloneElement(children, {
+    onClick: () => {
+      console.log("Just opened a modal");
+      open(openWindowName);
+    },
+  });
 }
 
 function Window({ children, name }) {
