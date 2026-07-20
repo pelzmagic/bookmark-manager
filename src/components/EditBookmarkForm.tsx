@@ -40,10 +40,6 @@ export default function EditBookmarkForm({
   };
 
   const onSubmit = (data: UpdateBookmarkData) => {
-    console.log("--- 1. FORM SUBMITTED ---");
-    console.log("ID from props:", id, "Type:", typeof id);
-    console.log("Form inputs data object:", data);
-
     editBookmark(
       { id, newBookmarkData: data },
       {

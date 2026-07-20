@@ -27,10 +27,6 @@ export async function updateBookmark(
   id: number,
   newBookmarkData: BookmarkData,
 ) {
-  console.log("--- 2. API FUNCTION EXECUTING ---");
-  console.log("SQL Target ID:", id);
-  console.log("SQL Payload:", newBookmarkData);
-
   const { data, error } = await supabase
     .from("Bookmarks")
     .update(newBookmarkData)
@@ -38,8 +34,6 @@ export async function updateBookmark(
     .select();
 
   if (error) throw new Error(error.message);
-
-  console.log("--- 3. SUPABASE RAW RESPONSE ---", data);
 
   return data;
 }
