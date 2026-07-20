@@ -3,6 +3,8 @@ import Tags from "./Tags";
 import Menus from "./Menus";
 import Modal from "@/ui/Modal";
 import EditBookmarkForm from "./EditBookmarkForm";
+import ConfirmDeleteModal from "./ConfirmDeleteModal";
+import { Trash2 } from "lucide-react";
 
 type CardProps = {
   bookmark: UpdateBookmarkData;
@@ -74,6 +76,12 @@ export default function Card({ bookmark }: CardProps) {
                   <img src="archive.png" alt="pin icon" className="h-4 w-4" />
                   <span>Archive</span>
                 </Menus.Button>
+                <Modal.Open opens="delete-modal">
+                  <Menus.Button>
+                    <Trash2 className="h-4 w-4" />
+                    <span>Delete</span>
+                  </Menus.Button>
+                </Modal.Open>
               </Menus.List>
             </Menus.Menu>
 
@@ -82,6 +90,10 @@ export default function Card({ bookmark }: CardProps) {
                 bookmarkToEdit={bookmark}
                 onCloseModal={() => {}}
               />
+            </Modal.Window>
+
+            <Modal.Window name="delete-modal">
+              <ConfirmDeleteModal onCloseModal={() => {}} />
             </Modal.Window>
           </Modal>
         </div>
