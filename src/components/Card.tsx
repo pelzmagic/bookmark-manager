@@ -2,7 +2,7 @@ import type { BookmarkData } from "@/types/bookmarkData";
 import Tags from "./Tags";
 import Menus from "./Menus";
 import Modal from "@/ui/Modal";
-import CreateBookmarkForm from "./CreateBookmarkForm";
+import EditBookmarkForm from "./EditBookmarkForm";
 
 type CardProps = {
   bookmark: BookmarkData;
@@ -64,7 +64,7 @@ export default function Card({ bookmark }: CardProps) {
                   <img src="/pin-icon.png" alt="pin icon" className="h-4 w-4" />
                   <span>Unpin</span>
                 </Menus.Button>
-                <Modal.Open opens="bookmark-form">
+                <Modal.Open opens="edit-bookmark-form">
                   <Menus.Button>
                     <img src="edit.png" alt="pin icon" className="h-4 w-4" />
                     <span>Edit</span>
@@ -77,8 +77,8 @@ export default function Card({ bookmark }: CardProps) {
               </Menus.List>
             </Menus.Menu>
 
-            <Modal.Window name="bookmark-form">
-              <CreateBookmarkForm />
+            <Modal.Window name="edit-bookmark-form">
+              <EditBookmarkForm />
             </Modal.Window>
           </Modal>
         </div>
