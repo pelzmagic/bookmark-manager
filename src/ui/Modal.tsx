@@ -29,7 +29,6 @@ function Open({
 
   return cloneElement(children, {
     onClick: () => {
-      console.log("Just opened a modal");
       open(openWindowName);
     },
   });

@@ -1,26 +1,57 @@
 import { useForm } from "react-hook-form";
-import type { BookmarkData } from "@/types/bookmarkData";
+import type { UpdateBookmarkData } from "@/types/bookmarkData";
+import { useEditBookmark } from "@/hooks/useEditBookmark";
+
+type EditBookmarkFormProps = {
+  onCloseModal: () => void;
+  bookmarkToEdit: UpdateBookmarkData;
+};
 
 export default function EditBookmarkForm({
+  bookmarkToEdit,
   onCloseModal,
-}: {
-  onCloseModal?: () => void;
-}) {
+}: EditBookmarkFormProps) {
+  const id = bookmarkToEdit.id;
+
+  const editValues = {
+    title: bookmarkToEdit.title,
+    description: bookmarkToEdit.description,
+    url: bookmarkToEdit.url,
+    tags: bookmarkToEdit.tags,
+  };
+
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
-  } = useForm<BookmarkData>({
-    defaultValues: { title: "", description: "", url: "", tags: "" },
+  } = useForm<UpdateBookmarkData>({
+    defaultValues: editValues,
   });
+
+  const { isUpdating, editBookmark } = useEditBookmark();
 
   const descriptionValue = watch("description", "");
 
-  const onSubmit = (data: BookmarkData) => {
-    console.log("Valid data form submitted:", data);
-
+  const handleCancel = () => {
+    reset();
     onCloseModal?.();
+  };
+
+  const onSubmit = (data: UpdateBookmarkData) => {
+    console.log("--- 1. FORM SUBMITTED ---");
+    console.log("ID from props:", id, "Type:", typeof id);
+    console.log("Form inputs data object:", data);
+
+    editBookmark(
+      { id, newBookmarkData: data },
+      {
+        onSuccess: () => {
+          onCloseModal?.();
+        },
+      },
+    );
   };
 
   return (
@@ -141,7 +172,7 @@ export default function EditBookmarkForm({
           <button
             type="button"
             className="border-light-400 text-light-900 cursor-pointer rounded-lg border px-4 py-3"
-            onClick={onCloseModal}
+            onClick={handleCancel}
           >
             Cancel
           </button>
@@ -149,7 +180,7 @@ export default function EditBookmarkForm({
             type="submit"
             className="font-manrope cursor-pointer rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white"
           >
-            Save Bookmark
+            {isUpdating ? "Saving..." : "Save Bookmark"}
           </button>
         </div>
       </form>

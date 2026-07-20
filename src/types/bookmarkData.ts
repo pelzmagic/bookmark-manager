@@ -3,5 +3,8 @@ export type BookmarkData = {
   description: string;
   url: string;
   tags: string;
+};
+
+export type UpdateBookmarkData = BookmarkData & {
   id: number;
 };

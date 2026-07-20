@@ -1,11 +1,11 @@
-import type { BookmarkData } from "@/types/bookmarkData";
+import type { UpdateBookmarkData } from "@/types/bookmarkData";
 import Tags from "./Tags";
 import Menus from "./Menus";
 import Modal from "@/ui/Modal";
 import EditBookmarkForm from "./EditBookmarkForm";
 
 type CardProps = {
-  bookmark: BookmarkData;
+  bookmark: UpdateBookmarkData;
 };
 
 export default function Card({ bookmark }: CardProps) {
@@ -78,7 +78,10 @@ export default function Card({ bookmark }: CardProps) {
             </Menus.Menu>
 
             <Modal.Window name="edit-bookmark-form">
-              <EditBookmarkForm />
+              <EditBookmarkForm
+                bookmarkToEdit={bookmark}
+                onCloseModal={() => {}}
+              />
             </Modal.Window>
           </Modal>
         </div>
