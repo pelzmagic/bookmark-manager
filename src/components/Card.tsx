@@ -51,7 +51,11 @@ export default function Card({ bookmark }: CardProps) {
               <Menus.Toggle id={bookmark.id} />
 
               <Menus.List id={bookmark.id}>
-                <Menus.Button>
+                <Menus.Button
+                  onClick={() =>
+                    window.open(bookmark.url, "_blank", "noopener,noreferrer")
+                  }
+                >
                   <img
                     src="/external-link.png"
                     alt="external link"

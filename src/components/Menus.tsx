@@ -84,15 +84,26 @@ function List({
 
 function Button({
   children,
+  onClick,
   ...props
 }: {
   children: React.ReactNode;
+  onClick: () => void;
   [key: string]: any;
 }) {
+  const context = useContext(MenusContext);
+  const close = context?.close;
+
+  function handleClick() {
+    onClick();
+    close?.();
+  }
+
   return (
     <li>
       <button
         {...props}
+        onClick={handleClick}
         className="text-light-800 font-manrope flex w-full cursor-pointer items-center gap-2.5 rounded-md border border-transparent p-2 text-sm leading-[140%] font-semibold hover:border-neutral-700 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
       >
         {children}
