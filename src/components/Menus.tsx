@@ -1,23 +1,9 @@
-import { createContext } from "react";
-import { useState } from "react";
-import { useContext } from "react";
+import { MenusProvider } from "./MenusProvider";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
-
-const MenusContext = createContext<{
-  openId: number | string;
-  close: () => void;
-  open: (id: number | string) => void;
-} | null>(null);
+import { useMenus } from "@/hooks/useMenus";
 
 function Menus({ children }: { children: React.ReactNode }) {
-  const [openId, setOpenId] = useState<number | string>("");
-  const close = () => setOpenId("");
-  const open = setOpenId;
-  return (
-    <MenusContext.Provider value={{ openId, close, open }}>
-      {children}
-    </MenusContext.Provider>
-  );
+  return <MenusProvider>{children}</MenusProvider>;
 }
 
 function Menu({ children }: { children: React.ReactNode }) {
@@ -25,14 +11,7 @@ function Menu({ children }: { children: React.ReactNode }) {
 }
 
 function Toggle({ id }: { id: number | string }) {
-  const context = useContext(MenusContext);
-
-  if (!context)
-    throw new Error(
-      "Menus.Toggle must be used inside a Menus parent container",
-    );
-
-  const { openId, close, open } = context;
+  const { openId, close, open } = useMenus();
 
   function handleClick(e: React.MouseEvent) {
     e.stopPropagation();
@@ -61,12 +40,7 @@ function List({
   id: number | string;
   children: React.ReactNode;
 }) {
-  const context = useContext(MenusContext);
-
-  if (!context)
-    throw new Error("Menus.List must be used inside a Menus parent container");
-
-  const { openId, close } = context;
+  const { openId, close } = useMenus();
 
   const ref = useOutsideClick(close);
 
@@ -85,18 +59,23 @@ function List({
 function Button({
   children,
   onClick,
+  closeOnSelect = true,
   ...props
 }: {
   children: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
+  closeOnSelect?: boolean;
   [key: string]: any;
 }) {
-  const context = useContext(MenusContext);
-  const close = context?.close;
+  const { close } = useMenus();
 
-  function handleClick() {
-    onClick();
-    close?.();
+  function handleClick(e: React.MouseEvent) {
+    e.stopPropagation();
+    onClick?.();
+
+    if (closeOnSelect) {
+      close?.();
+    }
   }
 
   return (

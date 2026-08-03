@@ -3,6 +3,7 @@ export type BookmarkData = {
   description: string;
   url: string;
   tags: string;
+  is_archived?: boolean;
 };
 
 export type UpdateBookmarkData = BookmarkData & {

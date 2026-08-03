@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { toast } from "sonner";
+import { Check, Copy } from "lucide-react";
 import type { UpdateBookmarkData } from "@/types/bookmarkData";
 import Tags from "./Tags";
 import Menus from "./Menus";
@@ -6,13 +9,31 @@ import EditBookmarkForm from "./EditBookmarkForm";
 import ConfirmDeleteModal from "./modals/ConfirmDeleteModal";
 import ConfirmArchiveModal from "./modals/ConfirmArchiveModal";
 import { Trash2 } from "lucide-react";
+import { useMenus } from "@/hooks/useMenus";
 
 type CardProps = {
   bookmark: UpdateBookmarkData;
 };
 
 export default function Card({ bookmark }: CardProps) {
+  const [isCopied, setIsCopied] = useState(false);
+  const { close } = useMenus();
   let faviconUrl = "/url-logo.png";
+
+  const handleCopyUrl = async () => {
+    try {
+      await navigator.clipboard.writeText(bookmark.url);
+
+      setIsCopied(true);
+
+      setTimeout(() => {
+        setIsCopied(false);
+        close();
+      }, 1000);
+    } catch {
+      toast.error("Failed to copy URL to clipboard");
+    }
+  };
 
   try {
     const domain = new URL(bookmark.url).hostname;
@@ -63,9 +84,15 @@ export default function Card({ bookmark }: CardProps) {
                   />
                   <span>Visit</span>
                 </Menus.Button>
-                <Menus.Button>
-                  <img src="/copy.png" alt="copy icon" className="h-4 w-4" />
-                  <span>Copy Url</span>
+                <Menus.Button onClick={handleCopyUrl} closeOnSelect={false}>
+                  {isCopied ? (
+                    <Check className="h-4 w-4 text-green-600" />
+                  ) : (
+                    <Copy className="h-4 w-4" />
+                  )}
+                  <span className={isCopied ? "font-bold text-green-600" : ""}>
+                    {isCopied ? "Copied" : "Copy Url"}
+                  </span>
                 </Menus.Button>
                 <Menus.Button>
                   <img src="/pin-icon.png" alt="pin icon" className="h-4 w-4" />
@@ -100,7 +127,7 @@ export default function Card({ bookmark }: CardProps) {
             </Modal.Window>
 
             <Modal.Window name="delete-modal">
-              <ConfirmDeleteModal onCloseModal={() => {}} />
+              <ConfirmDeleteModal onCloseModal={() => {}} bookmark={bookmark} />
             </Modal.Window>
 
             <Modal.Window name="archive-modal">

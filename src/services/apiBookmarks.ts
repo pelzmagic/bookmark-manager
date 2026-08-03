@@ -37,3 +37,13 @@ export async function updateBookmark(
 
   return data;
 }
+
+export async function deleteBookmark(id: number) {
+  const { error } = await supabase.from("Bookmarks").delete().eq("id", id);
+
+  if (error) throw new Error(error.message);
+}
+
+export async function archiveBookmark(id: number, is_archived: boolean) {
+  const {data,error} await supabase.from
+}
