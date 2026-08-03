@@ -15,8 +15,22 @@ export async function createBookmark(newBookmark: BookmarkData) {
   return data;
 }
 
-export async function getBookmarks() {
-  const { data, error } = await supabase.from("Bookmarks").select("*");
+export async function getBookmarks(showArchived = false) {
+  const { data, error } = await supabase
+    .from("Bookmarks")
+    .select("*")
+    .eq("is_archived", showArchived);
+
+  if (error) throw new Error("Bookmark could not be retrieved");
+
+  return data;
+}
+
+export async function getArchivedBookmarks(showArchived = true) {
+  const { data, error } = await supabase
+    .from("Bookmarks")
+    .select("*")
+    .eq("is_archived", showArchived);
 
   if (error) throw new Error("Bookmark could not be retrieved");
 
@@ -44,6 +58,20 @@ export async function deleteBookmark(id: number) {
   if (error) throw new Error(error.message);
 }
 
-export async function archiveBookmark(id: number, is_archived: boolean) {
-  const {data,error} await supabase.from
+export async function archiveBookmark({
+  id,
+  isArchived,
+}: {
+  id: number;
+  isArchived: boolean;
+}) {
+  const { data, error } = await supabase
+    .from("Bookmarks")
+    .update({ is_archived: isArchived })
+    .eq("id", id)
+    .select();
+
+  if (error) throw new Error(error.message);
+
+  return data;
 }

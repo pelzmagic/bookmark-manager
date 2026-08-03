@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { getBookmarks } from "@/services/apiBookmarks";
+import { getArchivedBookmarks } from "@/services/apiBookmarks";
 
-export function useGetBookmarks(showArchived = false) {
+export function useGetArchivedBookmarks(showArchived = true) {
   const {
     data: bookmarks,
     isPending,
     error,
   } = useQuery({
     queryKey: ["bookmarks", { showArchived }],
-    queryFn: () => getBookmarks(showArchived),
+    queryFn: () => getArchivedBookmarks(showArchived),
   });
 
   return { bookmarks, isPending, error };

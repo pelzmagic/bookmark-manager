@@ -20,6 +20,8 @@ export default function Card({ bookmark }: CardProps) {
   const { close } = useMenus();
   let faviconUrl = "/url-logo.png";
 
+  const isArchived = bookmark.is_archived ?? false;
+
   const handleCopyUrl = async () => {
     try {
       await navigator.clipboard.writeText(bookmark.url);
@@ -107,7 +109,7 @@ export default function Card({ bookmark }: CardProps) {
                 <Modal.Open opens="archive-modal">
                   <Menus.Button>
                     <img src="archive.png" alt="pin icon" className="h-4 w-4" />
-                    <span>Archive</span>
+                    <span>{isArchived ? "UnArchive" : "Archive"}</span>
                   </Menus.Button>
                 </Modal.Open>
                 <Modal.Open opens="delete-modal">
@@ -131,7 +133,10 @@ export default function Card({ bookmark }: CardProps) {
             </Modal.Window>
 
             <Modal.Window name="archive-modal">
-              <ConfirmArchiveModal onCloseModal={() => {}} />
+              <ConfirmArchiveModal
+                onCloseModal={() => {}}
+                bookmark={bookmark}
+              />
             </Modal.Window>
           </Modal>
         </div>

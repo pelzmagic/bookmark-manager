@@ -14,7 +14,7 @@ export default function Dashboard() {
       </div>
     );
 
-  if (!bookmarks || bookmarks.length == 0) {
+  if (!bookmarks || bookmarks.length === 0) {
     return (
       <Empty message="No bookmarks created yet, Please create a bookmark." />
     );
@@ -34,19 +34,13 @@ export default function Dashboard() {
         </button>
       </div>
 
-      {isPending ? (
-        <div className="flex flex-1 items-center justify-center">
-          <Spinner />
-        </div>
-      ) : (
-        <div className="grid flex-1 grid-cols-1 content-start gap-8 overflow-y-auto md:grid-cols-2 lg:grid-cols-3">
-          <Menus>
-            {bookmarks?.map((bookmark) => (
-              <Card key={bookmark.id} bookmark={bookmark} />
-            ))}
-          </Menus>
-        </div>
-      )}
+      <div className="grid flex-1 grid-cols-1 content-start gap-8 overflow-y-auto md:grid-cols-2 lg:grid-cols-3">
+        <Menus>
+          {bookmarks?.map((bookmark) => (
+            <Card key={bookmark.id} bookmark={bookmark} />
+          ))}
+        </Menus>
+      </div>
     </section>
   );
 }
