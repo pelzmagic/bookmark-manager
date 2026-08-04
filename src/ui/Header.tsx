@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useUser from "@/hooks/useUser";
+import { useSearchParams } from "react-router-dom";
 import Modal from "./Modal";
 import CreateBookmarkForm from "@/components/CreateBookmarkForm";
 import { useLogout } from "@/hooks/useLogout";
@@ -9,6 +10,19 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
   const { user, isPending } = useUser();
   const [showDropdown, setShowDropdown] = useState(false);
   const { logOut, isLoggingOut } = useLogout();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const searchQuery = searchParams.get("search") || "";
+
+  function handleSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value;
+    if (value) {
+      searchParams.set("search", value);
+    } else {
+      searchParams.delete("search");
+    }
+    setSearchParams(searchParams, { replace: true });
+  }
 
   const fullName = user?.user_metadata?.fullName || "";
   const userEmail = user?.email || "";
@@ -41,12 +55,14 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
           <input
             type="text"
             placeholder="Search by title"
+            value={searchQuery}
+            onChange={handleSearchChange}
             className="font-manrope text-light-800 text-sm leading-[140%] font-semibold outline-none"
           />
         </div>
       </div>
 
-      <div className="flex items-center gap-2.5 rounded-lg  lg:gap-4">
+      <div className="flex items-center gap-2.5 rounded-lg lg:gap-4">
         <Modal>
           <Modal.Open opens="bookmark-form">
             <div>

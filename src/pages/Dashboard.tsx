@@ -1,11 +1,15 @@
+import { useSearchParams } from "react-router-dom";
+import { useGetBookmarks } from "@/hooks/useGetBookmarks";
 import Card from "@/components/Card";
 import Spinner from "@/ui/Spinner";
-import { useGetBookmarks } from "@/hooks/useGetBookmarks";
 import Empty from "@/components/Empty";
 import Menus from "@/components/Menus";
 
 export default function Dashboard() {
   const { bookmarks, isPending } = useGetBookmarks();
+  const [searchParams] = useSearchParams();
+
+  const searchQuery = searchParams.get("search")?.toLowerCase() || "";
 
   if (isPending)
     return (
@@ -18,6 +22,14 @@ export default function Dashboard() {
     return (
       <Empty message="No bookmarks created yet, Please create a bookmark." />
     );
+  }
+
+  const searchedBookmarks = bookmarks.filter((bookmark) =>
+    bookmark.title.toLowerCase().includes(searchQuery),
+  );
+
+  if (searchedBookmarks.length === 0) {
+    return <Empty message={`No bookmarks found matching "${searchQuery}"`} />;
   }
 
   return (
@@ -36,7 +48,7 @@ export default function Dashboard() {
 
       <div className="grid flex-1 grid-cols-1 content-start gap-8 overflow-y-auto md:grid-cols-2 lg:grid-cols-3">
         <Menus>
-          {bookmarks?.map((bookmark) => (
+          {searchedBookmarks?.map((bookmark) => (
             <Card key={bookmark.id} bookmark={bookmark} />
           ))}
         </Menus>

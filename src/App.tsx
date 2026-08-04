@@ -9,6 +9,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
 import Archived from "./pages/Archived";
+import TagPage from "./pages/TagPage";
 import { Toaster } from "./components/ui/sonner";
 
 const queryClient = new QueryClient({
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/archived",
         element: <Archived />,
+      },
+      {
+        path: "/tag/:tagName",
+        element: <TagPage />,
       },
     ],
   },

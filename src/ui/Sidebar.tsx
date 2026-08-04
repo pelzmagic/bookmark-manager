@@ -1,5 +1,7 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { NavLink } from "react-router-dom";
+import Spinner from "./Spinner";
+import { useGetBookmarks } from "@/hooks/useGetBookmarks";
 
 export default function Sidebar({
   isOpen,
@@ -8,8 +10,34 @@ export default function Sidebar({
   isOpen: boolean;
   onClose: () => void;
 }) {
+  const { bookmarks, isPending } = useGetBookmarks();
+
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
     `flex cursor-pointer items-center gap-3 px-3 py-2 transition-all duration-200 ${isActive ? "bg-light-100 rounded-md" : "hover:bg-light-100 rounded-md"}`;
+
+  const tagCountsMap = (bookmarks || []).reduce<Record<string, number>>(
+    (acc, bookmark) => {
+      if (!bookmark.tags) return acc;
+
+      const rawTags = bookmark.tags.split(",");
+      rawTags.forEach((rawTag: string) => {
+        const cleanTag = rawTag.trim();
+
+        if (cleanTag) {
+          const existingKey = Object.keys(acc).find(
+            (k) => k.toLowerCase() === cleanTag.toLowerCase(),
+          );
+          const keyToUse = existingKey || cleanTag;
+          acc[keyToUse] = (acc[keyToUse] || 0) + 1;
+        }
+      });
+
+      return acc;
+    },
+    {},
+  );
+
+  const uniqueTags = Object.entries(tagCountsMap);
 
   return (
     <aside
@@ -74,15 +102,45 @@ export default function Sidebar({
         <p className="font-manrope px-3 pb-1 text-xs leading-[140%] font-bold text-[#4D4D4D]">
           TAGS
         </p>
-        <div className="flex items-center justify-between px-3 py-2">
-          <div className="flex items-center gap-2">
-            <Checkbox />
-            <p>AI</p>
+        {isPending ? (
+          <div className="flex justify-center py-4">
+            <Spinner />
           </div>
-          <div className="bg-light-300 font-manrope text-light-800 rounded-full px-2 py-0.5 text-xs leading-[140%] font-medium">
-            1
-          </div>
-        </div>
+        ) : uniqueTags.length === 0 ? (
+          <p className="font-manrope text-light-800 px-3 py-2 text-xs">
+            No tags found
+          </p>
+        ) : (
+          <ul className="flex flex-col gap-1">
+            {uniqueTags.map(([tagName, count]) => (
+              <li
+                key={tagName}
+                onClick={() => window.innerWidth < 1024 && onClose()}
+              >
+                <NavLink
+                  to={`/tag/${encodeURIComponent(tagName)}`}
+                  className={navLinkClasses}
+                >
+                  {({ isActive }) => (
+                    <div className="flex w-full items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Checkbox checked={isActive} />
+                        <p
+                          className={`font-manrope text-sm leading-[140%] font-semibold ${isActive ? "text-light-900" : "text-light-800"}`}
+                        >
+                          {tagName}
+                        </p>
+                      </div>
+                      <div className="bg-light-300 font-manrope text-light-800 leading-[140%]font-medium rounded-full px-2 py-0.5 text-xs">
+                        {count}
+                      </div>
+                    </div>
+                  )}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </aside>
   );

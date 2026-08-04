@@ -1,4 +1,5 @@
 import { useGetArchivedBookmarks } from "@/hooks/useGetArchivedBookmarks";
+import { useSearchParams } from "react-router-dom";
 import Spinner from "@/ui/Spinner";
 import Empty from "@/components/Empty";
 import Menus from "@/components/Menus";
@@ -6,6 +7,9 @@ import Card from "@/components/Card";
 
 export default function Archived() {
   const { bookmarks, isPending } = useGetArchivedBookmarks();
+  const [searchParams] = useSearchParams();
+
+  const searchQuery = searchParams.get("search")?.toLowerCase() || "";
 
   if (isPending)
     return (
@@ -16,6 +20,13 @@ export default function Archived() {
 
   if (!bookmarks || bookmarks.length === 0)
     return <Empty message="No archived bookmarks yet" />;
+
+  const searchedBookmarks = bookmarks.filter((bookmark) =>
+    bookmark.title.toLowerCase().includes(searchQuery),
+  );
+
+  if (searchedBookmarks.length === 0)
+    return <Empty message={`No bookmarks found matching "${searchQuery}" `} />;
 
   return (
     <section className="flex min-h-0 flex-1 flex-col gap-5">
@@ -33,7 +44,7 @@ export default function Archived() {
 
       <div className="grid flex-1 grid-cols-1 content-start gap-8 overflow-y-auto md:grid-cols-2 lg:grid-cols-3">
         <Menus>
-          {bookmarks.map((bookmark) => (
+          {searchedBookmarks.map((bookmark) => (
             <Card key={bookmark.id} bookmark={bookmark} />
           ))}
         </Menus>

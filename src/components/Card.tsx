@@ -31,7 +31,7 @@ export default function Card({ bookmark }: CardProps) {
       setTimeout(() => {
         setIsCopied(false);
         close();
-      }, 1000);
+      }, 500);
     } catch {
       toast.error("Failed to copy URL to clipboard");
     }
@@ -102,13 +102,13 @@ export default function Card({ bookmark }: CardProps) {
                 </Menus.Button>
                 <Modal.Open opens="edit-bookmark-form">
                   <Menus.Button>
-                    <img src="edit.png" alt="pin icon" className="h-4 w-4" />
+                    <img src="/edit.png" alt="edit icon" className="h-4 w-4" />
                     <span>Edit</span>
                   </Menus.Button>
                 </Modal.Open>
                 <Modal.Open opens="archive-modal">
                   <Menus.Button>
-                    <img src="archive.png" alt="pin icon" className="h-4 w-4" />
+                    <img src="/archive.png" alt="archive icon" className="h-4 w-4" />
                     <span>{isArchived ? "UnArchive" : "Archive"}</span>
                   </Menus.Button>
                 </Modal.Open>
