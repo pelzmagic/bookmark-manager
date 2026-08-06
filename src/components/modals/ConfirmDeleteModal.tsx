@@ -22,7 +22,7 @@ export default function ConfirmDeleteModal({
   }
 
   return (
-    <div className="flex min-w-112.5 flex-col gap-6 rounded-xl bg-white p-6">
+    <div className="flex flex-col gap-6 rounded-xl bg-white p-4 lg:min-w-112.5 lg:p-6">
       <h1 className="text-light-900 font-manrope text-2xl leading-[140%] font-bold">
         Delete Bookmark
       </h1>
@@ -31,14 +31,14 @@ export default function ConfirmDeleteModal({
       </p>
       <div className="flex items-center justify-end gap-4">
         <button
-          className="border-light-400 text-light-900 font-manrope cursor-pointer rounded-lg border px-4 py-3 text-base leading-[140%] font-semibold"
+          className="border-light-400 text-light-900 font-manrope cursor-pointer rounded-lg border px-3 py-2 text-sm leading-[140%] font-semibold lg:px-4 lg:py-3 lg:text-base"
           onClick={onCloseModal}
           disabled={isDeletingBookmark}
         >
           Cancel
         </button>
         <button
-          className="font-manrope font-sembold flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-red-800 px-4 py-3 text-base leading-[140%] text-white"
+          className="font-manrope font-sembold flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-red-800 px-3 py-2 text-sm leading-[140%] whitespace-nowrap text-white lg:px-4 lg:py-3 lg:text-base"
           disabled={isDeletingBookmark}
           onClick={handleDelete}
         >
@@ -47,7 +47,7 @@ export default function ConfirmDeleteModal({
               <Spinner /> <span>Deleting...</span>
             </>
           ) : (
-            "Delete Permanently"
+            "Delete permanently"
           )}
         </button>
       </div>

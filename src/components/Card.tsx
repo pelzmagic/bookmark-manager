@@ -45,11 +45,11 @@ export default function Card({ bookmark }: CardProps) {
   }
 
   return (
-    <div className="flex flex-col rounded-xl bg-white">
-      <div className="flex flex-col gap-4 p-4">
-        <div className="flex items-start justify-between">
-          <div className="flex flex-wrap items-center gap-4">
-            <div className="h-10 w-10 rounded-lg">
+    <div className="flex min-h-68 min-w-0 flex-col justify-between rounded-xl bg-white">
+      <div className="flex min-w-0 flex-1 flex-col p-4">
+        <div className="border-light-300 flex items-start justify-between border-b pb-4">
+          <div className="flex min-w-0 flex-1 items-center gap-4">
+            <div className="h-10 w-10 shrink-0 rounded-lg">
               <img
                 src={faviconUrl}
                 alt={`${bookmark.title} favicon`}
@@ -59,121 +59,139 @@ export default function Card({ bookmark }: CardProps) {
                 }
               />
             </div>
-            <div className="flex flex-col gap-1">
-              <h1 className="font-manrope text-light-900 text-[20px] leading-[120%] font-bold">
+            <div className="flex min-w-0 flex-col gap-1">
+              <h1 className="font-manrope text-light-900 truncate text-[20px] leading-[120%] font-bold">
                 {bookmark.title}
               </h1>
-              <p className="font-manrope text-light-800 text-[12px] leading-[140%] font-medium">
-                {bookmark.url.slice(0, 21)}...
+              <p className="font-manrope text-light-800 truncate text-[12px] leading-[140%] font-medium">
+                {bookmark.url}
               </p>
             </div>
           </div>
 
-          <Modal>
-            <Menus.Menu>
-              <Menus.Toggle id={bookmark.id} />
+          <div className="shrink-0">
+            <Modal>
+              <Menus.Menu>
+                <Menus.Toggle id={bookmark.id} />
 
-              <Menus.List id={bookmark.id}>
-                <Menus.Button
-                  onClick={() =>
-                    window.open(bookmark.url, "_blank", "noopener,noreferrer")
-                  }
-                >
-                  <img
-                    src="/external-link.png"
-                    alt="external link"
-                    className="h-4 w-4"
-                  />
-                  <span>Visit</span>
-                </Menus.Button>
-                <Menus.Button onClick={handleCopyUrl} closeOnSelect={false}>
-                  {isCopied ? (
-                    <Check className="h-4 w-4 text-green-600" />
-                  ) : (
-                    <Copy className="h-4 w-4" />
-                  )}
-                  <span className={isCopied ? "font-bold text-green-600" : ""}>
-                    {isCopied ? "Copied" : "Copy Url"}
-                  </span>
-                </Menus.Button>
-                <Menus.Button>
-                  <img src="/pin-icon.png" alt="pin icon" className="h-4 w-4" />
-                  <span>Unpin</span>
-                </Menus.Button>
-                <Modal.Open opens="edit-bookmark-form">
-                  <Menus.Button>
-                    <img src="/edit.png" alt="edit icon" className="h-4 w-4" />
-                    <span>Edit</span>
+                <Menus.List id={bookmark.id}>
+                  <Menus.Button
+                    onClick={() =>
+                      window.open(bookmark.url, "_blank", "noopener,noreferrer")
+                    }
+                  >
+                    <img
+                      src="/external-link.png"
+                      alt="external link"
+                      className="h-4 w-4"
+                    />
+                    <span>Visit</span>
                   </Menus.Button>
-                </Modal.Open>
-                <Modal.Open opens="archive-modal">
-                  <Menus.Button>
-                    <img src="/archive.png" alt="archive icon" className="h-4 w-4" />
-                    <span>{isArchived ? "UnArchive" : "Archive"}</span>
+                  <Menus.Button onClick={handleCopyUrl} closeOnSelect={false}>
+                    {isCopied ? (
+                      <Check className="h-4 w-4 text-green-600" />
+                    ) : (
+                      <Copy className="h-4 w-4" />
+                    )}
+                    <span
+                      className={isCopied ? "font-bold text-green-600" : ""}
+                    >
+                      {isCopied ? "Copied" : "Copy Url"}
+                    </span>
                   </Menus.Button>
-                </Modal.Open>
-                <Modal.Open opens="delete-modal">
                   <Menus.Button>
-                    <Trash2 className="h-4 w-4" />
-                    <span>Delete</span>
+                    <img
+                      src="/pin-icon.png"
+                      alt="pin icon"
+                      className="h-4 w-4"
+                    />
+                    <span>Unpin</span>
                   </Menus.Button>
-                </Modal.Open>
-              </Menus.List>
-            </Menus.Menu>
+                  <Modal.Open opens="edit-bookmark-form">
+                    <Menus.Button>
+                      <img
+                        src="/edit.png"
+                        alt="edit icon"
+                        className="h-4 w-4"
+                      />
+                      <span>Edit</span>
+                    </Menus.Button>
+                  </Modal.Open>
+                  <Modal.Open opens="archive-modal">
+                    <Menus.Button>
+                      <img
+                        src="/archive.png"
+                        alt="archive icon"
+                        className="h-4 w-4"
+                      />
+                      <span>{isArchived ? "UnArchive" : "Archive"}</span>
+                    </Menus.Button>
+                  </Modal.Open>
+                  <Modal.Open opens="delete-modal">
+                    <Menus.Button>
+                      <Trash2 className="h-4 w-4" />
+                      <span>Delete</span>
+                    </Menus.Button>
+                  </Modal.Open>
+                </Menus.List>
+              </Menus.Menu>
 
-            <Modal.Window name="edit-bookmark-form">
-              <EditBookmarkForm
-                bookmarkToEdit={bookmark}
-                onCloseModal={() => {}}
-              />
-            </Modal.Window>
+              <Modal.Window name="edit-bookmark-form">
+                <EditBookmarkForm
+                  bookmarkToEdit={bookmark}
+                  onCloseModal={() => {}}
+                />
+              </Modal.Window>
 
-            <Modal.Window name="delete-modal">
-              <ConfirmDeleteModal onCloseModal={() => {}} bookmark={bookmark} />
-            </Modal.Window>
+              <Modal.Window name="delete-modal">
+                <ConfirmDeleteModal
+                  onCloseModal={() => {}}
+                  bookmark={bookmark}
+                />
+              </Modal.Window>
 
-            <Modal.Window name="archive-modal">
-              <ConfirmArchiveModal
-                onCloseModal={() => {}}
-                bookmark={bookmark}
-              />
-            </Modal.Window>
-          </Modal>
+              <Modal.Window name="archive-modal">
+                <ConfirmArchiveModal
+                  onCloseModal={() => {}}
+                  bookmark={bookmark}
+                />
+              </Modal.Window>
+            </Modal>
+          </div>
         </div>
+        <div className="flex min-w-0 flex-1 flex-col justify-between pt-3">
+          <p className="text-light-800 font-manrope line-clamp-3 text-sm leading-[150%] font-medium wrap-break-word">
+            {bookmark.description}
+          </p>
 
-        <hr className="border-light-300 border" />
-
-        <p className="text-light-800 font-manrope text-sm leading-[150%] font-medium">
-          {bookmark.description}
-        </p>
-
-        <div className="flex items-center gap-2">
-          {bookmark.tags
-            .split(",")
-            .slice(0, 3)
-            .map((tag, index) => (
-              <Tags tag={tag.trim()} key={index} />
-            ))}
+          <div className="flex items-center gap-2">
+            {bookmark.tags
+              .split(",")
+              .slice(0, 3)
+              .map((tag, index) => (
+                <Tags tag={tag.trim()} key={index} />
+              ))}
+          </div>
         </div>
       </div>
 
       <div className="border-light-300 flex items-center justify-between border-t px-4 py-3">
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1.5">
+          <div className="flex shrink-0 items-center gap-1.5">
             <img src="/eye.png" alt="eye icon" className="h-3 w-3" />
             <p className="text-light-800 font-manrope text-xs leading-[140%] font-medium">
               47
             </p>
           </div>
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex shrink-0 items-center gap-1.5">
             <img src="/clock.png" alt="clock icon" className="h-3 w-3" />
             <p className="text-light-800 font-manrope text-xs leading-[140%] font-medium">
               23 Sep
             </p>
           </div>
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex shrink-0 items-center gap-1.5">
             <img src="/calendar.png" alt="calendar icon" className="h-3 w-3" />
             <p className="text-light-800 font-manrope text-xs leading-[140%] font-medium">
               15 Jan

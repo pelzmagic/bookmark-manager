@@ -26,7 +26,7 @@ export default function ConfirmArchiveModal({
   }
 
   return (
-    <div className="flex min-w-112.5 flex-col gap-6 rounded-xl bg-white p-6">
+    <div className="flex flex-col gap-6 rounded-xl bg-white p-4 lg:min-w-112.5 lg:p-6">
       <h1 className="text-light-900 font-manrope text-2xl leading-[140%] font-bold">
         Archive bookmark
       </h1>
