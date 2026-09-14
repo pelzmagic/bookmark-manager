@@ -46,7 +46,7 @@ export default function Dashboard() {
         </button>
       </div>
 
-      <div className="grid flex-1 grid-cols-1 content-start gap-8 overflow-y-auto md:grid-cols-2 lg:grid-cols-3">
+      <div className="no-scrollbar grid flex-1 grid-cols-1 content-start gap-8 overflow-y-auto md:grid-cols-2 lg:grid-cols-3">
         <Menus>
           {searchedBookmarks?.map((bookmark) => (
             <Card key={bookmark.id} bookmark={bookmark} />

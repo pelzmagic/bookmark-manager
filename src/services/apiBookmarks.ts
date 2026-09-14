@@ -39,7 +39,7 @@ export async function getArchivedBookmarks(showArchived = true) {
 
 export async function updateBookmark(
   id: number,
-  newBookmarkData: BookmarkData,
+  newBookmarkData: Partial<BookmarkData>,
 ) {
   const { data, error } = await supabase
     .from("Bookmarks")

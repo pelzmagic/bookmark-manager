@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useMenus } from "@/hooks/useMenus";
+import { useTogglePin } from "@/hooks/useTogglePin";
+import type { UpdateBookmarkData } from "@/types/bookmarkData";
 import { toast } from "sonner";
 import { Check, Copy } from "lucide-react";
-import type { UpdateBookmarkData } from "@/types/bookmarkData";
 import Tags from "./Tags";
 import Menus from "./Menus";
 import Modal from "@/ui/Modal";
@@ -9,7 +11,6 @@ import EditBookmarkForm from "./EditBookmarkForm";
 import ConfirmDeleteModal from "./modals/ConfirmDeleteModal";
 import ConfirmArchiveModal from "./modals/ConfirmArchiveModal";
 import { Trash2 } from "lucide-react";
-import { useMenus } from "@/hooks/useMenus";
 
 type CardProps = {
   bookmark: UpdateBookmarkData;
@@ -17,10 +18,17 @@ type CardProps = {
 
 export default function Card({ bookmark }: CardProps) {
   const [isCopied, setIsCopied] = useState(false);
+  const { togglePin, isPinning } = useTogglePin();
   const { close } = useMenus();
   let faviconUrl = "/url-logo.png";
 
   const isArchived = bookmark.is_archived ?? false;
+  const isPinned = bookmark.is_pinned ?? false;
+
+  const handleTogglePin = () => {
+    togglePin({ id: bookmark.id, isPinned: !isPinned });
+    close();
+  };
 
   const handleCopyUrl = async () => {
     try {
@@ -99,13 +107,13 @@ export default function Card({ bookmark }: CardProps) {
                       {isCopied ? "Copied" : "Copy Url"}
                     </span>
                   </Menus.Button>
-                  <Menus.Button>
+                  <Menus.Button onClick={handleTogglePin} disabled={isPinning}>
                     <img
                       src="/pin-icon.png"
                       alt="pin icon"
                       className="h-4 w-4"
                     />
-                    <span>Unpin</span>
+                    <span>{isPinned ? "Unpin" : "Pin"}</span>
                   </Menus.Button>
                   <Modal.Open opens="edit-bookmark-form">
                     <Menus.Button>
@@ -199,9 +207,18 @@ export default function Card({ bookmark }: CardProps) {
           </div>
         </div>
 
-        <div>
-          <img src="/pin.png" alt="pin icon" className="h-4 w-4" />
-        </div>
+        <button
+          onClick={handleTogglePin}
+          disabled={isPinning}
+          className="disabled:opacity-50"
+          aria-label={isPinned ? "Unpin bookmark" : "Pin bookmark"}
+        >
+          <img
+            src="/pin.png"
+            alt="pin icon"
+            className={`h-4 w-4 cursor-pointer transition-opacity ${isPinned ? "opacity-100" : "opacity-40 hover:opacity-100"}`}
+          />
+        </button>
       </div>
     </div>
   );
