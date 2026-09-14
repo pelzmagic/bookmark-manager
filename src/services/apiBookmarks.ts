@@ -52,6 +52,16 @@ export async function updateBookmark(
   return data;
 }
 
+export async function incrementBookmarkVisits(id: number) {
+  const { data, error } = await supabase.rpc("increment_visit_count", {
+    bookmark_id: id,
+  });
+
+  if (error) throw new Error(error.message);
+
+  return data;
+}
+
 export async function deleteBookmark(id: number) {
   const { error } = await supabase.from("Bookmarks").delete().eq("id", id);
 

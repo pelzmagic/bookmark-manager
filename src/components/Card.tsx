@@ -11,6 +11,7 @@ import EditBookmarkForm from "./EditBookmarkForm";
 import ConfirmDeleteModal from "./modals/ConfirmDeleteModal";
 import ConfirmArchiveModal from "./modals/ConfirmArchiveModal";
 import { Trash2 } from "lucide-react";
+import { useIncrementVisit } from "@/hooks/useIncrementVisit";
 
 type CardProps = {
   bookmark: UpdateBookmarkData;
@@ -19,15 +20,43 @@ type CardProps = {
 export default function Card({ bookmark }: CardProps) {
   const [isCopied, setIsCopied] = useState(false);
   const { togglePin, isPinning } = useTogglePin();
+  const { incrementVisit } = useIncrementVisit();
   const { close } = useMenus();
   let faviconUrl = "/url-logo.png";
 
   const isArchived = bookmark.is_archived ?? false;
   const isPinned = bookmark.is_pinned ?? false;
 
+  const visitCount = bookmark.visit_count ?? 0;
+
+  const createdAtDate = bookmark.created_at
+    ? new Date(bookmark.created_at)
+    : null;
+
+  const formattedDate = createdAtDate
+    ? createdAtDate.toLocaleDateString("en-US", {
+        day: "numeric",
+        month: "short",
+      })
+    : "N/A";
+
+  const formattedTime = createdAtDate
+    ? createdAtDate.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      })
+    : "N/A";
+
   const handleTogglePin = () => {
     togglePin({ id: bookmark.id, isPinned: !isPinned });
     close();
+  };
+
+  const handleVisit = () => {
+    incrementVisit(bookmark.id);
+
+    window.open(bookmark.url, "_blank", "noopener,noreferrer");
   };
 
   const handleCopyUrl = async () => {
@@ -83,11 +112,7 @@ export default function Card({ bookmark }: CardProps) {
                 <Menus.Toggle id={bookmark.id} />
 
                 <Menus.List id={bookmark.id}>
-                  <Menus.Button
-                    onClick={() =>
-                      window.open(bookmark.url, "_blank", "noopener,noreferrer")
-                    }
-                  >
+                  <Menus.Button onClick={handleVisit}>
                     <img
                       src="/external-link.png"
                       alt="external link"
@@ -188,21 +213,21 @@ export default function Card({ bookmark }: CardProps) {
           <div className="flex shrink-0 items-center gap-1.5">
             <img src="/eye.png" alt="eye icon" className="h-3 w-3" />
             <p className="text-light-800 font-manrope text-xs leading-[140%] font-medium">
-              47
+              {visitCount}
             </p>
           </div>
 
           <div className="flex shrink-0 items-center gap-1.5">
             <img src="/clock.png" alt="clock icon" className="h-3 w-3" />
             <p className="text-light-800 font-manrope text-xs leading-[140%] font-medium">
-              23 Sep
+              {formattedTime}
             </p>
           </div>
 
           <div className="flex shrink-0 items-center gap-1.5">
             <img src="/calendar.png" alt="calendar icon" className="h-3 w-3" />
             <p className="text-light-800 font-manrope text-xs leading-[140%] font-medium">
-              15 Jan
+              {formattedDate}
             </p>
           </div>
         </div>
