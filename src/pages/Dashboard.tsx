@@ -1,15 +1,26 @@
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useGetBookmarks } from "@/hooks/useGetBookmarks";
+import { useOutsideClick } from "@/hooks/useOutsideClick";
 import Card from "@/components/Card";
 import Spinner from "@/ui/Spinner";
 import Empty from "@/components/Empty";
 import Menus from "@/components/Menus";
 
 export default function Dashboard() {
+  const [showDropdown, setShowDropdown] = useState(false);
   const { bookmarks, isPending } = useGetBookmarks();
   const [searchParams] = useSearchParams();
 
+  const dropdownRef = useOutsideClick<HTMLDivElement>(() =>
+    setShowDropdown(false),
+  );
+
   const searchQuery = searchParams.get("search")?.toLowerCase() || "";
+
+  function handleDropdown() {
+    setShowDropdown((prev) => !prev);
+  }
 
   if (isPending)
     return (
@@ -34,35 +45,43 @@ export default function Dashboard() {
 
   return (
     <section className="flex min-h-0 flex-1 flex-col gap-5">
-      <div className="relative flex items-center justify-between border border-red-500">
+      <div className="relative flex items-center justify-between">
         <h1 className="text-light-900 font-manrope text-[20px] leading-[120%] font-bold lg:text-2xl lg:leading-[140%]">
           All Bookmarks
         </h1>
-        <button className="border-light-400 flex cursor-pointer items-center gap-1 rounded-lg border bg-white px-3 py-2.5">
+        <button
+          className="border-light-400 flex cursor-pointer items-center gap-1 rounded-lg border bg-white px-3 py-2.5"
+          onClick={handleDropdown}
+        >
           <img src="/switch-vertical.png" alt="sort icon" className="h-5 w-5" />
           <p className="text-light-900 font-manrope text-[20px] leading-[120%] font-semibold">
             Sort by
           </p>
         </button>
 
-        <div className="border-light-100 absolute top-full right-0 z-10 min-w-50 rounded-lg border bg-white p-2">
-          <button className="flex w-full cursor-pointer items-center justify-between p-2">
-            <span className="text-light-800 font-manrope text-sm leading-[140%] font-semibold">
-              Recently added
-            </span>
-            <img src="/check-icon.png" alt="check icon" className="h-4 w-4" />
-          </button>
-          <button className="flex w-full cursor-pointer items-center justify-between p-2">
-            <span className="text-light-800 font-manrope text-sm leading-[140%] font-semibold">
-              Recently visited
-            </span>
-          </button>
-          <button className="flex w-full cursor-pointer items-center justify-between p-2">
-            <span className="text-light-800 font-manrope text-sm leading-[140%] font-semibold">
-              Most visited
-            </span>
-          </button>
-        </div>
+        {showDropdown && (
+          <div
+            className="border-light-100 absolute top-full right-0 z-10 min-w-50 rounded-lg border bg-white p-2"
+            ref={dropdownRef}
+          >
+            <button className="flex w-full cursor-pointer items-center justify-between p-2">
+              <span className="text-light-800 font-manrope text-sm leading-[140%] font-semibold">
+                Recently added
+              </span>
+              <img src="/check-icon.png" alt="check icon" className="h-4 w-4" />
+            </button>
+            <button className="flex w-full cursor-pointer items-center justify-between p-2">
+              <span className="text-light-800 font-manrope text-sm leading-[140%] font-semibold">
+                Recently visited
+              </span>
+            </button>
+            <button className="flex w-full cursor-pointer items-center justify-between p-2">
+              <span className="text-light-800 font-manrope text-sm leading-[140%] font-semibold">
+                Most visited
+              </span>
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="no-scrollbar grid flex-1 grid-cols-1 content-start gap-8 overflow-y-auto md:grid-cols-2 lg:grid-cols-3">
