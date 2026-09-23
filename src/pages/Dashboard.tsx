@@ -34,7 +34,7 @@ export default function Dashboard() {
 
   return (
     <section className="flex min-h-0 flex-1 flex-col gap-5">
-      <div className="flex items-center justify-between">
+      <div className="relative flex items-center justify-between border border-red-500">
         <h1 className="text-light-900 font-manrope text-[20px] leading-[120%] font-bold lg:text-2xl lg:leading-[140%]">
           All Bookmarks
         </h1>
@@ -44,6 +44,25 @@ export default function Dashboard() {
             Sort by
           </p>
         </button>
+
+        <div className="border-light-100 absolute top-full right-0 z-10 min-w-50 rounded-lg border bg-white p-2">
+          <button className="flex w-full cursor-pointer items-center justify-between p-2">
+            <span className="text-light-800 font-manrope text-sm leading-[140%] font-semibold">
+              Recently added
+            </span>
+            <img src="/check-icon.png" alt="check icon" className="h-4 w-4" />
+          </button>
+          <button className="flex w-full cursor-pointer items-center justify-between p-2">
+            <span className="text-light-800 font-manrope text-sm leading-[140%] font-semibold">
+              Recently visited
+            </span>
+          </button>
+          <button className="flex w-full cursor-pointer items-center justify-between p-2">
+            <span className="text-light-800 font-manrope text-sm leading-[140%] font-semibold">
+              Most visited
+            </span>
+          </button>
+        </div>
       </div>
 
       <div className="no-scrollbar grid flex-1 grid-cols-1 content-start gap-8 overflow-y-auto md:grid-cols-2 lg:grid-cols-3">
