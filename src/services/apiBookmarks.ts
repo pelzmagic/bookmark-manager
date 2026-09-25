@@ -1,6 +1,11 @@
 import supabase from "./supabase";
 import type { BookmarkData } from "@/types/bookmarkData";
 
+type GetBookmarksArgs = {
+  showArchived?: boolean;
+  sortBy?: string;
+};
+
 export async function createBookmark(newBookmark: BookmarkData) {
   const { data, error } = await supabase
     .from("Bookmarks")
@@ -15,11 +20,21 @@ export async function createBookmark(newBookmark: BookmarkData) {
   return data;
 }
 
-export async function getBookmarks(showArchived = false) {
-  const { data, error } = await supabase
+export async function getBookmarks({
+  showArchived = false,
+  sortBy = "created-at_desc",
+}: GetBookmarksArgs) {
+  let query = supabase
     .from("Bookmarks")
     .select("*")
     .eq("is_archived", showArchived);
+
+  const [field, direction] = sortBy.split("-");
+  const isAscending = direction === "asc";
+
+  query = query.order(field, { ascending: isAscending });
+
+  const { data, error } = await query;
 
   if (error) throw new Error("Bookmark could not be retrieved");
 
