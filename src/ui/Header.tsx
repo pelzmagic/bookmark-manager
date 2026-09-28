@@ -44,22 +44,22 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
   };
 
   return (
-    <header className="border-light-300 relative flex items-center justify-between border border-b px-4 py-3 md:px-8 md:py-4 lg:px-8 lg:py-4">
+    <header className="bg-popover relative flex items-center justify-between border border-b px-4 py-3 md:px-8 md:py-4 lg:px-8 lg:py-4">
       <div className="flex items-center gap-1 md:gap-4">
         <button
-          className="border-light-400 rounded-lg border px-2.5 py-2.5p lg:hidden"
+          className="border-line-strong rounded-lg px-2.5 py-2.5 lg:hidden"
           onClick={onMenuClick}
         >
           <img src="/menu.png" alt="hamburger menu" className="h-5 w-5" />
         </button>
-        <div className="border-light-300 flex max-w-48.25 items-center gap-1.5 rounded-md border p-3 lg:min-w-[320px]">
+        <div className="border-line flex max-w-48.25 items-center gap-1.5 rounded-md border p-3 lg:min-w-[320px]">
           <img src="/search.png" alt="search icon" className="h-5 w-5" />
           <input
             type="text"
             placeholder="Search by title"
             value={searchQuery}
             onChange={handleSearchChange}
-            className="font-manrope text-light-800 text-sm leading-[140%] font-semibold outline-none"
+            className="font-manrope text-ink-muted text-sm leading-[140%] font-semibold outline-none"
           />
         </div>
       </div>
@@ -68,7 +68,7 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
         <Modal>
           <Modal.Open opens="bookmark-form">
             <div>
-              <div className="cursor-pointer rounded-lg bg-teal-700 px-2.5 py-2.5 lg:hidden">
+              <div className="bg-brand cursor-pointer rounded-lg px-2.5 py-2.5 lg:hidden">
                 <img
                   src="/add-icon.png"
                   alt="addition icon"
@@ -76,7 +76,7 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
                 />
               </div>
               <div
-                className="hidden min-w-42.25 cursor-pointer items-center gap-1 rounded-lg bg-teal-700 px-4 py-3 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 lg:flex"
+                className="bg-brand hidden min-w-42.25 cursor-pointer items-center gap-1 rounded-lg px-4 py-3 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 lg:flex"
                 role="button"
                 tabIndex={0}
               >
@@ -85,7 +85,7 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
                   alt="addition icon"
                   className="h-5 w-5"
                 />
-                <p className="font-manrope text-base leading-[140%] font-semibold text-white">
+                <p className="font-manrope text-popover text-base leading-[140%] font-semibold">
                   Add Bookmark
                 </p>
               </div>
@@ -99,42 +99,42 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
         <div
           role="button"
           tabIndex={0}
-          className="bg-light-500 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
+          className="bg-avatar flex h-10 w-10 cursor-pointer items-center justify-center rounded-full focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
           onClick={toggleDropdown}
         >
           {isPending ? (
-            <div className="bg-light-300 h-full w-full animate-pulse"></div>
+            <div className="bg-line h-full w-full animate-pulse"></div>
           ) : (
-            <span className="font-manrope text-light-900 text-sm font-bold">
+            <span className="font-manrope text-ink text-sm font-bold">
               {initials}
             </span>
           )}
         </div>
 
         {showDropdown && (
-          <div className="absolute top-full right-4 z-15 flex max-w-62 flex-col rounded-lg border border-red-500 bg-white md:right-8">
+          <div className="bg-popover absolute top-full right-4 z-15 flex max-w-62 flex-col rounded-lg md:right-8">
             <div className="flex flex-wrap items-center gap-3 px-4 py-3">
-              <p className="font-manrope text-light-900 border-light-900 rounded-full border p-2 text-sm font-bold">
+              <p className="font-manrope text-ink border-light-900 rounded-full border p-2 text-sm font-bold">
                 {initials}
               </p>
               <div className="flex min-w-0 flex-col">
-                <p className="font-manrope text-light-900 truncate text-sm leading-[140%] font-semibold">
+                <p className="font-manrope text-ink truncate text-sm leading-[140%] font-semibold">
                   {fullName}
                 </p>
-                <p className="font-manrope text-light-800 truncate text-sm leading-[150%] font-medium">
+                <p className="font-manrope text-ink-muted truncate text-sm leading-[150%] font-medium">
                   {userEmail}
                 </p>
               </div>
             </div>
-            <div className="border-light-100 border border-t border-red-700 px-2 py-1">
+            <div className="border-surface-muted border-t px-2 py-1">
               <div className="flex items-center justify-between px-2 py-2">
                 <div className="flex items-center gap-4">
                   <img src="/palette.png" alt="palette" className="h-4 w-4" />
-                  <p className="font-manrope text-light-800 text-sm leading-[140%] font-semibold">
+                  <p className="font-manrope text-ink-muted text-sm leading-[140%] font-semibold">
                     Theme
                   </p>
                 </div>
-                <div className="bg-light-300 border-light-300 flex rounded-sm border px-0.5 py-0.5">
+                <div className="bg-line border-line flex rounded-sm border px-0.5 py-0.5">
                   <button
                     className={`cursor-pointer rounded-sm px-2 py-1.5 transition-colors ${
                       !isDarkMode
@@ -160,7 +160,7 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
             </div>
 
             <button
-              className="border-border text-foreground hover:bg-muted/50 flex cursor-pointer items-center gap-4 border-t px-4 py-3"
+              className="border-surface-muted text-foreground hover:bg-muted/50 flex cursor-pointer items-center gap-4 border-t px-4 py-3"
               onClick={() => logOut()}
               disabled={isLoggingOut}
             >
@@ -170,10 +170,10 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
                 <img
                   src="/log-out-01.png"
                   alt="log out icon"
-                  className="h-4 w-4 dark:invert"
+                  className="h-4 w-4"
                 />
               )}
-              <p className="font-manrope text-light-800 text-sm leading-[140%] font-semibold">
+              <p className="font-manrope text-ink-muted text-sm leading-[140%] font-semibold">
                 {isLoggingOut ? "Logging out" : "Logout"}
               </p>
             </button>
