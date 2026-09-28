@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useUser from "@/hooks/useUser";
+import { useDarkMode } from "@/hooks/useDarkMode";
 import { useSearchParams } from "react-router-dom";
 import Modal from "./Modal";
 import CreateBookmarkForm from "@/components/CreateBookmarkForm";
@@ -11,6 +12,7 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const { logOut, isLoggingOut } = useLogout();
   const [searchParams, setSearchParams] = useSearchParams();
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   const searchQuery = searchParams.get("search") || "";
 
@@ -45,7 +47,7 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
     <header className="border-light-300 relative flex items-center justify-between border border-b px-4 py-3 md:px-8 md:py-4 lg:px-8 lg:py-4">
       <div className="flex items-center gap-1 md:gap-4">
         <button
-          className="border-light-400 rounded-lg border px-2.5 py-2.5 lg:hidden"
+          className="border-light-400 rounded-lg border px-2.5 py-2.5p lg:hidden"
           onClick={onMenuClick}
         >
           <img src="/menu.png" alt="hamburger menu" className="h-5 w-5" />
@@ -110,7 +112,7 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
         </div>
 
         {showDropdown && (
-          <div className="absolute top-full right-4 flex max-w-62 flex-col rounded-lg bg-white md:right-8">
+          <div className="absolute top-full right-4 z-15 flex max-w-62 flex-col rounded-lg border border-red-500 bg-white md:right-8">
             <div className="flex flex-wrap items-center gap-3 px-4 py-3">
               <p className="font-manrope text-light-900 border-light-900 rounded-full border p-2 text-sm font-bold">
                 {initials}
@@ -124,7 +126,7 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
                 </p>
               </div>
             </div>
-            <div className="border-light-100 border-t px-2 py-1">
+            <div className="border-light-100 border border-t border-red-700 px-2 py-1">
               <div className="flex items-center justify-between px-2 py-2">
                 <div className="flex items-center gap-4">
                   <img src="/palette.png" alt="palette" className="h-4 w-4" />
@@ -133,10 +135,24 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
                   </p>
                 </div>
                 <div className="bg-light-300 border-light-300 flex rounded-sm border px-0.5 py-0.5">
-                  <button className="cursor-pointer rounded-sm bg-white px-2 py-1.5">
+                  <button
+                    className={`cursor-pointer rounded-sm px-2 py-1.5 transition-colors ${
+                      !isDarkMode
+                        ? "bg-background shadow-xs"
+                        : "bg-transparent opacity-50"
+                    }`}
+                    onClick={() => isDarkMode && toggleDarkMode()}
+                  >
                     <img src="/sun.png" alt="moon" className="h-3.5 w-3.5" />
                   </button>
-                  <button className="cursor-pointer bg-inherit px-2 py-1.5">
+                  <button
+                    className={`cursor-pointer rounded-sm px-2 py-1.5 transition-colors ${
+                      isDarkMode
+                        ? "bg-background shadow-xs"
+                        : "bg-transparent opacity-50"
+                    }`}
+                    onClick={() => !isDarkMode && toggleDarkMode()}
+                  >
                     <img src="/moon.png" alt="moon" className="h-3.5 w-3.5" />
                   </button>
                 </div>
@@ -144,7 +160,7 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
             </div>
 
             <button
-              className="border-light-100 flex cursor-pointer items-center gap-4 border border-t px-4 py-3"
+              className="border-border text-foreground hover:bg-muted/50 flex cursor-pointer items-center gap-4 border-t px-4 py-3"
               onClick={() => logOut()}
               disabled={isLoggingOut}
             >
@@ -154,7 +170,7 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
                 <img
                   src="/log-out-01.png"
                   alt="log out icon"
-                  className="h-4 w-4"
+                  className="h-4 w-4 dark:invert"
                 />
               )}
               <p className="font-manrope text-light-800 text-sm leading-[140%] font-semibold">
