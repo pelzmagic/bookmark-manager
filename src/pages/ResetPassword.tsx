@@ -38,7 +38,7 @@ export default function ResetPassword() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-neutral-100">
+    <div className="bg-surface-muted flex min-h-screen items-center justify-center">
       <div className="flex w-[90%] flex-col gap-8 rounded-xl bg-white px-5 py-8 md:max-w-md lg:max-w-md">
         <div className="flex items-center gap-2">
           <img src="/Bookmark.png" alt="bookmark icon" className="h-8 w-8" />
@@ -65,7 +65,7 @@ export default function ResetPassword() {
               New Password <span className="text-neutral-900">*</span>
             </label>
             <div
-              className={`relative flex items-center rounded-lg border transition-all focus-within:ring-2 focus-within:ring-offset-2 hover:bg-neutral-50 ${touched && !isPasswordValid ? "border-red-500 focus-within:ring-red-500" : "border-neutral-500 focus-within:ring-neutral-700"}`}
+              className={`relative flex items-center rounded-lg border transition-all focus-within:ring-2 focus-within:ring-offset-2 hover:bg-neutral-50 ${touched && !isPasswordValid ? "border-red-500 focus-within:ring-red-500" : "border-avatar focus-within:ring-neutral-700"}`}
             >
               <input
                 type={showPassword ? "text" : "password"}
@@ -141,7 +141,7 @@ export default function ResetPassword() {
               name="confirm password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className={`rounded-lg border p-3 transition-all outline-none focus:ring-2 focus:ring-offset-2 ${touched && !passwordsMatch ? "border-red-500 focus:ring-red-500" : "border-neutral-500 focus:ring-neutral-700"}`}
+              className={`rounded-lg border p-3 transition-all outline-none focus:ring-2 focus:ring-offset-2 ${touched && !passwordsMatch ? "border-red-500 focus:ring-red-500" : "border-avatar focus:ring-neutral-700"}`}
             />
             {touched && !passwordsMatch && confirmPassword !== "" && (
               <p className="text-xs font-medium text-red-500">
@@ -151,7 +151,7 @@ export default function ResetPassword() {
           </div>
 
           <button
-            className="font-manrope flex cursor-pointer items-center justify-center rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 disabled:bg-neutral-400"
+            className="font-manrope bg-brand hover:bg-brand-hover flex cursor-pointer items-center justify-center rounded-lg px-4 py-3 text-base leading-[140%] font-semibold text-white focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 disabled:bg-neutral-400"
             disabled={isUpdatingPassword}
           >
             {isUpdatingPassword ? <Spinner /> : "Reset password"}

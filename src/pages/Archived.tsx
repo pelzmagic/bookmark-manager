@@ -31,12 +31,12 @@ export default function Archived() {
   return (
     <section className="flex min-h-0 flex-1 flex-col gap-5">
       <div className="flex items-center justify-between">
-        <h1 className="text-light-900 font-manrope text-[20px] leading-[120%] font-bold lg:text-2xl lg:leading-[140%]">
+        <h1 className="text-ink font-manrope text-[20px] leading-[120%] font-bold lg:text-2xl lg:leading-[140%]">
           Archived bookmarks
         </h1>
-        <button className="border-light-400 flex cursor-pointer items-center gap-1 rounded-lg border bg-white px-3 py-2.5">
+        <button className="border-line-strong flex cursor-pointer items-center gap-1 rounded-lg border bg-white px-3 py-2.5">
           <img src="/switch-vertical.png" alt="sort icon" className="h-5 w-5" />
-          <p className="text-light-900 font-manrope text-base leading-[140%] font-semibold lg:text-[20px] lg:leading-[120%]">
+          <p className="text-ink font-manrope text-base leading-[140%] font-semibold lg:text-[20px] lg:leading-[120%]">
             Sort by
           </p>
         </button>

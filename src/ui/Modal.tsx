@@ -43,7 +43,7 @@ function Window({ children, name }) {
       <div className="relative max-h-screen max-w-87.5 overflow-y-auto rounded-2xl bg-white p-8 md:max-w-120 lg:max-w-142.5">
         <button
           onClick={close}
-          className="border-light-400 absolute top-5 right-5 cursor-pointer rounded-lg border bg-white p-1.5"
+          className="border-line-strong absolute top-5 right-5 cursor-pointer rounded-lg border bg-white p-1.5"
         >
           <img src="/x-close.png" alt="close icon" className="h-5 w-5" />
         </button>

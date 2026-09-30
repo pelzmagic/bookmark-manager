@@ -60,13 +60,13 @@ export default function Dashboard() {
   return (
     <section className="flex min-h-0 flex-1 flex-col gap-5">
       <div className="flex items-center justify-between">
-        <h1 className="text-light-900 font-manrope text-[20px] leading-[120%] font-bold lg:text-2xl lg:leading-[140%]">
+        <h1 className="text-ink font-manrope text-[20px] leading-[120%] font-bold lg:text-2xl lg:leading-[140%]">
           All Bookmarks
         </h1>
 
         <div ref={dropdownRef} className="relative">
           <button
-            className="border-light-400 flex cursor-pointer items-center gap-1 rounded-lg border bg-white px-3 py-2.5"
+            className="bg-surface-muted border-line-strong flex cursor-pointer items-center gap-1 rounded-lg border px-3 py-2.5"
             onClick={handleDropdown}
           >
             <img
@@ -74,13 +74,13 @@ export default function Dashboard() {
               alt="sort icon"
               className="h-5 w-5"
             />
-            <p className="text-light-900 font-manrope text-[20px] leading-[120%] font-semibold">
+            <p className="text-ink font-manrope text-[20px] leading-[120%] font-semibold">
               Sort by
             </p>
           </button>
 
           {showDropdown && (
-            <div className="border-light-100 absolute top-full right-0 z-10 min-w-50 rounded-lg border bg-white p-2">
+            <div className="border-surface-muted absolute top-full right-0 z-10 min-w-50 rounded-lg border bg-white p-2">
               {SORT_OPTIONS.map((option) => {
                 const isSelected = currentSortBy === option.value;
                 return (
@@ -90,7 +90,7 @@ export default function Dashboard() {
                     type="button"
                     onClick={() => handleSortChange(option.value)}
                   >
-                    <span className="text-light-800 font-manrope text-sm leading-[140%] font-semibold">
+                    <span className="text-ink-muted font-manrope text-sm leading-[140%] font-semibold">
                       {option.label}
                     </span>
                     {isSelected && (

@@ -13,7 +13,7 @@ export default function Sidebar({
   const { bookmarks, isPending } = useGetBookmarks();
 
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
-    `flex cursor-pointer items-center gap-3 px-3 py-2 transition-all duration-200 ${isActive ? "bg-light-100 rounded-md" : "hover:bg-light-100 rounded-md"}`;
+    `flex cursor-pointer items-center gap-3 px-3 py-2 transition-all duration-200 ${isActive ? "bg-surface-muted rounded-md" : "hover:bg-surface-muted rounded-md"}`;
 
   const tagCountsMap = (bookmarks || []).reduce<Record<string, number>>(
     (acc, bookmark) => {
@@ -41,11 +41,11 @@ export default function Sidebar({
 
   return (
     <aside
-      className={`border-light-300 fixed inset-y-0 left-0 z-2 row-start-1 -row-end-1 flex h-full w-74 flex-col gap-4 overflow-y-auto border-r transition-all duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"} bg-white lg:static lg:flex lg:translate-x-0`}
+      className={`border-line fixed inset-y-0 left-0 z-2 row-start-1 -row-end-1 flex h-full w-74 flex-col gap-4 overflow-y-auto border-r transition-all duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"} bg-white lg:static lg:flex lg:translate-x-0`}
     >
       <div className="flex items-center gap-2 px-5 pt-5 pb-2.5 lg:gap-5">
         <img src="/Bookmark.png" alt="logo icon" className="h-8 w-8" />
-        <p className="font-roboto text-light-900 text-[20px] leading-[100%] font-bold tracking-[-1%]">
+        <p className="font-roboto text-ink text-[20px] leading-[100%] font-bold tracking-[-1%]">
           Bookmark Manager
         </p>
       </div>
@@ -69,7 +69,7 @@ export default function Sidebar({
                     className={`h-5 w-5 ${isActive ? "opacity-100" : "opacity-50"}`}
                   />
                   <p
-                    className={`font-manrope text-base leading-[140%] font-semibold ${isActive ? "text-light-900" : "text-light-800"}`}
+                    className={`font-manrope text-base leading-[140%] font-semibold ${isActive ? "text-ink" : "text-ink-muted"}`}
                   >
                     Home
                   </p>
@@ -87,7 +87,7 @@ export default function Sidebar({
                     className={`h-5 w-5 ${isActive ? "opacity-100" : "opacity-50"}`}
                   />
                   <p
-                    className={`font-manrope text-light-900 text-base leading-[140%] font-semibold ${isActive ? "text-light-900" : "text-light-800"}`}
+                    className={`font-manrope text-ink text-base leading-[140%] font-semibold ${isActive ? "text-ink" : "text-ink-muted"}`}
                   >
                     Archived
                   </p>
@@ -99,7 +99,7 @@ export default function Sidebar({
       </nav>
 
       <div className="mt-4 px-4">
-        <p className="font-manrope px-3 pb-1 text-xs leading-[140%] font-bold text-[#4D4D4D]">
+        <p className="font-manrope text-tag px-3 pb-1 text-xs leading-[140%] font-bold">
           TAGS
         </p>
         {isPending ? (
@@ -107,7 +107,7 @@ export default function Sidebar({
             <Spinner />
           </div>
         ) : uniqueTags.length === 0 ? (
-          <p className="font-manrope text-light-800 px-3 py-2 text-xs">
+          <p className="font-manrope text-ink-muted px-3 py-2 text-xs">
             No tags found
           </p>
         ) : (
@@ -126,12 +126,12 @@ export default function Sidebar({
                       <div className="flex items-center gap-2">
                         <Checkbox checked={isActive} />
                         <p
-                          className={`font-manrope text-sm leading-[140%] font-semibold ${isActive ? "text-light-900" : "text-light-800"}`}
+                          className={`font-manrope text-sm leading-[140%] font-semibold ${isActive ? "text-ink" : "text-ink-muted"}`}
                         >
                           {tagName}
                         </p>
                       </div>
-                      <div className="bg-light-300 font-manrope text-light-800 leading-[140%]font-medium rounded-full px-2 py-0.5 text-xs">
+                      <div className="bg-line font-manrope text-ink-muted leading-[140%]font-medium rounded-full px-2 py-0.5 text-xs">
                         {count}
                       </div>
                     </div>

@@ -21,20 +21,20 @@ export default function ForgotPassword() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-neutral-100">
+    <div className="bg-surface-muted flex min-h-screen items-center justify-center">
       <div className="flex w-[90%] flex-col gap-8 rounded-xl bg-white px-5 py-8 md:max-w-md lg:max-w-md">
         <div className="flex items-center gap-2">
           <img src="/Bookmark.png" alt="bookmark icon" className="h-8 w-8" />
-          <p className="font-roboto text-xl leading-[100%] font-bold text-neutral-900">
+          <p className="font-roboto text-ink text-xl leading-[100%] font-bold">
             Bookmark Manager
           </p>
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <h1 className="font-manrope lelading-[140%] text-2xl font-bold text-neutral-900">
+          <h1 className="font-manrope lelading-[140%] text-ink text-2xl font-bold">
             Forgot your password?
           </h1>
-          <p className="font-manrope text-sm leading-[150%] font-medium text-neutral-800">
+          <p className="font-manrope text-ink-muted text-sm leading-[150%] font-medium">
             Enter your email address below and we'll send you a link to reset
             your password.
           </p>
@@ -44,9 +44,9 @@ export default function ForgotPassword() {
           <div className="flex flex-col gap-1.5">
             <label
               htmlFor="email"
-              className="font-manrope cursor-pointer text-sm leading-[140%] font-semibold text-neutral-900"
+              className="font-manrope text-ink cursor-pointer text-sm leading-[140%] font-semibold"
             >
-              Email <span className="text-neutral-900">*</span>
+              Email <span className="text-ink">*</span>
             </label>
             <input
               type="email"
@@ -55,11 +55,11 @@ export default function ForgotPassword() {
               value={email}
               placeholder="m@example.com"
               onChange={(e) => setEmail(e.target.value)}
-              className="cursor-pointer rounded-lg border border-neutral-500 p-3 shadow-xs outline-0 transition-all hover:bg-neutral-100 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
+              className="border-avatar hover:bg-surface-muted focus:ring-brand cursor-pointer rounded-lg border p-3 shadow-xs outline-0 transition-all focus:ring-2 focus:ring-offset-2"
             />
           </div>
           <button
-            className="font-manrope flex cursor-pointer items-center justify-center rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 disabled:bg-neutral-400"
+            className="font-manrope bg-brand hover:bg-brand-hover focus:ring-brand disabled:bg-line-strong flex cursor-pointer items-center justify-center rounded-lg px-4 py-3 text-base leading-[140%] font-semibold text-white focus:ring-2 focus:ring-offset-2"
             disabled={isForgettingPassword}
           >
             {isForgettingPassword ? <Spinner /> : "Send reset Link"}
@@ -68,7 +68,7 @@ export default function ForgotPassword() {
 
         <Link
           to="/"
-          className="font-manrope cursor-pointer text-center text-sm leading-[140%] font-semibold text-neutral-900"
+          className="font-manrope text-ink cursor-pointer text-center text-sm leading-[140%] font-semibold"
         >
           Back to login
         </Link>

@@ -44,7 +44,7 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
   };
 
   return (
-    <header className="bg-popover relative flex items-center justify-between border border-b px-4 py-3 md:px-8 md:py-4 lg:px-8 lg:py-4">
+    <header className="relative flex items-center justify-between border border-b bg-white px-4 py-3 md:px-8 md:py-4 lg:px-8 lg:py-4">
       <div className="flex items-center gap-1 md:gap-4">
         <button
           className="border-line-strong rounded-lg px-2.5 py-2.5 lg:hidden"
@@ -112,7 +112,7 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
         </div>
 
         {showDropdown && (
-          <div className="bg-popover absolute top-full right-4 z-15 flex max-w-62 flex-col rounded-lg md:right-8">
+          <div className="absolute top-full right-4 z-15 flex max-w-62 flex-col rounded-lg bg-white md:right-8">
             <div className="flex flex-wrap items-center gap-3 px-4 py-3">
               <p className="font-manrope text-ink border-light-900 rounded-full border p-2 text-sm font-bold">
                 {initials}

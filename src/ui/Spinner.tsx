@@ -11,7 +11,7 @@ export default function Spinner({
 
   return (
     <div
-      className={`${sizeClasses[size]} animate-spin rounded-full border-neutral-800 border-t-black`}
+      className={`${sizeClasses[size]} border-ink-muted border-t-ink animate-spin rounded-full`}
       role="status"
     >
       <span className="sr-only">Loading...</span>

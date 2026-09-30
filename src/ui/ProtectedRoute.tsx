@@ -18,7 +18,7 @@ export default function ProtectedRoute({
 
   if (isPending)
     return (
-      <div className="flex h-screen items-center justify-center bg-neutral-100">
+      <div className="bg-surface-muted flex h-screen items-center justify-center">
         <Spinner size="lg" />
       </div>
     );
