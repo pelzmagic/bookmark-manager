@@ -53,7 +53,11 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
           <img src="/menu.png" alt="hamburger menu" className="h-5 w-5" />
         </button>
         <div className="border-line flex max-w-48.25 items-center gap-1.5 rounded-md border p-3 lg:min-w-[320px]">
-          <img src="/search.png" alt="search icon" className="h-5 w-5" />
+          <img
+            src={isDarkMode ? "/dark-search.png" : "/search.png"}
+            alt="search icon"
+            className="h-5 w-5"
+          />
           <input
             type="text"
             placeholder="Search by title"
@@ -85,7 +89,9 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
                   alt="addition icon"
                   className="h-5 w-5"
                 />
-                <p className="font-manrope text-popover text-base leading-[140%] font-semibold">
+                <p
+                  className={`font-manrope text-base leading-[140%] font-semibold ${isDarkMode ? "text-ink" : "text-white"}`}
+                >
                   Add Bookmark
                 </p>
               </div>
