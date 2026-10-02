@@ -53,10 +53,10 @@ export default function EditBookmarkForm({
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-2">
-        <h1 className="font-manrope text-light-900 text-2xl leading-[140%] font-bold">
+        <h1 className="font-manrope text-ink text-2xl leading-[140%] font-bold">
           Edit bookmark
         </h1>
-        <p className="text-light-800 font-manrope text-sm leading-[150%] font-medium">
+        <p className="text-ink-muted font-manrope text-sm leading-[150%] font-medium">
           Update your saved link details - change the title, description, URL,
           or tags anytime.
         </p>
@@ -66,15 +66,15 @@ export default function EditBookmarkForm({
         <div className="flex flex-col gap-1.5">
           <label
             htmlFor="title"
-            className="text-light-900 font-manrope text-sm leading-[140%] font-semibold"
+            className="text-ink font-manrope text-sm leading-[140%] font-semibold"
           >
-            Title <span className="text-sm text-teal-700">*</span>
+            Title <span className="text-brand text-sm">*</span>
           </label>
           <input
             type="text"
             id="title"
             {...register("title", { required: "Title is required" })}
-            className={`border-light-500 font-manrope text-light-800 rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 ${errors.title ? "border-red-500 focus:ring-2 focus:ring-red-500 focus:ring-offset-2" : ""}`}
+            className={`border-avatar font-manrope text-ink-muted rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 ${errors.title ? "border-red-500 focus:ring-2 focus:ring-red-500 focus:ring-offset-2" : ""}`}
           />
           {errors.title && (
             <p className="text-xs font-medium text-red-500">
@@ -88,7 +88,7 @@ export default function EditBookmarkForm({
             htmlFor="description"
             className="text-light-900 font-manrope text-sm leading-[140%] font-semibold"
           >
-            Description <span className="text-sm text-teal-700">*</span>
+            Description <span className="text-brand text-sm">*</span>
           </label>
           <textarea
             id="description"
@@ -100,7 +100,7 @@ export default function EditBookmarkForm({
               },
             })}
             rows={4}
-            className={`border-light-500 font-manrope text-light-800 resize-none rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 ${errors.description ? "border-red-500 focus:ring-2 focus:ring-red-500 focus:ring-offset-2" : ""}`}
+            className={`border-avatar font-manrope text-ink-muted resize-none rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 ${errors.description ? "border-red-500 focus:ring-2 focus:ring-red-500 focus:ring-offset-2" : ""}`}
           ></textarea>
           <div className="flex items-center justify-between">
             {errors.description ? (
@@ -110,7 +110,7 @@ export default function EditBookmarkForm({
             ) : (
               <span></span>
             )}
-            <p className="font-manrope text-light-800 text-xs leading-[140%] font-medium">
+            <p className="font-manrope text-ink-muted text-xs leading-[140%] font-medium">
               {descriptionValue.length}/280
             </p>
           </div>
@@ -119,9 +119,9 @@ export default function EditBookmarkForm({
         <div className="flex flex-col gap-1.5">
           <label
             htmlFor="url"
-            className="text-light-900 font-manrope text-sm leading-[140%] font-semibold"
+            className="text-ink font-manrope text-sm leading-[140%] font-semibold"
           >
-            Website Url <span className="text-sm text-teal-700">*</span>
+            Website Url <span className="text-brand text-sm">*</span>
           </label>
           <input
             type="text"
@@ -134,7 +134,7 @@ export default function EditBookmarkForm({
                 message: "Please enter a valid website url",
               },
             })}
-            className={`border-light-500 font-manrope text-light-800 rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none ${errors.url ? "border-red-500 focus:ring-2 focus:ring-red-500 focus:ring-offset-2" : ""}`}
+            className={`border-avatar font-manrope text-ink-muted rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none ${errors.url ? "border-red-500 focus:ring-2 focus:ring-red-500 focus:ring-offset-2" : ""}`}
           />
           {errors.url && (
             <p className="font-manrope text-xs font-medium text-red-500">
@@ -146,16 +146,16 @@ export default function EditBookmarkForm({
         <div className="flex flex-col gap-1.5">
           <label
             htmlFor="tags"
-            className="text-light-900 font-manrope text-sm leading-[140%] font-semibold"
+            className="text-ink font-manrope text-sm leading-[140%] font-semibold"
           >
-            Tags <span className="text-sm text-teal-700">*</span>
+            Tags <span className="text-brand text-sm">*</span>
           </label>
           <input
             type="text"
             id="tags"
             placeholder="e.g. Design, Learning, Tools"
             {...register("tags", { required: "Atlease one tag is required" })}
-            className={`border-light-500 font-manrope text-light-800 rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none ${errors.tags ? "border-red-500 focus:ring-2 focus:ring-red-500 focus:ring-offset-2" : ""}`}
+            className={`border-avatar font-manrope text-ink-muted rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none ${errors.tags ? "border-red-500 focus:ring-2 focus:ring-red-500 focus:ring-offset-2" : ""}`}
           />
           {errors.tags && (
             <p className="font-manrope text-xs font-medium text-red-500">
@@ -167,14 +167,14 @@ export default function EditBookmarkForm({
         <div className="flex items-center justify-end gap-4">
           <button
             type="button"
-            className="border-light-400 text-light-900 cursor-pointer rounded-lg border px-4 py-3"
+            className="border-line-strong text-ink cursor-pointer rounded-lg border px-4 py-3"
             onClick={handleCancel}
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="font-manrope cursor-pointer rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white"
+            className="font-manrope bg-brand cursor-pointer rounded-lg px-4 py-3 text-base leading-[140%] font-semibold text-white"
           >
             {isUpdating ? "Saving..." : "Save Bookmark"}
           </button>
