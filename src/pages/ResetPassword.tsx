@@ -42,16 +42,16 @@ export default function ResetPassword() {
       <div className="flex w-[90%] flex-col gap-8 rounded-xl bg-white px-5 py-8 md:max-w-md lg:max-w-md">
         <div className="flex items-center gap-2">
           <img src="/Bookmark.png" alt="bookmark icon" className="h-8 w-8" />
-          <p className="font-roboto text-xl leading-[100%] font-bold text-neutral-900">
+          <p className="font-roboto text-ink text-xl leading-[100%] font-bold">
             Bookmark Manager
           </p>
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <h1 className="font-manrope lelading-[140%] text-2xl font-bold text-neutral-900">
+          <h1 className="font-manrope lelading-[140%] text-ink text-2xl font-bold">
             Reset Your Password?
           </h1>
-          <p className="font-manrope text-sm leading-[150%] font-medium text-neutral-800">
+          <p className="font-manrope text-ink-muted text-sm leading-[150%] font-medium">
             Enter your new password below. Make sure it's strong and secure.
           </p>
         </div>
@@ -60,9 +60,9 @@ export default function ResetPassword() {
           <div className="flex flex-col gap-1.5">
             <label
               htmlFor="new-password"
-              className="font-manrope cursor-pointer text-sm leading-[140%] font-semibold text-neutral-900"
+              className="font-manrope text-ink cursor-pointer text-sm leading-[140%] font-semibold"
             >
-              New Password <span className="text-neutral-900">*</span>
+              New Password <span className="text-ink">*</span>
             </label>
             <div
               className={`relative flex items-center rounded-lg border transition-all focus-within:ring-2 focus-within:ring-offset-2 hover:bg-neutral-50 ${touched && !isPasswordValid ? "border-red-500 focus-within:ring-red-500" : "border-avatar focus-within:ring-neutral-700"}`}
@@ -94,10 +94,10 @@ export default function ResetPassword() {
                 <li
                   className={
                     hasMinLength
-                      ? "text-teal-700"
+                      ? "text-brand"
                       : touched
                         ? "text-red-500"
-                        : "text-neutral-500"
+                        : "text-avatar"
                   }
                 >
                   {hasMinLength ? "✓" : "○"} Atleast 8 characters
@@ -105,10 +105,10 @@ export default function ResetPassword() {
                 <li
                   className={
                     hasUpperCase
-                      ? "text-teal-700"
+                      ? "text-brand"
                       : touched
                         ? "text-red-500"
-                        : "text-neutral-500"
+                        : "text-avatar"
                   }
                 >
                   {hasUpperCase ? "✓" : "○"} An Uppercase letter
@@ -116,10 +116,10 @@ export default function ResetPassword() {
                 <li
                   className={
                     hasSpecialChar
-                      ? "text-teal-700"
+                      ? "text-brand"
                       : touched
                         ? "text-red-500"
-                        : "text-neutral-500"
+                        : "text-avatar"
                   }
                 >
                   {hasSpecialChar ? "✓" : "○"} A special character
@@ -131,9 +131,9 @@ export default function ResetPassword() {
           <div className="flex flex-col gap-1.5">
             <label
               htmlFor="confirm password"
-              className="font-manrope cursor-pointer text-sm leading-[140%] font-semibold text-neutral-900"
+              className="font-manrope text-ink cursor-pointer text-sm leading-[140%] font-semibold"
             >
-              Confirm Password <span className="text-neutral-900">*</span>
+              Confirm Password <span className="text-ink">*</span>
             </label>
             <input
               type="password"
@@ -160,7 +160,7 @@ export default function ResetPassword() {
 
         <Link
           to="/"
-          className="font-manrope cursor-pointer text-center text-sm leading-[140%] font-semibold text-neutral-900"
+          className="font-manrope text-ink cursor-pointer text-center text-sm leading-[140%] font-semibold"
         >
           Back to login
         </Link>
