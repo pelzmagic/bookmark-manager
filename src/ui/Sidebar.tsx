@@ -2,6 +2,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { NavLink } from "react-router-dom";
 import Spinner from "./Spinner";
 import { useGetBookmarks } from "@/hooks/useGetBookmarks";
+import { useDarkMode } from "@/hooks/useDarkMode";
 
 export default function Sidebar({
   isOpen,
@@ -11,6 +12,7 @@ export default function Sidebar({
   onClose: () => void;
 }) {
   const { bookmarks, isPending } = useGetBookmarks();
+  const { isDarkMode } = useDarkMode();
 
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
     `flex cursor-pointer items-center gap-3 px-3 py-2 transition-all duration-200 ${isActive ? "bg-surface-muted rounded-md" : "hover:bg-surface-muted rounded-md"}`;
@@ -64,7 +66,7 @@ export default function Sidebar({
               {({ isActive }) => (
                 <>
                   <img
-                    src="/Icon.png"
+                    src={isDarkMode ? "/dark-home-icon.png" : "/Icon.png"}
                     alt="home icon"
                     className={`h-5 w-5 ${isActive ? "opacity-100" : "opacity-50"}`}
                   />
@@ -82,7 +84,7 @@ export default function Sidebar({
               {({ isActive }) => (
                 <>
                   <img
-                    src="/archive.png"
+                    src={isDarkMode ? "/dark-archive.png" : "/archive.png"}
                     alt="archive icon"
                     className={`h-5 w-5 ${isActive ? "opacity-100" : "opacity-50"}`}
                   />
