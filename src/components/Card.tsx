@@ -215,21 +215,33 @@ export default function Card({ bookmark }: CardProps) {
       <div className="border-line flex items-center justify-between border-t px-4 py-3">
         <div className="flex items-center gap-4">
           <div className="flex shrink-0 items-center gap-1.5">
-            <img src="/eye.png" alt="eye icon" className="h-3 w-3" />
+            <img
+              src={isDarkMode ? "/dark-eye.png" : "/eye.png"}
+              alt="eye icon"
+              className="h-3 w-3"
+            />
             <p className="text-ink-muted font-manrope text-xs leading-[140%] font-medium">
               {visitCount}
             </p>
           </div>
 
           <div className="flex shrink-0 items-center gap-1.5">
-            <img src="/clock.png" alt="clock icon" className="h-3 w-3" />
+            <img
+              src={isDarkMode ? "/dark-clock.png" : "/clock.png"}
+              alt="clock icon"
+              className="h-3 w-3"
+            />
             <p className="text-ink-muted font-manrope text-xs leading-[140%] font-medium">
               {formattedTime}
             </p>
           </div>
 
           <div className="flex shrink-0 items-center gap-1.5">
-            <img src="/calendar.png" alt="calendar icon" className="h-3 w-3" />
+            <img
+              src={isDarkMode ? "/dark-calendar.png" : "/calendar.png"}
+              alt="calendar icon"
+              className="h-3 w-3"
+            />
             <p className="text-ink-muted font-manrope text-xs leading-[140%] font-medium">
               {formattedDate}
             </p>
@@ -243,7 +255,7 @@ export default function Card({ bookmark }: CardProps) {
           aria-label={isPinned ? "Unpin bookmark" : "Pin bookmark"}
         >
           <img
-            src="/pin.png"
+            src={isDarkMode ? "/dark-pin.png" : "/pin.png"}
             alt="pin icon"
             className={`h-4 w-4 cursor-pointer transition-opacity ${isPinned ? "opacity-100" : "opacity-40 hover:opacity-100"}`}
           />

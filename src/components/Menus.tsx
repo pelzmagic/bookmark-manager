@@ -1,6 +1,7 @@
 import { MenusProvider } from "./MenusProvider";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
 import { useMenus } from "@/hooks/useMenus";
+import { useDarkMode } from "@/hooks/useDarkMode";
 
 function Menus({ children }: { children: React.ReactNode }) {
   return <MenusProvider>{children}</MenusProvider>;
@@ -23,12 +24,18 @@ function Toggle({ id }: { id: number | string }) {
     }
   }
 
+  const { isDarkMode } = useDarkMode();
+
   return (
     <button
       className="border-line-strong focus:ring-brand cursor-pointer rounded-lg border bg-white p-1.5 focus:ring-2 focus:ring-offset-2"
       onClick={handleClick}
     >
-      <img src="/dots-vertical.png" alt="menu icon" className="h-5 w-5" />
+      <img
+        src={isDarkMode ? "/dark-vertical-dots.png" : "/dots-vertical.png"}
+        alt="menu icon"
+        className="h-5 w-5"
+      />
     </button>
   );
 }
