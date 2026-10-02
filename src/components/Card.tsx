@@ -12,6 +12,7 @@ import ConfirmDeleteModal from "./modals/ConfirmDeleteModal";
 import ConfirmArchiveModal from "./modals/ConfirmArchiveModal";
 import { Trash2 } from "lucide-react";
 import { useIncrementVisit } from "@/hooks/useIncrementVisit";
+import { useDarkMode } from "@/hooks/useDarkMode";
 
 type CardProps = {
   bookmark: UpdateBookmarkData;
@@ -26,6 +27,7 @@ export default function Card({ bookmark }: CardProps) {
 
   const isArchived = bookmark.is_archived ?? false;
   const isPinned = bookmark.is_pinned ?? false;
+  const { isDarkMode } = useDarkMode();
 
   const visitCount = bookmark.visit_count ?? 0;
 
@@ -82,7 +84,9 @@ export default function Card({ bookmark }: CardProps) {
   }
 
   return (
-    <div className="flex min-h-68 min-w-0 flex-col justify-between rounded-xl bg-white">
+    <div
+      className={`flex min-h-68 min-w-0 flex-col justify-between rounded-xl ${isDarkMode ? "bg-[#001f1f]" : "bg-white"}`}
+    >
       <div className="flex min-w-0 flex-1 flex-col p-4">
         <div className="border-line flex items-start justify-between border-b pb-4">
           <div className="flex min-w-0 flex-1 items-center gap-4">
