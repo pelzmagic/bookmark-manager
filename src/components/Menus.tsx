@@ -25,7 +25,7 @@ function Toggle({ id }: { id: number | string }) {
 
   return (
     <button
-      className="border-light-400 cursor-pointer rounded-lg border bg-white p-1.5 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
+      className="border-line-strong focus:ring-brand cursor-pointer rounded-lg border bg-white p-1.5 focus:ring-2 focus:ring-offset-2"
       onClick={handleClick}
     >
       <img src="/dots-vertical.png" alt="menu icon" className="h-5 w-5" />
@@ -49,7 +49,7 @@ function List({
   return (
     <ul
       ref={ref}
-      className="border-light-300 absolute top-10 right-0 z-5 flex min-w-50 flex-col gap-1 rounded-lg border bg-white p-2"
+      className="border-line absolute top-10 right-0 z-5 flex min-w-50 flex-col gap-1 rounded-lg border bg-white p-2"
     >
       {children}
     </ul>
@@ -83,7 +83,7 @@ function Button({
       <button
         {...props}
         onClick={handleClick}
-        className="text-light-800 font-manrope flex w-full cursor-pointer items-center gap-2.5 rounded-md border border-transparent p-2 text-sm leading-[140%] font-semibold hover:border-neutral-700 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
+        className="text-ink-muted font-manrope hover:border-brand focus:ring-brand flex w-full cursor-pointer items-center gap-2.5 rounded-md border border-transparent p-2 text-sm leading-[140%] font-semibold focus:ring-2 focus:ring-offset-2"
       >
         {children}
       </button>
