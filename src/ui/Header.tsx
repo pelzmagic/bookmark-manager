@@ -135,7 +135,11 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
             <div className="border-surface-muted border-t px-2 py-1">
               <div className="flex items-center justify-between px-2 py-2">
                 <div className="flex items-center gap-4">
-                  <img src="/palette.png" alt="palette" className="h-4 w-4" />
+                  <img
+                    src={isDarkMode ? "/dark-palette.png" : "/palette.png"}
+                    alt="palette"
+                    className="h-4 w-4"
+                  />
                   <p className="font-manrope text-ink-muted text-sm leading-[140%] font-semibold">
                     Theme
                   </p>
@@ -149,7 +153,11 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
                     }`}
                     onClick={() => isDarkMode && toggleDarkMode()}
                   >
-                    <img src="/sun.png" alt="moon" className="h-3.5 w-3.5" />
+                    <img
+                      src={isDarkMode ? "/dark-sun.png" : "/sun.png"}
+                      alt="moon"
+                      className="h-3.5 w-3.5"
+                    />
                   </button>
                   <button
                     className={`cursor-pointer rounded-sm px-2 py-1.5 transition-colors ${
@@ -159,7 +167,11 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
                     }`}
                     onClick={() => !isDarkMode && toggleDarkMode()}
                   >
-                    <img src="/moon.png" alt="moon" className="h-3.5 w-3.5" />
+                    <img
+                      src={isDarkMode ? "/dark-moon.png" : "/moon.png"}
+                      alt="moon"
+                      className="h-3.5 w-3.5"
+                    />
                   </button>
                 </div>
               </div>
@@ -174,7 +186,7 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
                 <Spinner />
               ) : (
                 <img
-                  src="/log-out-01.png"
+                  src={isDarkMode ? "/dark-log-out.png" : "/log-out-01.png"}
                   alt="log out icon"
                   className="h-4 w-4"
                 />

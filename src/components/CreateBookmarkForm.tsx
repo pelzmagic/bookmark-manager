@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useCreateBookmark } from "@/hooks/useBookmarks";
 import { toast } from "sonner";
+import Spinner from "@/ui/Spinner";
 
 export default function CreateBookmarkForm({
   onCloseModal,
@@ -24,14 +25,18 @@ export default function CreateBookmarkForm({
       return;
     }
 
-    createBookmark({ title, description, url, tags });
-
-    setTitle("");
-    setDescription("");
-    setUrl("");
-    setTags("");
-
-    onCloseModal?.();
+    createBookmark(
+      { title, description, url, tags },
+      {
+        onSuccess: () => {
+          setTitle("");
+          setDescription("");
+          setUrl("");
+          setTags("");
+          onCloseModal?.();
+        },
+      },
+    );
   }
 
   return (
@@ -131,11 +136,17 @@ export default function CreateBookmarkForm({
             Cancel
           </button>
           <button
-            className="font-manrope bg-brand cursor-pointer rounded-lg px-4 py-3 text-base leading-[140%] font-semibold text-white"
+            className="font-manrope bg-brand flex cursor-pointer items-center gap-2 rounded-lg px-4 py-3 text-base leading-[140%] font-semibold text-white"
             type="submit"
             disabled={isCreating}
           >
-            {isCreating ? "Creating..." : "Add Bookmark"}
+            {isCreating ? (
+              <>
+                <Spinner /> <span>Creating...</span>
+              </>
+            ) : (
+              "Add Bookmark"
+            )}
           </button>
         </div>
       </form>

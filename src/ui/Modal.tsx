@@ -3,6 +3,7 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import { useContext } from "react";
 import { cloneElement } from "react";
+import { useDarkMode } from "@/hooks/useDarkMode";
 
 const ModalContext = createContext();
 
@@ -37,6 +38,7 @@ function Open({
 function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
   if (name !== openName) return null;
+  const { isDarkMode } = useDarkMode();
 
   return createPortal(
     <div className="fixed inset-0 z-10 flex items-center justify-center bg-[#131313]/70 backdrop-blur-sm transition-all">
@@ -45,7 +47,11 @@ function Window({ children, name }) {
           onClick={close}
           className="border-line-strong absolute top-5 right-5 cursor-pointer rounded-lg border bg-white p-1.5"
         >
-          <img src="/x-close.png" alt="close icon" className="h-5 w-5" />
+          <img
+            src={isDarkMode ? "/dark-close.png" : "/x-close.png"}
+            alt="close icon"
+            className="h-5 w-5"
+          />
         </button>
         {cloneElement(children, { onCloseModal: close })}
       </div>
