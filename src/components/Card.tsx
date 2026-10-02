@@ -118,7 +118,11 @@ export default function Card({ bookmark }: CardProps) {
                 <Menus.List id={bookmark.id}>
                   <Menus.Button onClick={handleVisit}>
                     <img
-                      src="/external-link.png"
+                      src={
+                        isDarkMode
+                          ? "/dark-external-link.png"
+                          : "/external-link.png"
+                      }
                       alt="external link"
                       className="h-4 w-4"
                     />
@@ -138,7 +142,7 @@ export default function Card({ bookmark }: CardProps) {
                   </Menus.Button>
                   <Menus.Button onClick={handleTogglePin} disabled={isPinning}>
                     <img
-                      src="/pin-icon.png"
+                      src={isDarkMode ? "/dark-pin.png" : "/pin-icon.png"}
                       alt="pin icon"
                       className="h-4 w-4"
                     />
@@ -147,7 +151,7 @@ export default function Card({ bookmark }: CardProps) {
                   <Modal.Open opens="edit-bookmark-form">
                     <Menus.Button>
                       <img
-                        src="/edit.png"
+                        src={isDarkMode ? "/dark-edit.png" : "/edit.png"}
                         alt="edit icon"
                         className="h-4 w-4"
                       />
@@ -157,7 +161,7 @@ export default function Card({ bookmark }: CardProps) {
                   <Modal.Open opens="archive-modal">
                     <Menus.Button>
                       <img
-                        src="/archive.png"
+                        src={isDarkMode ? "/dark-archive.png" : "/archive.png"}
                         alt="archive icon"
                         className="h-4 w-4"
                       />

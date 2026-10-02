@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useGetBookmarks } from "@/hooks/useGetBookmarks";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
+import { useDarkMode } from "@/hooks/useDarkMode";
 import Card from "@/components/Card";
 import Spinner from "@/ui/Spinner";
 import Empty from "@/components/Empty";
@@ -17,6 +18,7 @@ export default function Dashboard() {
   const [showDropdown, setShowDropdown] = useState(false);
   const { bookmarks, isPending } = useGetBookmarks();
   const [searchParams, setSearchParams] = useSearchParams();
+  const { isDarkMode } = useDarkMode();
 
   const dropdownRef = useOutsideClick<HTMLDivElement>(
     () => setShowDropdown(false),
@@ -70,7 +72,7 @@ export default function Dashboard() {
             onClick={handleDropdown}
           >
             <img
-              src="/switch-vertical.png"
+              src={isDarkMode ? "/dark-switch.png" : "/switch-vertical.png"}
               alt="sort icon"
               className="h-5 w-5"
             />
@@ -95,7 +97,7 @@ export default function Dashboard() {
                     </span>
                     {isSelected && (
                       <img
-                        src="/check-icon.png"
+                        src={isDarkMode ? "/dark-check.png" : "/check-icon.png"}
                         alt="check icon"
                         className="h-4 w-4"
                       />
