@@ -20,20 +20,20 @@ export default function SignIn() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-neutral-100">
+    <div className="bg-surface-muted flex min-h-screen items-center justify-center">
       <div className="flex w-[90%] flex-col gap-8 rounded-xl bg-white px-5 py-8 md:max-w-md lg:max-w-md">
         <div className="flex items-center gap-2">
           <img src="/Bookmark.png" alt="bookmark icon" className="h-8 w-8" />
-          <p className="font-roboto text-xl leading-[100%] font-bold text-neutral-900">
+          <p className="font-roboto text-ink text-xl leading-[100%] font-bold">
             Bookmark Manager
           </p>
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <h1 className="font-manrope lelading-[140%] text-2xl font-bold text-neutral-900">
+          <h1 className="font-manrope text-ink text-2xl leading-[140%] font-bold">
             Log in to your account
           </h1>
-          <div className="font-manrope text-sm leading-[150%] font-medium text-neutral-800">
+          <div className="font-manrope text-ink-muted text-sm leading-[150%] font-medium">
             <TypewriterComponent
               options={{
                 strings: ["Welcome back! Please enter your details"],
@@ -50,7 +50,7 @@ export default function SignIn() {
           <div className="flex flex-col gap-1.5">
             <label
               htmlFor="email"
-              className="font-manrope cursor-pointer text-sm leading-[140%] font-semibold text-neutral-900"
+              className="font-manrope text-ink cursor-pointer text-sm leading-[140%] font-semibold"
             >
               Email
             </label>
@@ -60,13 +60,13 @@ export default function SignIn() {
               name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="cursor-pointer rounded-lg border border-neutral-500 p-3 shadow-xs outline-0 hover:bg-neutral-100 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
+              className="hover:bg-surface-muted border-avatar focus:ring-brand cursor-pointer rounded-lg border p-3 shadow-xs outline-0 focus:ring-2 focus:ring-offset-2"
             />
           </div>
           <div className="flex flex-col gap-1.5">
             <label
               htmlFor="password"
-              className="font-manrope cursor-pointer text-sm leading-[140%] font-semibold text-neutral-900"
+              className="font-manrope text-ink cursor-pointer text-sm leading-[140%] font-semibold"
             >
               Password
             </label>
@@ -77,7 +77,7 @@ export default function SignIn() {
                 name="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-lg border border-neutral-500 p-3 shadow-xs outline-0 hover:bg-neutral-100 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
+                className="hover:bg-surface-muted border-avatar focus:ring-brand w-full rounded-lg border p-3 shadow-xs outline-0 focus:ring-2 focus:ring-offset-2"
               />
 
               <button
@@ -94,7 +94,7 @@ export default function SignIn() {
             </div>
           </div>
           <button
-            className="font-manrope flex cursor-pointer items-center justify-center rounded-lg bg-teal-700 px-4 py-3 text-base leading-[140%] font-semibold text-white hover:bg-teal-800 focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 disabled:bg-neutral-400"
+            className="font-manrope bg-brand hover:bg-brand-hover disabled:bg-line-strong focus:ring-brand flex cursor-pointer items-center justify-center rounded-lg px-4 py-3 text-base leading-[140%] font-semibold text-white focus:ring-2 focus:ring-offset-2"
             disabled={isLoggingIn}
           >
             {isLoggingIn ? <Spinner /> : "Log in"}
@@ -103,23 +103,23 @@ export default function SignIn() {
 
         <div className="flex flex-col gap-3">
           <div className="flex justify-center gap-1">
-            <p className="font-manrope text-sm leading-[150%] font-medium text-neutral-800">
+            <p className="font-manrope text-ink-muted text-sm leading-[150%] font-medium">
               Forgot Password?
             </p>
             <Link
               to="/forgot-password"
-              className="font-manrope cursor-pointer text-sm leading-[140%] font-semibold text-neutral-900"
+              className="font-manrope text-ink cursor-pointer text-sm leading-[140%] font-semibold"
             >
               Reset it
             </Link>
           </div>
           <div className="flex justify-center gap-1">
-            <p className="font-manrope text-sm leading-[150%] font-medium text-neutral-800">
+            <p className="font-manrope text-ink-muted text-sm leading-[150%] font-medium">
               Don't have an account?
             </p>
             <Link
               to="/sign-up"
-              className="font-manrope cursor-pointer text-sm leading-[140%] font-semibold text-neutral-900"
+              className="font-manrope text-ink cursor-pointer text-sm leading-[140%] font-semibold"
             >
               Sign up
             </Link>
