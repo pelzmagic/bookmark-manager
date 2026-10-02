@@ -74,7 +74,7 @@ export default function EditBookmarkForm({
             type="text"
             id="title"
             {...register("title", { required: "Title is required" })}
-            className={`border-avatar font-manrope text-ink-muted rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 ${errors.title ? "border-red-500 focus:ring-2 focus:ring-red-500 focus:ring-offset-2" : ""}`}
+            className={`border-avatar font-manrope text-ink-muted focus:ring-brand rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none focus:ring-2 focus:ring-offset-2 ${errors.title ? "border-red-500 focus:ring-2 focus:ring-red-500 focus:ring-offset-2" : ""}`}
           />
           {errors.title && (
             <p className="text-xs font-medium text-red-500">
@@ -100,7 +100,7 @@ export default function EditBookmarkForm({
               },
             })}
             rows={4}
-            className={`border-avatar font-manrope text-ink-muted resize-none rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 ${errors.description ? "border-red-500 focus:ring-2 focus:ring-red-500 focus:ring-offset-2" : ""}`}
+            className={`border-avatar font-manrope text-ink-muted focus:ring-brand resize-none rounded-lg border p-3 text-sm leading-[150%] font-medium outline-none focus:ring-2 focus:ring-offset-2 ${errors.description ? "border-red-500 focus:ring-2 focus:ring-red-500 focus:ring-offset-2" : ""}`}
           ></textarea>
           <div className="flex items-center justify-between">
             {errors.description ? (
