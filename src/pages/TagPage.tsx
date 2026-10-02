@@ -43,7 +43,7 @@ export default function TagPage() {
   return (
     <section className="flex min-h-0 flex-1 flex-col gap-5">
       <div className="flex items-center justify-between">
-        <h1 className="text-light-900 font-manrope text-[20px] leading-[120%] font-bold capitalize lg:text-2xl lg:leading-[140%]">
+        <h1 className="text-ink font-manrope text-[20px] leading-[120%] font-bold capitalize lg:text-2xl lg:leading-[140%]">
           Tag: {tagName}
         </h1>
       </div>
