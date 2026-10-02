@@ -84,7 +84,7 @@ export default function Card({ bookmark }: CardProps) {
   return (
     <div className="flex min-h-68 min-w-0 flex-col justify-between rounded-xl bg-white">
       <div className="flex min-w-0 flex-1 flex-col p-4">
-        <div className="border-light-300 flex items-start justify-between border-b pb-4">
+        <div className="border-line flex items-start justify-between border-b pb-4">
           <div className="flex min-w-0 flex-1 items-center gap-4">
             <div className="h-10 w-10 shrink-0 rounded-lg">
               <img
@@ -97,10 +97,10 @@ export default function Card({ bookmark }: CardProps) {
               />
             </div>
             <div className="flex min-w-0 flex-col gap-1">
-              <h1 className="font-manrope text-light-900 truncate text-[20px] leading-[120%] font-bold">
+              <h1 className="font-manrope text-ink truncate text-[20px] leading-[120%] font-bold">
                 {bookmark.title}
               </h1>
-              <p className="font-manrope text-light-800 truncate text-[12px] leading-[140%] font-medium">
+              <p className="font-manrope text-ink-muted truncate text-[12px] leading-[140%] font-medium">
                 {bookmark.url}
               </p>
             </div>
@@ -193,7 +193,7 @@ export default function Card({ bookmark }: CardProps) {
           </div>
         </div>
         <div className="flex min-w-0 flex-1 flex-col justify-between pt-3">
-          <p className="text-light-800 font-manrope line-clamp-3 text-sm leading-[150%] font-medium wrap-break-word">
+          <p className="text-ink-muted font-manrope line-clamp-3 text-sm leading-[150%] font-medium wrap-break-word">
             {bookmark.description}
           </p>
 
@@ -208,25 +208,25 @@ export default function Card({ bookmark }: CardProps) {
         </div>
       </div>
 
-      <div className="border-light-300 flex items-center justify-between border-t px-4 py-3">
+      <div className="border-line flex items-center justify-between border-t px-4 py-3">
         <div className="flex items-center gap-4">
           <div className="flex shrink-0 items-center gap-1.5">
             <img src="/eye.png" alt="eye icon" className="h-3 w-3" />
-            <p className="text-light-800 font-manrope text-xs leading-[140%] font-medium">
+            <p className="text-ink-muted font-manrope text-xs leading-[140%] font-medium">
               {visitCount}
             </p>
           </div>
 
           <div className="flex shrink-0 items-center gap-1.5">
             <img src="/clock.png" alt="clock icon" className="h-3 w-3" />
-            <p className="text-light-800 font-manrope text-xs leading-[140%] font-medium">
+            <p className="text-ink-muted font-manrope text-xs leading-[140%] font-medium">
               {formattedTime}
             </p>
           </div>
 
           <div className="flex shrink-0 items-center gap-1.5">
             <img src="/calendar.png" alt="calendar icon" className="h-3 w-3" />
-            <p className="text-light-800 font-manrope text-xs leading-[140%] font-medium">
+            <p className="text-ink-muted font-manrope text-xs leading-[140%] font-medium">
               {formattedDate}
             </p>
           </div>
