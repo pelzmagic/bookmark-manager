@@ -1,11 +1,29 @@
 import { createContext } from "react";
+import type { ReactElement } from "react";
+import type { MouseEventHandler } from "react";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { useContext } from "react";
 import { cloneElement } from "react";
 import { useDarkMode } from "@/hooks/useDarkMode";
 
-const ModalContext = createContext();
+type ModalContextType = {
+  openName: string;
+  close: () => void;
+  open: (name: string) => void;
+};
+
+const ModalContext = createContext<ModalContextType | undefined>(undefined);
+
+function useModal() {
+  const context = useContext(ModalContext);
+  if (!context) {
+    throw new Error(
+      "Modal compound components must be rendered inside <Modal>",
+    );
+  }
+  return context;
+}
 
 function Modal({ children }: { children: React.ReactNode }) {
   const [openName, setOpenName] = useState("");
@@ -24,21 +42,28 @@ function Open({
   children,
   opens: openWindowName,
 }: {
-  children: React.ReactNode;
+  children: ReactElement<{ onClick?: MouseEventHandler }>;
+  opens: string;
 }) {
-  const { open } = useContext(ModalContext);
+  const { open } = useModal();
 
   return cloneElement(children, {
-    onClick: () => {
+    onClick: (e: React.MouseEvent) => {
+      children.props.onClick?.(e);
       open(openWindowName);
     },
   });
 }
 
-function Window({ children, name }) {
-  const { openName, close } = useContext(ModalContext);
-  if (name !== openName) return null;
+type WindowProps = {
+  children: ReactElement<{ onCloseModal?: () => void }>;
+  name: string;
+};
+
+function Window({ children, name }: WindowProps) {
+  const { openName, close } = useModal();
   const { isDarkMode } = useDarkMode();
+  if (name !== openName) return null;
 
   return createPortal(
     <div className="fixed inset-0 z-10 flex items-center justify-center bg-[#131313]/70 backdrop-blur-sm transition-all">
