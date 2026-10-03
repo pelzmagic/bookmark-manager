@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import Modal from "./Modal";
 import CreateBookmarkForm from "@/components/CreateBookmarkForm";
 import { useLogout } from "@/hooks/useLogout";
+import { useOutsideClick } from "@/hooks/useOutsideClick";
 import Spinner from "./Spinner";
 
 export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
@@ -13,6 +14,11 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
   const { logOut, isLoggingOut } = useLogout();
   const [searchParams, setSearchParams] = useSearchParams();
   const { isDarkMode, toggleDarkMode } = useDarkMode();
+
+  const dropdownRef = useOutsideClick<HTMLDivElement>(
+    () => setShowDropdown(false),
+    false,
+  );
 
   const searchQuery = searchParams.get("search") || "";
 
@@ -107,6 +113,7 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
           tabIndex={0}
           className="bg-avatar flex h-10 w-10 cursor-pointer items-center justify-center rounded-full focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
           onClick={toggleDropdown}
+          ref={dropdownRef}
         >
           {isPending ? (
             <div className="bg-line h-full w-full animate-pulse"></div>
