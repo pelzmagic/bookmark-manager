@@ -49,7 +49,7 @@ function List({
 }) {
   const { openId, close } = useMenus();
 
-  const ref = useOutsideClick(close);
+  const ref = useOutsideClick<HTMLUListElement>(close);
 
   if (openId !== id) return null;
 
@@ -72,11 +72,10 @@ function Button({
   children: React.ReactNode;
   onClick?: () => void;
   closeOnSelect?: boolean;
-  [key: string]: any;
-}) {
+} & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   const { close } = useMenus();
 
-  function handleClick(e: React.MouseEvent) {
+  function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
     e.stopPropagation();
     onClick?.();
 
