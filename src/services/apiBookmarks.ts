@@ -7,9 +7,16 @@ type GetBookmarksArgs = {
 };
 
 export async function createBookmark(newBookmark: BookmarkData) {
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+  if (userError || !user)
+    throw new Error("User must be logged in to create a bookmark");
+
   const { data, error } = await supabase
     .from("Bookmarks")
-    .insert([newBookmark])
+    .insert([{ ...newBookmark, user_id: user.id }])
     .select();
 
   if (error) {
@@ -24,10 +31,19 @@ export async function getBookmarks({
   showArchived = false,
   sortBy = "created-at_desc",
 }: GetBookmarksArgs) {
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user)
+    throw new Error("User must be logged in to view bookmarks");
+
   let query = supabase
     .from("Bookmarks")
     .select("*")
-    .eq("is_archived", showArchived);
+    .eq("is_archived", showArchived)
+    .eq("user_id", user.id);
 
   const [field, direction] = sortBy.split("-");
   const isAscending = direction === "asc";
