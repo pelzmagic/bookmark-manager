@@ -10,7 +10,7 @@ export default function AppLayout() {
   const closeSidebar = () => setIsSidebarOpen(false);
 
   return (
-    <div className="grid h-screen grid-cols-1 grid-rows-[auto_1fr] lg:grid-cols-[296px_1fr]">
+    <div className="grid h-screen grid-cols-1 grid-rows-[auto_1fr] overflow-hidden lg:grid-cols-[296px_1fr]">
       <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
       <Header onMenuClick={toggleSidebar} />
       <main className="bg-surface-muted flex min-h-0 flex-col px-4 pt-6 pb-4 lg:px-8 lg:pt-8">
