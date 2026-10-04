@@ -112,102 +112,103 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
             <CreateBookmarkForm />
           </Modal.Window>
         </Modal>
-        <div
-          role="button"
-          tabIndex={0}
-          className="bg-avatar flex h-10 w-10 cursor-pointer items-center justify-center rounded-full focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
-          onClick={toggleDropdown}
-          ref={dropdownRef}
-        >
-          {isPending ? (
-            <div className="bg-line h-full w-full animate-pulse"></div>
-          ) : (
-            <span className="font-manrope text-ink text-sm font-bold">
-              {initials}
-            </span>
-          )}
-        </div>
-
-        {showDropdown && (
-          <div className="absolute top-full right-4 z-15 flex max-w-62 flex-col rounded-lg bg-white md:right-8">
-            <div className="flex flex-wrap items-center gap-3 px-4 py-3">
-              <p className="font-manrope text-ink border-light-900 rounded-full border p-2 text-sm font-bold">
+        <div ref={dropdownRef}>
+          <div
+            role="button"
+            tabIndex={0}
+            className="bg-avatar flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2"
+            onClick={toggleDropdown}
+          >
+            {isPending ? (
+              <div className="bg-line h-full w-full animate-pulse"></div>
+            ) : (
+              <span className="font-manrope text-ink text-sm font-bold">
                 {initials}
-              </p>
-              <div className="flex min-w-0 flex-col">
-                <p className="font-manrope text-ink truncate text-sm leading-[140%] font-semibold">
-                  {fullName}
+              </span>
+            )}
+          </div>
+
+          {showDropdown && (
+            <div className="absolute top-full right-4 z-15 flex max-w-62 flex-col rounded-lg bg-white md:right-8">
+              <div className="flex flex-wrap items-center gap-3 px-4 py-3">
+                <p className="font-manrope text-ink border-light-900 rounded-full border p-2 text-sm font-bold">
+                  {initials}
                 </p>
-                <p className="font-manrope text-ink-muted truncate text-sm leading-[150%] font-medium">
-                  {userEmail}
-                </p>
-              </div>
-            </div>
-            <div className="border-surface-muted border-t px-2 py-1">
-              <div className="flex items-center justify-between px-2 py-2">
-                <div className="flex items-center gap-4">
-                  <img
-                    src={isDarkMode ? "/dark-palette.png" : "/palette.png"}
-                    alt="palette"
-                    className="h-4 w-4"
-                  />
-                  <p className="font-manrope text-ink-muted text-sm leading-[140%] font-semibold">
-                    Theme
+                <div className="flex min-w-0 flex-col">
+                  <p className="font-manrope text-ink truncate text-sm leading-[140%] font-semibold">
+                    {fullName}
+                  </p>
+                  <p className="font-manrope text-ink-muted truncate text-sm leading-[150%] font-medium">
+                    {userEmail}
                   </p>
                 </div>
-                <div className="bg-line border-line flex rounded-sm border px-0.5 py-0.5">
-                  <button
-                    className={`cursor-pointer rounded-sm px-2 py-1.5 transition-colors ${
-                      !isDarkMode
-                        ? "bg-background shadow-xs"
-                        : "bg-transparent opacity-50"
-                    }`}
-                    onClick={() => isDarkMode && toggleDarkMode()}
-                  >
+              </div>
+              <div className="border-surface-muted border-t px-2 py-1">
+                <div className="flex items-center justify-between px-2 py-2">
+                  <div className="flex items-center gap-4">
                     <img
-                      src={isDarkMode ? "/dark-sun.png" : "/sun.png"}
-                      alt="moon"
-                      className="h-3.5 w-3.5"
+                      src={isDarkMode ? "/dark-palette.png" : "/palette.png"}
+                      alt="palette"
+                      className="h-4 w-4"
                     />
-                  </button>
-                  <button
-                    className={`cursor-pointer rounded-sm px-2 py-1.5 transition-colors ${
-                      isDarkMode
-                        ? "bg-background shadow-xs"
-                        : "bg-transparent opacity-50"
-                    }`}
-                    onClick={() => !isDarkMode && toggleDarkMode()}
-                  >
-                    <img
-                      src={isDarkMode ? "/dark-moon.png" : "/moon.png"}
-                      alt="moon"
-                      className="h-3.5 w-3.5"
-                    />
-                  </button>
+                    <p className="font-manrope text-ink-muted text-sm leading-[140%] font-semibold">
+                      Theme
+                    </p>
+                  </div>
+                  <div className="bg-line border-line flex rounded-sm border px-0.5 py-0.5">
+                    <button
+                      className={`cursor-pointer rounded-sm px-2 py-1.5 transition-colors ${
+                        !isDarkMode
+                          ? "bg-background shadow-xs"
+                          : "bg-transparent opacity-50"
+                      }`}
+                      onClick={() => isDarkMode && toggleDarkMode()}
+                    >
+                      <img
+                        src={isDarkMode ? "/dark-sun.png" : "/sun.png"}
+                        alt="moon"
+                        className="h-3.5 w-3.5"
+                      />
+                    </button>
+                    <button
+                      className={`cursor-pointer rounded-sm px-2 py-1.5 transition-colors ${
+                        isDarkMode
+                          ? "bg-background shadow-xs"
+                          : "bg-transparent opacity-50"
+                      }`}
+                      onClick={() => !isDarkMode && toggleDarkMode()}
+                    >
+                      <img
+                        src={isDarkMode ? "/dark-moon.png" : "/moon.png"}
+                        alt="moon"
+                        className="h-3.5 w-3.5"
+                      />
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <button
-              className="border-surface-muted text-foreground hover:bg-muted/50 flex cursor-pointer items-center gap-4 border-t px-4 py-3"
-              onClick={() => logOut()}
-              disabled={isLoggingOut}
-            >
-              {isLoggingOut ? (
-                <Spinner />
-              ) : (
-                <img
-                  src={isDarkMode ? "/dark-log-out.png" : "/log-out-01.png"}
-                  alt="log out icon"
-                  className="h-4 w-4"
-                />
-              )}
-              <p className="font-manrope text-ink-muted text-sm leading-[140%] font-semibold">
-                {isLoggingOut ? "Logging out" : "Logout"}
-              </p>
-            </button>
-          </div>
-        )}
+              <button
+                className="border-surface-muted text-foreground hover:bg-muted/50 flex cursor-pointer items-center gap-4 border-t px-4 py-3"
+                onClick={() => logOut()}
+                disabled={isLoggingOut}
+              >
+                {isLoggingOut ? (
+                  <Spinner />
+                ) : (
+                  <img
+                    src={isDarkMode ? "/dark-log-out.png" : "/log-out-01.png"}
+                    alt="log out icon"
+                    className="h-4 w-4"
+                  />
+                )}
+                <p className="font-manrope text-ink-muted text-sm leading-[140%] font-semibold">
+                  {isLoggingOut ? "Logging out" : "Logout"}
+                </p>
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
