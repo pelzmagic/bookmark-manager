@@ -56,7 +56,11 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
           className="border-line-strong rounded-lg px-2.5 py-2.5 lg:hidden"
           onClick={onMenuClick}
         >
-          <img src="/menu.png" alt="hamburger menu" className="h-5 w-5" />
+          <img
+            src={isDarkMode ? "/dark-menu.png" : "/menu.png"}
+            alt="hamburger menu"
+            className="h-5 w-5"
+          />
         </button>
         <div className="border-line flex max-w-48.25 items-center gap-1.5 rounded-md border p-3 lg:min-w-[320px]">
           <img

@@ -56,7 +56,11 @@ export default function Sidebar({
         className="absolute top-1.5 right-0 px-2.5 py-2.5 lg:hidden"
         onClick={onClose}
       >
-        <img src="/x-close.png" alt="close icon" className="h-5 w-5" />
+        <img
+          src={isDarkMode ? "/dark-close.png" : "/x-close.png"}
+          alt="close icon"
+          className="h-5 w-5"
+        />
       </button>
 
       <nav className="px-4 pb-5">
