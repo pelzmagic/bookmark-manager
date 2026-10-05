@@ -27,7 +27,7 @@ export default function SignUp() {
   }
 
   return (
-    <div className="bg-surface-muted flex min-h-screen items-center justify-center">
+    <div className="bg-surface-muted flex min-h-dvh items-center justify-center overflow-y-auto">
       <div className="flex w-[90%] flex-col gap-8 rounded-xl bg-white px-5 py-8 md:max-w-md lg:max-w-md">
         <div className="flex items-center gap-2">
           <img src="/Bookmark.png" alt="bookmark icon" className="h-8 w-8" />
