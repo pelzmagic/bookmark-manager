@@ -17,6 +17,17 @@ export default function CreateBookmarkForm({
 
   const maxLength = 280;
 
+  function sanitizeUrl(rawUrl: string) {
+    const trimmed = rawUrl.trim();
+    if (!trimmed) return "";
+
+    if (!/^https?:\/\//i.test(trimmed)) {
+      return `https://${trimmed}`;
+    }
+
+    return trimmed;
+  }
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
@@ -25,8 +36,10 @@ export default function CreateBookmarkForm({
       return;
     }
 
+    const formattedUrl = sanitizeUrl(url);
+
     createBookmark(
-      { title, description, url, tags },
+      { title, description, url: formattedUrl, tags },
       {
         onSuccess: () => {
           setTitle("");
@@ -38,6 +51,8 @@ export default function CreateBookmarkForm({
       },
     );
   }
+
+  console.log("url:", url);
 
   return (
     <div className="flex flex-col gap-8">
@@ -100,7 +115,7 @@ export default function CreateBookmarkForm({
             Website Url <span className="text-brand text-sm">*</span>
           </label>
           <input
-            type="url"
+            type="text"
             id="url"
             value={url}
             disabled={isCreating}
@@ -117,7 +132,7 @@ export default function CreateBookmarkForm({
             Tags <span className="text-brand text-sm">*</span>
           </label>
           <input
-            type="tag"
+            type="text"
             id="tag"
             value={tags}
             disabled={isCreating}
